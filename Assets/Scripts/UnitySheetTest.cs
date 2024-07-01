@@ -8,7 +8,8 @@ using System.Text;
 
 public class UnitySheetTest : MonoBehaviour
 {
-    [SerializeField] private List<Text> textList;
+    [SerializeField] Text textStr;
+    [SerializeField] Text textName;
     private int index = 0;
     private bool isTypingDone = false;
     Dictionary<int, DefaultTable.Data> localeMap = new Dictionary<int, DefaultTable.Data>();
@@ -22,7 +23,7 @@ public class UnitySheetTest : MonoBehaviour
     private void Start()
     {
         localeMap = DefaultTable.Data.GetDictionary();
-        SetText();   
+        SetText();
     }
 
     private void Update()
@@ -41,7 +42,6 @@ public class UnitySheetTest : MonoBehaviour
             }
         }
         
-        
     }
 
     private void SetText()
@@ -50,6 +50,7 @@ public class UnitySheetTest : MonoBehaviour
         {
             isTypingDone = false;
             StartCoroutine(TypeTextEffect(localeMap[index].strValue));
+            textName.text = localeMap[index].name;
         }
         catch (KeyNotFoundException)
         {
@@ -57,9 +58,9 @@ public class UnitySheetTest : MonoBehaviour
         }
     }
 
-    IEnumerator TypeTextEffect(string text)
+    private IEnumerator TypeTextEffect(string text)
     {
-        textList[0].text = string.Empty;
+        textStr.text = string.Empty;
 
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -67,11 +68,11 @@ public class UnitySheetTest : MonoBehaviour
         {
             if(isTypingDone)
             {
-                textList[0].text = text;
+                textStr.text = text;
                 break;       
             }
             stringBuilder.Append(text[i]);
-            textList[0].text = stringBuilder.ToString();
+            textStr.text = stringBuilder.ToString();
             yield return new WaitForSeconds(0.1f);
         }
 
