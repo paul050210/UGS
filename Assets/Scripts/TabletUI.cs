@@ -64,7 +64,18 @@ public class TabletUI : MonoBehaviour
         bool isOn = tabeltAnimator.GetBool("IsOn");
         tabeltAnimator.SetBool("IsOn", !isOn);
         currentState = State.Quest;
-        tabeltCanvas[0].gameObject.SetActive(true);
+
+        if(isOn)
+        {
+            tabeltCanvas[0].gameObject.SetActive(false);
+            tabeltCanvas[1].gameObject.SetActive(false);
+            tabeltCanvas[2].gameObject.SetActive(false);
+        }
+        else
+        {
+            tabeltCanvas[0].gameObject.SetActive(true);
+        }
+
         for(int i = 0; i<stateButtons.Count; i++)
         {
             stateButtons[i].gameObject.SetActive(!isOn);
