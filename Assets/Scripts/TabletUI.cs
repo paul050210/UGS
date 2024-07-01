@@ -15,7 +15,7 @@ public class TabletUI : MonoBehaviour
     [SerializeField] private Button tabeltButton;
     [SerializeField] private Animator tabeltAnimator;
     [SerializeField] private List<Button> stateButtons;
-    [SerializeField] private List<Canvas> tabeltCanvas;
+    [SerializeField] private List<GameObject> tabeltCanvas;
     private State currentState = State.Quest;
     
     private void Start()
@@ -29,27 +29,27 @@ public class TabletUI : MonoBehaviour
                     stateButtons[i].onClick.AddListener(() => 
                     { 
                         currentState = State.Quest;
-                        tabeltCanvas[0].gameObject.SetActive(true);
-                        tabeltCanvas[1].gameObject.SetActive(false);
-                        tabeltCanvas[2].gameObject.SetActive(false);    
+                        tabeltCanvas[0].SetActive(true);
+                        tabeltCanvas[1].SetActive(false);
+                        tabeltCanvas[2].SetActive(false);    
                     });
                     break;
                 case 1:
                     stateButtons[i].onClick.AddListener(() => 
                     { 
                         currentState = State.Inventory;
-                        tabeltCanvas[0].gameObject.SetActive(false);
-                        tabeltCanvas[1].gameObject.SetActive(true);
-                        tabeltCanvas[2].gameObject.SetActive(false);
+                        tabeltCanvas[0].SetActive(false);
+                        tabeltCanvas[1].SetActive(true);
+                        tabeltCanvas[2].SetActive(false);
                     });
                     break;
                 case 2:
                     stateButtons[i].onClick.AddListener(() => 
                     { 
                         currentState = State.Setting;
-                        tabeltCanvas[0].gameObject.SetActive(false);
-                        tabeltCanvas[1].gameObject.SetActive(false);
-                        tabeltCanvas[2].gameObject.SetActive(true);
+                        tabeltCanvas[0].SetActive(false);
+                        tabeltCanvas[1].SetActive(false);
+                        tabeltCanvas[2].SetActive(true);
                     });
                     break;
                 default:
@@ -67,13 +67,13 @@ public class TabletUI : MonoBehaviour
 
         if(isOn)
         {
-            tabeltCanvas[0].gameObject.SetActive(false);
-            tabeltCanvas[1].gameObject.SetActive(false);
-            tabeltCanvas[2].gameObject.SetActive(false);
+            tabeltCanvas[0].SetActive(false);
+            tabeltCanvas[1].SetActive(false);
+            tabeltCanvas[2].SetActive(false);
         }
         else
         {
-            tabeltCanvas[0].gameObject.SetActive(true);
+            tabeltCanvas[0].SetActive(true);
         }
 
         for(int i = 0; i<stateButtons.Count; i++)
