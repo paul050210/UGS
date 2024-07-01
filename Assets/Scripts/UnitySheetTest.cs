@@ -32,6 +32,7 @@ public class UnitySheetTest : MonoBehaviour
             if(isTypingDone)
             {
                 index++;
+                if (index >= 4) index = 0;
                 SetText();
             }
             else
@@ -39,6 +40,8 @@ public class UnitySheetTest : MonoBehaviour
                 isTypingDone = true;
             }
         }
+        
+        
     }
 
     private void SetText()
