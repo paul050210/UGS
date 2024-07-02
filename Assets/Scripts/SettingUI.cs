@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class SettingUI : MonoBehaviour
 {
-    [SerializeReference] private Scrollbar soundScrollbar;
-    [SerializeReference] private Text soundText;
+    [SerializeField] private Scrollbar soundScrollbar;
+    [SerializeField] private Text soundText;
 
     [SerializeField] private Scrollbar speedScrollbar;
     [SerializeField] private Text speedText;
@@ -16,6 +16,9 @@ public class SettingUI : MonoBehaviour
     [SerializeField] private Text playText;
     private const string testText = "가나다라마바사아자차카타파하";
 
+    [SerializeField] private Dropdown screenDropdown;
+    private int[] widthArray = new int[]{ 1920, 1366 };
+    private int[] heightArray = new int[]{ 1080, 768 };
 
     private void Start()
     {
@@ -26,6 +29,7 @@ public class SettingUI : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(Type(testText));
         });
+        screenDropdown.onValueChanged.AddListener(SetDropDown);
     }
     
     private void SetSoundText(float f)
@@ -36,6 +40,12 @@ public class SettingUI : MonoBehaviour
     private void SetSpeedText(float f) 
     {
         speedText.text = Mathf.FloorToInt(f * 10).ToString();
+    }
+
+    private void SetDropDown(int i)
+    {
+        Debug.Log(i);
+        Screen.SetResolution(widthArray[i], heightArray[i], true);
     }
 
     private IEnumerator Type(string text)
