@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Unity.VisualScripting;
+using UnityEditor.U2D;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,28 +29,53 @@ public class SettingUI : MonoBehaviour
         playButton.onClick.AddListener(() =>
         {
             StopAllCoroutines();
-            StartCoroutine(Type(testText));
+            StartCoroutine(Typing(testText));
         });
         screenDropdown.onValueChanged.AddListener(SetDropDown);
+        Load();
+        SetSoundText(soundScrollbar.value);
+        SetSpeedText(speedScrollbar.value);
+        SetDropDown(screenDropdown.value);
+    }
+
+    private void OnEnable()
+    {
+        Load();
+    }
+
+    private void Load()
+    {
+        SaveManager.Instance.LoadGameData();
+        var gD = SaveManager.Instance.gameData;
+        soundScrollbar.value = gD.volume;
+        speedScrollbar.value = gD.textSpeed;
+        screenDropdown.value = gD.screenSize;
     }
     
     private void SetSoundText(float f)
     {
-        soundText.text = Mathf.FloorToInt(f * 100).ToString();
+        int volume = Mathf.FloorToInt(f * 100);
+        soundText.text = volume.ToString();
+        SaveManager.Instance.gameData.volume = f;
+        SaveManager.Instance.SaveGameData();
     }
 
     private void SetSpeedText(float f) 
     {
-        speedText.text = Mathf.FloorToInt(f * 10).ToString();
+        int speed = Mathf.FloorToInt(f * 10);
+        speedText.text = speed.ToString();
+        SaveManager.Instance.gameData.textSpeed = f;
+        SaveManager.Instance.SaveGameData();
     }
 
     private void SetDropDown(int i)
     {
-        Debug.Log(i);
         Screen.SetResolution(widthArray[i], heightArray[i], true);
+        SaveManager.Instance.gameData.screenSize = i;
+        SaveManager.Instance.SaveGameData();
     }
 
-    private IEnumerator Type(string text)
+    private IEnumerator Typing(string text)
     {
         float delay = 0.3f - (speedScrollbar.value * 0.2f);
         playText.text = string.Empty;
