@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+[System.Serializable]
+public class ItemList
+{
+    public Dictionary<Item, int> items;
+}
+
 public class SaveManager : MonoBehaviourSingleton<SaveManager>
 {
     private string GameSettingDataFileName = "GameSettingData.json";
@@ -10,6 +16,7 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
 
     public GameData gameSettingData = new GameData();
     public Dictionary<Item, int> itemMap = new Dictionary<Item, int>();
+    public ItemList itemList;
 
     public void LoadGameSettingData()
     {
@@ -37,13 +44,16 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
         if (File.Exists(filePath)) 
         {
             string FromJsonData = File.ReadAllText(filePath);
-            itemMap = JsonUtility.FromJson<Dictionary<Item, int>>(FromJsonData);
+            Debug.Log(FromJsonData);
+            itemList = new ItemList();
+            itemList.items = DictionaryJsonUtility.FromJson<Item, int>(FromJsonData);
+            
         }
     }
 
     public void SaveItemData()
     {
-        string ToJsonData = JsonUtility.ToJson(itemMap, true);
+        string ToJsonData = DictionaryJsonUtility.ToJson(itemMap, true);
         string filePath = Application.dataPath + "/" + ItemDataFileName;
 
         File.WriteAllText(filePath, ToJsonData);

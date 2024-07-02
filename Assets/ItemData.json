@@ -1,1 +1,36 @@
-{}
+{
+    "data": [
+        {
+            "Key": {
+                "type": 0,
+                "itemName": "herb",
+                "itemDesc": "1"
+            },
+            "Value": 18
+        },
+        {
+            "Key": {
+                "type": 1,
+                "itemName": "stone",
+                "itemDesc": "2"
+            },
+            "Value": 5
+        },
+        {
+            "Key": {
+                "type": 2,
+                "itemName": "bio",
+                "itemDesc": "3"
+            },
+            "Value": 5
+        },
+        {
+            "Key": {
+                "type": 3,
+                "itemName": "potion",
+                "itemDesc": "4"
+            },
+            "Value": 5
+        }
+    ]
+}

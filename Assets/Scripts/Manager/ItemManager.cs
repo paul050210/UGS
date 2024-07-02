@@ -9,10 +9,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
     {
         if(SaveManager.Instance.itemMap.ContainsKey(item)) 
         {
-            SaveManager.Instance.itemMap[item] += i;
-            if (SaveManager.Instance.itemMap[item] <= 0)
-                SaveManager.Instance.itemMap.Remove(item);
-
+            SaveManager.Instance.itemMap[item] = Mathf.Max(0, SaveManager.Instance.itemMap[item] + i);
             SaveManager.Instance.SaveItemData();
         }
         else if(i > 0)

@@ -53,13 +53,13 @@ public static class DictionaryJsonUtility
 
     public static Dictionary<TKey, TValue> FromJson<TKey, TValue>(string jsonData)
     {
-        List<DataDictionary<TKey, TValue>> dataList = JsonUtility.FromJson<List<DataDictionary<TKey, TValue>>>(jsonData);
+        JsonDataArray<TKey, TValue> dataList = JsonUtility.FromJson<JsonDataArray<TKey, TValue>>(jsonData);
 
         Dictionary<TKey, TValue> returnDictionary = new Dictionary<TKey, TValue>();
 
-        for (int i = 0; i < dataList.Count; i++)
+        for (int i = 0; i < dataList.data.Count; i++)
         {
-            DataDictionary<TKey, TValue> dictionaryData = dataList[i];
+            DataDictionary<TKey, TValue> dictionaryData = dataList.data[i];
             returnDictionary[dictionaryData.Key] = dictionaryData.Value;
         }
 

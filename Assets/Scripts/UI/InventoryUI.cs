@@ -10,9 +10,14 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         SaveManager.Instance.LoadItemData();
-        foreach(ItemSO itemSO in itemSOs) 
+        //foreach(ItemSO itemSO in itemSOs) 
+        //{
+        //    Debug.Log($"{itemSO.item.itemName}: {ItemManager.Instance.GetItem(itemSO.item)}");
+        //}
+
+        foreach(var pair in SaveManager.Instance.itemList.items)
         {
-            Debug.Log($"{itemSO.item.itemName}: {ItemManager.Instance.GetItem(itemSO.item)}");
+            Debug.Log($"{pair.Key.itemName}: {pair.Value}");
         }
     }
 
@@ -40,11 +45,8 @@ public class InventoryUI : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            foreach (ItemSO itemSO in itemSOs)
-            {
-                Debug.Log($"{itemSO.item.itemName}: {ItemManager.Instance.GetItem(itemSO.item)}");
-            }
-            SaveManager.Instance.SaveItemData();
+            SaveManager.Instance.LoadItemData();
+
         }
     }
 }
