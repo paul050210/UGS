@@ -455,6 +455,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94884673}
   m_CullTransparentMesh: 1
+--- !u!1 &115832236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 115832238}
+  - component: {fileID: 115832237}
+  - component: {fileID: 115832239}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &115832237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115832236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49dd9a97adf83c54d83d5d73781d45cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSOs:
+  - {fileID: 11400000, guid: f417ddaf6aa1803469d23c6f5773edbe, type: 2}
+  - {fileID: 11400000, guid: 12abbdac63342ff4a8eca7179ea5d41b, type: 2}
+  - {fileID: 11400000, guid: afa9a9387d7b67744ad91fcfcf8c2939, type: 2}
+  - {fileID: 11400000, guid: ffb21af5dd1cb844191e4b267d2e31c0, type: 2}
+  - {fileID: 11400000, guid: 4fdb11c84c64a1b4e857078d9c3025b4, type: 2}
+--- !u!4 &115832238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115832236}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 425, y: 1030, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &115832239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115832236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c266d6752730f940bbd6b0262ff5632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSettingData:
+    volume: 0
+    textSpeed: 0
+    screenSize: 0
 --- !u!1 &205944639
 GameObject:
   m_ObjectHideFlags: 0
@@ -3997,3 +4064,4 @@ SceneRoots:
   - {fileID: 1500324314}
   - {fileID: 583269041}
   - {fileID: 791607523}
+  - {fileID: 115832238}

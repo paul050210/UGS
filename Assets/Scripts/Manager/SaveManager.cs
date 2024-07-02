@@ -9,7 +9,7 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
     private string ItemDataFileName = "ItemData.json";
 
     public GameData gameSettingData = new GameData();
-    public Dictionary<ItemSO, int> itemMap = new Dictionary<ItemSO, int>();
+    public Dictionary<Item, int> itemMap = new Dictionary<Item, int>();
 
     public void LoadGameSettingData()
     {
@@ -32,19 +32,19 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
 
     public void LoadItemData()
     {
-        string filePath = Application.persistentDataPath + "/" + ItemDataFileName; 
+        string filePath = Application.dataPath + "/" + ItemDataFileName; 
         
         if (File.Exists(filePath)) 
         {
             string FromJsonData = File.ReadAllText(filePath);
-            itemMap = JsonUtility.FromJson<Dictionary<ItemSO, int>>(FromJsonData);
+            itemMap = JsonUtility.FromJson<Dictionary<Item, int>>(FromJsonData);
         }
     }
 
     public void SaveItemData()
     {
         string ToJsonData = JsonUtility.ToJson(itemMap, true);
-        string filePath = Application.persistentDataPath + "/" + ItemDataFileName;
+        string filePath = Application.dataPath + "/" + ItemDataFileName;
 
         File.WriteAllText(filePath, ToJsonData);
     }
