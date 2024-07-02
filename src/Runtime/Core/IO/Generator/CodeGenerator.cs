@@ -340,7 +340,7 @@ namespace @namespace
             FieldInfo[] fields = typeof(@namespace.@class).GetFields(BindingFlags.Public | BindingFlags.Instance);
             List<(string original, string propertyName, string type)> typeInfos = new List<(string,string,string)>();
             List<List<string>> typeValuesCList = new List<List<string>>(); 
-            //Load GameData.
+            //Load gameSettingData.
             string text = reader.ReadData(""@namespace"");
             if (text != null)
             {{

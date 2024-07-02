@@ -45,8 +45,8 @@ public class SettingUI : MonoBehaviour
 
     private void Load()
     {
-        SaveManager.Instance.LoadGameData();
-        var gD = SaveManager.Instance.gameData;
+        SaveManager.Instance.LoadGameSettingData();
+        var gD = SaveManager.Instance.gameSettingData;
         soundScrollbar.value = gD.volume;
         speedScrollbar.value = gD.textSpeed;
         screenDropdown.value = gD.screenSize;
@@ -56,23 +56,23 @@ public class SettingUI : MonoBehaviour
     {
         int volume = Mathf.FloorToInt(f * 100);
         soundText.text = volume.ToString();
-        SaveManager.Instance.gameData.volume = f;
-        SaveManager.Instance.SaveGameData();
+        SaveManager.Instance.gameSettingData.volume = f;
+        SaveManager.Instance.SaveGameSettingData();
     }
 
     private void SetSpeedText(float f) 
     {
         int speed = Mathf.FloorToInt(f * 10);
         speedText.text = speed.ToString();
-        SaveManager.Instance.gameData.textSpeed = f;
-        SaveManager.Instance.SaveGameData();
+        SaveManager.Instance.gameSettingData.textSpeed = f;
+        SaveManager.Instance.SaveGameSettingData();
     }
 
     private void SetDropDown(int i)
     {
         Screen.SetResolution(widthArray[i], heightArray[i], true);
-        SaveManager.Instance.gameData.screenSize = i;
-        SaveManager.Instance.SaveGameData();
+        SaveManager.Instance.gameSettingData.screenSize = i;
+        SaveManager.Instance.SaveGameSettingData();
     }
 
     private IEnumerator Typing(string text)
