@@ -6,7 +6,7 @@
                 "itemName": "herb",
                 "itemDesc": "1"
             },
-            "Value": 2
+            "Value": 4
         },
         {
             "Key": {
@@ -14,7 +14,7 @@
                 "itemName": "stone",
                 "itemDesc": "2"
             },
-            "Value": 1
+            "Value": 3
         },
         {
             "Key": {
@@ -22,7 +22,7 @@
                 "itemName": "bio",
                 "itemDesc": "3"
             },
-            "Value": 1
+            "Value": 3
         },
         {
             "Key": {
@@ -30,7 +30,7 @@
                 "itemName": "potion",
                 "itemDesc": "4"
             },
-            "Value": 1
+            "Value": 3
         },
         {
             "Key": {

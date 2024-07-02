@@ -28,4 +28,14 @@ public class Item
         Item i = obj as Item;
         return i != null && (i.itemName == this.itemName);
     }
+
+    //public static bool operator ==(Item lhs, Item rhs)
+    //{
+    //    return lhs.Equals(rhs);
+    //}
+
+    //public static bool operator !=(Item lhs, Item rhs)
+    //{
+    //    return !lhs.Equals(rhs);
+    //}
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviourSingleton<ItemManager>
 {
+    [SerializeField] private ItemSO[] itemSOs;
+
 
     public void AddItem(Item item, int i)
     {
@@ -27,5 +29,21 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
             return SaveManager.Instance.itemMap[item];
         else
             return 0;
+    }
+
+    public Sprite GetItemSprite(Item item)
+    {
+        for(int i = 0; i < itemSOs.Length; i++) 
+        {
+            if (itemSOs[i].item == item)
+                return itemSOs[i].sprite;
+            else
+            {
+                Debug.Log($"{itemSOs[i].item.itemName} != {item.itemName}");
+            }
+        }
+
+        Debug.Log("return null");
+        return null;
     }
 }
