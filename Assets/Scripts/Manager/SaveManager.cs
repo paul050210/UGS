@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-[System.Serializable]
-public class ItemList
-{
-    public Dictionary<Item, int> items;
-}
 
 public class SaveManager : MonoBehaviourSingleton<SaveManager>
 {
@@ -16,7 +11,7 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
 
     public GameData gameSettingData = new GameData();
     public Dictionary<Item, int> itemMap = new Dictionary<Item, int>();
-    public ItemList itemList;
+    
 
     public void LoadGameSettingData()
     {
@@ -44,9 +39,7 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
         if (File.Exists(filePath)) 
         {
             string FromJsonData = File.ReadAllText(filePath);
-            Debug.Log(FromJsonData);
-            itemList = new ItemList();
-            itemList.items = DictionaryJsonUtility.FromJson<Item, int>(FromJsonData);
+            itemMap = DictionaryJsonUtility.FromJson<Item, int>(FromJsonData);
             
         }
     }

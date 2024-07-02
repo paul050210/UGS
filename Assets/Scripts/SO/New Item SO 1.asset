@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1ee9e22c054ac4499fa3c61b3aca98, type: 3}
   m_Name: New Item SO 1
   m_EditorClassIdentifier: 
-  type: 1
-  itemName: stone
-  itemDesc: 2
+  item:
+    type: 1
+    itemName: stone
+    itemDesc: 2
   sprite: {fileID: 0}

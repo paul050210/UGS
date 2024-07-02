@@ -17,4 +17,15 @@ public class Item
     public ItemType type;
     public string itemName;
     public string itemDesc;
+
+    public override int GetHashCode()
+    {
+        return type.GetHashCode() + itemName.GetHashCode() + itemDesc.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+        Item i = obj as Item;
+        return i != null && (i.itemName == this.itemName);
+    }
 }
