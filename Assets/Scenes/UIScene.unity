@@ -1797,7 +1797,13 @@ MonoBehaviour:
   - {fileID: 1134335637}
   itemText: {fileID: 540098887}
   countText: {fileID: 1698231755}
-  stateButtons: []
+  stateButtons:
+  - {fileID: 600349698}
+  - {fileID: 2046002558}
+  - {fileID: 1534874392}
+  - {fileID: 695640398}
+  - {fileID: 95236349}
+  - {fileID: 1655127660}
 --- !u!114 &605975717
 MonoBehaviour:
   m_ObjectHideFlags: 0
