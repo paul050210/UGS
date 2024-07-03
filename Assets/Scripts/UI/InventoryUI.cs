@@ -19,6 +19,9 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Text itemText;
     [SerializeField] private Text countText;
     [SerializeField] private Button[] stateButtons;
+    
+    private int selectedSlot = -1;
+
     private InvenState state = InvenState.all;
 
     private void Start()
@@ -34,6 +37,7 @@ public class InventoryUI : MonoBehaviour
         for(int i = 0; i<slots.Count; i++) 
         {
             slots[i].SetItemText(ref itemText, ref countText);
+            slots[i].index = i;
         }
     }
 
@@ -93,11 +97,19 @@ public class InventoryUI : MonoBehaviour
             stateButtons[temp].onClick.AddListener(() => 
             {
                 state = (InvenState)temp;
-                Debug.Log(temp);
                 ResetItemSlot();
                 SetItemSlot();
             });
         }
+    }
+
+    public void ChangeSelectedSlot(int index)
+    {
+        if(selectedSlot != -1)
+        {
+            slots[selectedSlot].OffSelect();
+        }
+        selectedSlot = index;
     }
 }
  
