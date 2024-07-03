@@ -35,7 +35,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
     {
         for(int i = 0; i < itemSOs.Length; i++) 
         {
-            if (itemSOs[i].item == item)
+            if (itemSOs[i].item.Equals(item))
                 return itemSOs[i].sprite;
             else
             {
