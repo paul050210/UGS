@@ -109,6 +109,8 @@ public class InventoryUI : MonoBehaviour
                 state = (InvenState)temp;
                 ResetItemSlot();
                 SetItemSlot();
+                itemText.text = "아이템설명";
+                countText.text = "0";
             });
         }
     }
