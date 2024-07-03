@@ -17,6 +17,8 @@ public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private List<ItemSlotUI> slots;
     [SerializeField] private Text itemText;
+    [SerializeField] private Text countText;
+    [SerializeField] private Button[] stateButtons;
     private InvenState state = InvenState.all;
 
     private void Start()
@@ -24,20 +26,20 @@ public class InventoryUI : MonoBehaviour
         SaveManager.Instance.LoadItemData();
         SetItemSlot();
         SetItemButton();
+        SetStateButton();
     }
 
     private void SetItemButton()
     {
         for(int i = 0; i<slots.Count; i++) 
         {
-            slots[i].SetItemText(ref itemText);
+            slots[i].SetItemText(ref itemText, ref countText);
         }
     }
 
     private void SetItemSlot()
     {
         int i = 0;
-        Debug.Log(SaveManager.Instance.itemMap.Count);
         foreach (var p in SaveManager.Instance.itemMap)
         {
             if (p.Value == 0)
@@ -74,4 +76,28 @@ public class InventoryUI : MonoBehaviour
             
         }
     }
+
+    private void ResetItemSlot()
+    {
+        for(int i = 0; i<slots.Count; i++)
+        {
+            slots[i].ResetItem();
+        }
+    }
+
+    private void SetStateButton()
+    {
+        for(int i = 0; i < stateButtons.Length; i++) 
+        {
+            int temp = i;
+            stateButtons[temp].onClick.AddListener(() => 
+            {
+                state = (InvenState)temp;
+                Debug.Log(temp);
+                ResetItemSlot();
+                SetItemSlot();
+            });
+        }
+    }
 }
+ 

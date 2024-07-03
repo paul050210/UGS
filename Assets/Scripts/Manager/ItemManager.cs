@@ -7,21 +7,19 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
     [SerializeField] private ItemSO[] itemSOs;
 
 
-
     public void AddItem(Item item, int i)
     {
         if(SaveManager.Instance.itemMap.ContainsKey(item)) 
         {
             Debug.Log("수정");
-            SaveManager.Instance.itemMap[item] = Mathf.Max(0, SaveManager.Instance.itemMap[item] + i);
-            SaveManager.Instance.SaveItemData();
+            SaveManager.Instance.itemMap[item] = Mathf.Max(0, i);
         }
-        else if(i > 0)
+        else
         {
             Debug.Log("추가");
-            SaveManager.Instance.itemMap.Add(item, i);
-            SaveManager.Instance.SaveItemData();
+            SaveManager.Instance.itemMap.Add(item, Mathf.Max(0, i));
         }
+        SaveManager.Instance.SaveItemData();
     }
 
     public int GetItem(Item item)
@@ -30,6 +28,14 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
             return SaveManager.Instance.itemMap[item];
         else
             return 0;
+    }
+
+    public void ResetMap()
+    {
+        for(int i = 0; i<itemSOs.Length; i++) 
+        {
+            AddItem(itemSOs[i].item, 1);
+        }
     }
 
     public Sprite GetItemSprite(Item item)
