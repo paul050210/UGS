@@ -32,6 +32,15 @@ public class InventoryUI : MonoBehaviour
         SetStateButton();
     }
 
+    private void OnEnable()
+    {
+        state = InvenState.all;
+        ResetItemSlot();
+        SetItemSlot();
+        itemText.text = "아이템설명";
+        countText.text = "0";
+    }
+
     private void SetItemButton()
     {
         for(int i = 0; i<slots.Count; i++) 
@@ -83,7 +92,8 @@ public class InventoryUI : MonoBehaviour
 
     private void ResetItemSlot()
     {
-        for(int i = 0; i<slots.Count; i++)
+        selectedSlot = -1;
+        for (int i = 0; i<slots.Count; i++)
         {
             slots[i].ResetItem();
         }

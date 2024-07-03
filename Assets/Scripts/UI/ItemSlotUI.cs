@@ -38,7 +38,7 @@ public class ItemSlotUI : MonoBehaviour
     public void ResetItem()
     {
         item = null;
-        itemImg.sprite = null;
+        transform.GetChild(1).GetComponent<Image>().sprite = null;
         OffSelect();
     }
 
@@ -64,7 +64,7 @@ public class ItemSlotUI : MonoBehaviour
     public void OffSelect()
     {
         isSelected = false;
-        selectImg.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void SetItemText(ref Text itemText, ref Text countText) 
