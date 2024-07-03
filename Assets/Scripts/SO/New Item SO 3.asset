@@ -15,5 +15,5 @@ MonoBehaviour:
   item:
     type: 3
     itemName: potion
-    itemDesc: 4
-  sprite: {fileID: 0}
+    itemDesc: This is potion
+  sprite: {fileID: 21300000, guid: 1db2aafa220bdac428f29f48a82e2b50, type: 3}

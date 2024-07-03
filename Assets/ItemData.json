@@ -4,39 +4,39 @@
             "Key": {
                 "type": 0,
                 "itemName": "herb",
-                "itemDesc": "1"
+                "itemDesc": "This is herb"
             },
-            "Value": 4
+            "Value": 1
         },
         {
             "Key": {
                 "type": 1,
                 "itemName": "stone",
-                "itemDesc": "2"
+                "itemDesc": "This is stone"
             },
-            "Value": 3
+            "Value": 1
         },
         {
             "Key": {
                 "type": 2,
                 "itemName": "bio",
-                "itemDesc": "3"
+                "itemDesc": "This is bio"
             },
-            "Value": 3
+            "Value": 1
         },
         {
             "Key": {
                 "type": 3,
                 "itemName": "potion",
-                "itemDesc": "4"
+                "itemDesc": "This is potion"
             },
-            "Value": 3
+            "Value": 1
         },
         {
             "Key": {
                 "type": 4,
                 "itemName": "another",
-                "itemDesc": "5"
+                "itemDesc": "This is another"
             },
             "Value": 1
         }

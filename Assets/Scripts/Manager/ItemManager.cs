@@ -7,6 +7,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
     [SerializeField] private ItemSO[] itemSOs;
 
 
+
     public void AddItem(Item item, int i)
     {
         if(SaveManager.Instance.itemMap.ContainsKey(item)) 
@@ -37,10 +38,6 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
         {
             if (itemSOs[i].item.Equals(item))
                 return itemSOs[i].sprite;
-            else
-            {
-                Debug.Log($"{itemSOs[i].item.itemName} != {item.itemName}");
-            }
         }
 
         Debug.Log("return null");

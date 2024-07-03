@@ -6,6 +6,14 @@ using UnityEngine.UI;
 public class ItemSlotUI : MonoBehaviour
 {
     private Item item;
+    private Button button;
+    private Text itemText;
+
+    private void Start()
+    {
+        button = GetComponentInChildren<Button>();
+        button.onClick.AddListener(OnClickButton);
+    }
 
     public void SetItem(Item item)
     {
@@ -17,5 +25,16 @@ public class ItemSlotUI : MonoBehaviour
     {
         item = null;
         GetComponentInChildren<Image>().sprite = null;
+    }
+
+    private void OnClickButton()
+    {
+        if (object.ReferenceEquals(item, null)) return;
+        itemText.text = item.itemDesc;
+    }
+
+    public void SetItemText(ref Text itemText) 
+    {
+        this.itemText = itemText;
     }
 }

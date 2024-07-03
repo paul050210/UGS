@@ -20,7 +20,7 @@ public class Item
 
     public override int GetHashCode()
     {
-        return type.GetHashCode() + itemName.GetHashCode() + itemDesc.GetHashCode();
+        return type.GetHashCode() + itemName.GetHashCode();
     }
 
     public override bool Equals(object obj)
