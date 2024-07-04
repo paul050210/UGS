@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
 public class CameraMove : MonoBehaviour
 {
@@ -13,11 +15,28 @@ public class CameraMove : MonoBehaviour
     private int temp;
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
+    private EventTrigger leftTrigger;
+    private EventTrigger rightTrigger;
 
     private void Start()
     {
+        leftTrigger = leftButton.GetComponent<EventTrigger>();
+        rightTrigger = rightButton.GetComponent<EventTrigger>();
         leftButton.onClick.AddListener(() => Turn(0));
         rightButton.onClick.AddListener(() => Turn(1));
+
+        EventTrigger.Entry entryPointerEnter = new EventTrigger.Entry();
+        entryPointerEnter.eventID = EventTriggerType.PointerEnter;
+        entryPointerEnter.callback.AddListener((data) => { OnPointerEnter((PointerEventData)data); });
+
+        EventTrigger.Entry entryPointerExit = new EventTrigger.Entry();
+        entryPointerExit.eventID = EventTriggerType.PointerExit;
+        entryPointerExit.callback.AddListener((data) => { OnPointerExit((PointerEventData)data); });
+
+        leftTrigger.triggers.Add(entryPointerEnter);
+        leftTrigger.triggers.Add(entryPointerExit);
+        rightTrigger.triggers.Add(entryPointerEnter);
+        rightTrigger.triggers.Add(entryPointerExit);
     }
 
 
@@ -56,4 +75,24 @@ public class CameraMove : MonoBehaviour
         });
     }
 
+    private void OnPointerEnter(PointerEventData data) 
+    {
+        Debug.Log("Enter");
+        try
+        {
+            var img = data.pointerEnter.GetComponent<Image>();
+            img.color = new Color(img.color.r, img.color.g, img.color.b, 50f/255f);
+        }
+        catch (NullReferenceException)
+        {
+            Debug.LogWarning("data.selectedObject is null");
+        }
+    }
+
+    public void OnPointerExit(PointerEventData data)
+    {
+        Debug.Log("Exit");
+        var img = data.pointerEnter.GetComponent<Image>();
+        img.color = new Color(img.color.r, img.color.g, img.color.b, 0f);
+    }
 }
