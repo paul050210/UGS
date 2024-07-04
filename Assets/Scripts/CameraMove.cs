@@ -10,7 +10,7 @@ public class CameraMove : MonoBehaviour
     private bool isMoving = false;
     private float moveDelay = 0.7f;
     [SerializeField] private GameObject[] canvases;
-
+    private int temp;
 
 
     private void Update()
@@ -19,26 +19,28 @@ public class CameraMove : MonoBehaviour
         {
             if (isMoving) return;
             isMoving = true;
-            canvases[Mathf.FloorToInt(dir.y / 90f) % 4].SetActive(false);
+            temp = Mathf.FloorToInt(dir.y / 90f);
             dir.y += 90f;
-            if (dir.y < 0) dir.y = 270f;
+            if (dir.y == 360) dir.y = 0f;
+            canvases[Mathf.FloorToInt(dir.y / 90f)].SetActive(true);
             transform.DORotate(dir, moveDelay).SetEase(Ease.Linear).OnComplete(() => 
             { 
                 isMoving = false;
-                canvases[Mathf.FloorToInt(dir.y / 90f) % 4].SetActive(true);
+                canvases[temp].SetActive(false);
             });
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (isMoving) return;
             isMoving = true;
-            canvases[Mathf.FloorToInt(dir.y / 90f) % 4].SetActive(false);
+            temp = Mathf.FloorToInt(dir.y / 90f);
             dir.y -= 90f;
             if (dir.y < 0) dir.y = 270f;
+            canvases[Mathf.FloorToInt(dir.y / 90f)].SetActive(true);
             transform.DORotate(dir, moveDelay).SetEase(Ease.Linear).OnComplete(() => 
             { 
                 isMoving = false;
-                canvases[Mathf.FloorToInt(dir.y / 90f) % 4].SetActive(true);
+                canvases[temp].SetActive(false);
             });
         }
     }
