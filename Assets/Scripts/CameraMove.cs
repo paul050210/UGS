@@ -4,7 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System;
 
 public class CameraMove : MonoBehaviour
 {
@@ -77,21 +76,12 @@ public class CameraMove : MonoBehaviour
 
     private void OnPointerEnter(PointerEventData data) 
     {
-        Debug.Log("Enter");
-        try
-        {
-            var img = data.pointerEnter.GetComponent<Image>();
-            img.color = new Color(img.color.r, img.color.g, img.color.b, 50f/255f);
-        }
-        catch (NullReferenceException)
-        {
-            Debug.LogWarning("data.selectedObject is null");
-        }
+        var img = data.pointerEnter.GetComponent<Image>();
+        img.color = new Color(img.color.r, img.color.g, img.color.b, 50f/255f);
     }
 
     public void OnPointerExit(PointerEventData data)
     {
-        Debug.Log("Exit");
         var img = data.pointerEnter.GetComponent<Image>();
         img.color = new Color(img.color.r, img.color.g, img.color.b, 0f);
     }
