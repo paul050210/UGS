@@ -13,4 +13,6 @@ public class ItemSO : ScriptableObject
     {
         return so.item;
     }
+    
+    
 }

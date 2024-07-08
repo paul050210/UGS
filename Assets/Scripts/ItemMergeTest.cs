@@ -6,36 +6,34 @@ using UnityEngine;
 
 public class ItemMergeTest : MonoBehaviour
 {
-    private ItemMergeSO itemMergeSO;
-    private Item itemA;
-    private Item itemB;
-    private Item itemC;
+
+    private List<ItemMergeSO> itemMergeSOs= new List<ItemMergeSO>();
+    public ItemSO so1;
+    public ItemSO so2;
 
     private void Start()
     {
-        //itemA = new Item();
-        //itemA.type = ItemType.potion;
-        //itemA.itemName = "A";
-
-        //itemB = new Item();
-        //itemB.type = ItemType.potion;
-        //itemB.itemName = "B";
-
-        //itemC = new Item();
-        //itemC.type = ItemType.potion;
-        //itemC.itemName = "C";
-
-        //itemMergeSO = new ItemMergeSO(itemA, itemB, itemC);
-
-        //Item testItem = itemMergeSO.ReturnMergeItem(itemA, null);
-        //if(testItem == null) { Debug.Log("Null"); }
-        //else { Debug.Log(testItem.itemName); }
+        ItemMergeSO so;
+        for(int i = 0; i<1; i++)
+        {
+            so = Resources.Load<ItemMergeSO>($"SO/itemMerge{i}");
+            itemMergeSOs.Add(so);
+        }
+        
+        Debug.Log(ItemMerge(so1, so2).itemName);
     }
 
 
     public Item ItemMerge(Item itemA, Item itemB)
     {
-        return null;
+        Item returnItem = null;
+        foreach(ItemMergeSO so in itemMergeSOs)
+        {
+            returnItem = so.ReturnMergeItem(itemA, itemB);
+            if (returnItem != null) break;
+        }
+
+        return returnItem;
     }
 
 }
