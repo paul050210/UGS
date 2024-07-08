@@ -29,10 +29,11 @@ public class ItemSlotUI : MonoBehaviour
         button.onClick.AddListener(OnClickButton);
     }
 
-    public void SetItem(Item item)
+    public void SetItem(Item item, bool check = false)
     {
         this.item = item;
         itemImg.sprite = ItemManager.Instance.GetItemSprite(item);
+        transform.GetChild(2).gameObject.SetActive(check);
     }
 
     public void ResetItem()

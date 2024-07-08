@@ -38,6 +38,7 @@ public class InventoryUI : MonoBehaviour
     private void OnEnable()
     {
         state = InvenState.all;
+        selectedItems.Clear();
         ResetItemSlot();
         SetItemSlot();
         itemText.text = "아이템설명";
@@ -86,7 +87,7 @@ public class InventoryUI : MonoBehaviour
             }
 
             
-            slots[i].SetItem(p.Key);
+            slots[i].SetItem(p.Key, selectedItems.Contains(p.Key));
             i++;
             
         }
