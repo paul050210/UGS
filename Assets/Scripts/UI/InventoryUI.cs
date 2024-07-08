@@ -45,8 +45,7 @@ public class InventoryUI : MonoBehaviour
     {
         for(int i = 0; i<slots.Count; i++) 
         {
-            slots[i].SetItemText(ref itemText, ref countText);
-            slots[i].index = i;
+            slots[i].SetItemText(ref itemText, ref countText, i);
         }
     }
 

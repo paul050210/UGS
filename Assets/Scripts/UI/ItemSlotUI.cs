@@ -14,7 +14,7 @@ public class ItemSlotUI : MonoBehaviour
     private Image itemImg;
     private GameObject selectImg;
     private InventoryUI inventory;
-    public int index;
+    private int index;
 
     private void Awake()
     {
@@ -67,10 +67,11 @@ public class ItemSlotUI : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    public void SetItemText(ref Text itemText, ref Text countText) 
+    public void SetItemText(ref Text itemText, ref Text countText, int index) 
     {
         this.itemText = itemText;
         this.countText = countText;
+        this.index = index;
     }
 }
  
