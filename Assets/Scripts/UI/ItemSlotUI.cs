@@ -65,6 +65,10 @@ public class ItemSlotUI : MonoBehaviour
             countText.text = "0";
             inventory.ChangeSelectedSlot(-1);
         }
+        if(inventory.IsSelectMode) 
+        {
+            inventory.OnClickSelect(index);
+        }
         selectImg.SetActive(isSelected);
     }
 

@@ -22,6 +22,8 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Button[] stateButtons;
     
     private int selectedSlot = -1;
+    private bool isSelecteMode = false;
+    public bool IsSelectMode => isSelecteMode;
     private List<Item> selectedItems = new List<Item>();
 
     private InvenState state = InvenState.all;
@@ -32,13 +34,14 @@ public class InventoryUI : MonoBehaviour
         SetItemSlot();
         SetItemButton();
         SetStateButton();
-        selectButton.onClick.AddListener(OnClickSelect);
+        selectButton.onClick.AddListener(SelectButton);
     }
 
     private void OnEnable()
     {
         state = InvenState.all;
         selectedItems.Clear();
+        isSelecteMode = false;
         ResetItemSlot();
         SetItemSlot();
         itemText.text = "아이템설명";
@@ -127,17 +130,22 @@ public class InventoryUI : MonoBehaviour
         selectedSlot = index;
     }
 
-    private void OnClickSelect()
+    public void OnClickSelect(int index)
     {
-        if (selectedSlot == -1) return;
-        if(slots[selectedSlot].CheckOn())
+        if(slots[index].CheckOn())
         {
-            selectedItems.Add(slots[selectedSlot].GetItem());
+            selectedItems.Add(slots[index].GetItem());
         }
         else
         {
-            selectedItems.Remove(slots[selectedSlot].GetItem());
+            selectedItems.Remove(slots[index].GetItem());
         }
+    }
+
+    private void SelectButton()
+    {
+        isSelecteMode = !isSelecteMode;
+        ChangeSelectedSlot(-1);
     }
 }
  
