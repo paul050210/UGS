@@ -40,6 +40,7 @@ public class ItemSlotUI : MonoBehaviour
         item = null;
         transform.GetChild(1).GetComponent<Image>().sprite = null;
         OffSelect();
+        CheckOff();
     }
 
     private void OnClickButton()
@@ -65,6 +66,17 @@ public class ItemSlotUI : MonoBehaviour
     {
         isSelected = false;
         transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    public void CheckOn()
+    {
+        bool isActive = transform.GetChild(2).gameObject.activeSelf;
+        transform.GetChild(2).gameObject.SetActive(!isActive);
+    }
+
+    public void CheckOff() 
+    {
+        transform.GetChild(2).gameObject.SetActive(false);
     }
 
     public void SetItemText(ref Text itemText, ref Text countText, int index) 
