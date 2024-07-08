@@ -22,6 +22,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Button[] stateButtons;
     
     private int selectedSlot = -1;
+    private List<Item> selectedItems = new List<Item>();
 
     private InvenState state = InvenState.all;
 
@@ -128,7 +129,14 @@ public class InventoryUI : MonoBehaviour
     private void OnClickSelect()
     {
         if (selectedSlot == -1) return;
-        slots[selectedSlot].CheckOn();
+        if(slots[selectedSlot].CheckOn())
+        {
+            selectedItems.Add(slots[selectedSlot].GetItem());
+        }
+        else
+        {
+            selectedItems.Remove(slots[selectedSlot].GetItem());
+        }
     }
 }
  

@@ -43,6 +43,11 @@ public class ItemSlotUI : MonoBehaviour
         CheckOff();
     }
 
+    public Item GetItem()
+    {
+        return item;
+    }
+
     private void OnClickButton()
     {
         if (object.ReferenceEquals(item, null)) return;
@@ -68,10 +73,11 @@ public class ItemSlotUI : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
-    public void CheckOn()
+    public bool CheckOn()
     {
         bool isActive = transform.GetChild(2).gameObject.activeSelf;
         transform.GetChild(2).gameObject.SetActive(!isActive);
+        return !isActive;
     }
 
     public void CheckOff() 
