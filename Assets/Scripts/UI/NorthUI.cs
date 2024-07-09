@@ -6,7 +6,10 @@ using DG.Tweening;
 
 public class NorthUI : MonoBehaviour
 {
-    [SerializeField] private Button btn;
+    [SerializeField] private Button zoomBtn;
+    [SerializeField] private Button zoomOutBtn;
+    [SerializeField] private Image leftBtn;
+    [SerializeField] private Image rightBtn;
     [SerializeField] private GameObject questWindow;
 
     private Camera cam;
@@ -17,28 +20,33 @@ public class NorthUI : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-        btn.onClick.AddListener(ZoomAndOut);
-        
+        zoomBtn.onClick.AddListener(Zoom);
+        zoomOutBtn.onClick.AddListener(ZoomOut);
     }
 
-    private void ZoomAndOut()
+    private void Zoom()
     {
-        if(fov == 60f)
-        {
-            fov = 40f;
-            camY = 2.5f;
-        }
-        else
-        {
-            fov = 60f;
-            camY = 1f;
-            questWindow.SetActive(false);
-        }
+        if (!Mathf.Approximately(cam.fieldOfView, 60f)) return;
+        fov = 40f;
+        camY = 2.5f;
         cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
-        cam.gameObject.transform.DOMoveY(camY, camCloseDuration).SetEase(Ease.Linear).OnComplete(() => 
+        cam.gameObject.transform.DOMoveY(camY, camCloseDuration).SetEase(Ease.Linear).OnComplete(() =>
         {
-            if (fov == 40)
-                questWindow.SetActive(true); 
+            questWindow.SetActive(true);
+            leftBtn.raycastTarget = false;
+            rightBtn.raycastTarget = false;
         });
+    }
+
+    private void ZoomOut()
+    {
+        if (fov == 60f) return;
+        fov = 60f;
+        camY = 1f;
+        questWindow.SetActive(false);
+        leftBtn.raycastTarget = true;
+        rightBtn.raycastTarget = true;
+        cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
+        cam.gameObject.transform.DOMoveY(camY, camCloseDuration).SetEase(Ease.Linear);
     }
 }
