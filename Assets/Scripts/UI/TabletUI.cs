@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public enum State
@@ -17,10 +18,12 @@ public class TabletUI : MonoBehaviour
     [SerializeField] private List<Button> stateButtons;
     [SerializeField] private List<GameObject> tabeltCanvas;
     private State currentState = State.Quest;
+
+    public UnityEvent onDisable;
     
     private void Start()
     {
-        tabeltButton.onClick.AddListener(SetAnimator);
+        tabeltButton.onClick.AddListener(() => SetAnimator());
         for(int i = 0; i<stateButtons.Count; i++)
         {
             switch(i)
@@ -59,20 +62,18 @@ public class TabletUI : MonoBehaviour
         }
     }
 
-    private void SetAnimator()
+    private void SetAnimator(bool isFree = true)
     {
         bool isOn = tabeltAnimator.GetBool("IsOn");
         tabeltAnimator.SetBool("IsOn", !isOn);
         
+        tabeltCanvas[(int)currentState].SetActive(!isOn);
         if(isOn)
         {
-            tabeltCanvas[(int)currentState].SetActive(false);
-        }
-        else
-        {
-            tabeltCanvas[(int)currentState].SetActive(true);
+            onDisable.Invoke();
         }
 
+        if (!isFree) return;
         for(int i = 0; i<stateButtons.Count; i++)
         {
             stateButtons[i].gameObject.SetActive(!isOn);
@@ -82,7 +83,7 @@ public class TabletUI : MonoBehaviour
     public void TurnOnTablet(State state)
     {
         currentState = state;
-        tabeltButton.onClick.Invoke();
+        SetAnimator(false);
     }
 
     public bool IsTabletOn()
