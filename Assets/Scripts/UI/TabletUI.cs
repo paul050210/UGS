@@ -83,7 +83,7 @@ public class TabletUI : MonoBehaviour
     public void TurnOnTablet(State state)
     {
         currentState = state;
-        SetAnimator(false);
+        SetAnimator(true);
     }
 
     public bool IsTabletOn()

@@ -33,27 +33,6 @@ public class EastUI : MonoBehaviour
         decomButton.onClick.AddListener(() => OnClickButton(1));
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            if (Mathf.Approximately(cam.fieldOfView, 60f))
-            {
-                fov = 30f;
-                camvec = new Vector3(0f, -1.6f, 5f);
-            }
-            else if (Mathf.Approximately(cam.fieldOfView, 30f))
-            {
-                fov = 60f;
-                camvec = new Vector3(0f, 1f, 0f);
-            }
-            else
-                return;
-                
-            cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
-            cam.gameObject.transform.DOMove(camvec, camCloseDuration).SetEase(Ease.Linear);
-        }
-    }
 
     private void OnClickButton(int i)
     {
