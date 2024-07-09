@@ -29,10 +29,11 @@ public class ItemSlotUI : MonoBehaviour
         button.onClick.AddListener(OnClickButton);
     }
 
-    public void SetItem(Item item)
+    public void SetItem(Item item, bool check = false)
     {
         this.item = item;
         itemImg.sprite = ItemManager.Instance.GetItemSprite(item);
+        transform.GetChild(2).gameObject.SetActive(check);
     }
 
     public void ResetItem()
@@ -63,6 +64,10 @@ public class ItemSlotUI : MonoBehaviour
             itemText.text = "아이템 설명";
             countText.text = "0";
             inventory.ChangeSelectedSlot(-1);
+        }
+        if(inventory.IsSelectMode) 
+        {
+            inventory.OnClickSelect(index);
         }
         selectImg.SetActive(isSelected);
     }

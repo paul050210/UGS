@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-enum State
+public enum State
 {
     Quest,
     Inventory,
@@ -17,10 +18,12 @@ public class TabletUI : MonoBehaviour
     [SerializeField] private List<Button> stateButtons;
     [SerializeField] private List<GameObject> tabeltCanvas;
     private State currentState = State.Quest;
+
+    public UnityEvent onDisable;
     
     private void Start()
     {
-        tabeltButton.onClick.AddListener(SetAnimator);
+        tabeltButton.onClick.AddListener(() => SetAnimator());
         for(int i = 0; i<stateButtons.Count; i++)
         {
             switch(i)
@@ -59,29 +62,32 @@ public class TabletUI : MonoBehaviour
         }
     }
 
-    private void SetAnimator()
+    private void SetAnimator(bool isFree = true)
     {
         bool isOn = tabeltAnimator.GetBool("IsOn");
         tabeltAnimator.SetBool("IsOn", !isOn);
-        //currentState = State.Quest;
-
+        
+        tabeltCanvas[(int)currentState].SetActive(!isOn);
         if(isOn)
         {
-            //tabeltCanvas[0].SetActive(false);
-            //tabeltCanvas[1].SetActive(false);
-            //tabeltCanvas[2].SetActive(false);
-            tabeltCanvas[(int)currentState].SetActive(false);
-        }
-        else
-        {
-            tabeltCanvas[(int)currentState].SetActive(true);
-            //tabeltCanvas[0].SetActive(true);
+            onDisable.Invoke();
         }
 
+        if (!isFree) return;
         for(int i = 0; i<stateButtons.Count; i++)
         {
             stateButtons[i].gameObject.SetActive(!isOn);
         }
     }
     
+    public void TurnOnTablet(State state)
+    {
+        currentState = state;
+        SetAnimator(false);
+    }
+
+    public bool IsTabletOn()
+    {
+        return tabeltAnimator.GetBool("IsOn");
+    }
 }

@@ -17,8 +17,11 @@ public class CameraMove : MonoBehaviour
     private EventTrigger leftTrigger;
     private EventTrigger rightTrigger;
 
+    private TabletUI tabletUI;
+
     private void Start()
     {
+        tabletUI = FindObjectOfType<TabletUI>();
         leftTrigger = leftButton.GetComponent<EventTrigger>();
         rightTrigger = rightButton.GetComponent<EventTrigger>();
         leftButton.onClick.AddListener(() => Turn(0));
@@ -53,6 +56,7 @@ public class CameraMove : MonoBehaviour
 
     private void Turn(int lr = 0)
     {
+        if (tabletUI.IsTabletOn()) return;
         if (isMoving) return;
         isMoving = true;
         temp = Mathf.FloorToInt(dir.y / 90f);
@@ -76,8 +80,9 @@ public class CameraMove : MonoBehaviour
 
     private void OnPointerEnter(PointerEventData data) 
     {
+        if (tabletUI.IsTabletOn()) return;
         var img = data.pointerEnter.GetComponent<Image>();
-        img.color = new Color(img.color.r, img.color.g, img.color.b, 50f/255f);
+        img.color = new Color(img.color.r, img.color.g, img.color.b, 150f/255f);
     }
 
     public void OnPointerExit(PointerEventData data)
