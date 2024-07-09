@@ -15,12 +15,11 @@ enum InvenState
 }
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private List<ItemSlotUI> slots;
     [SerializeField] private Text itemText;
-    [SerializeField] private Text countText;
     [SerializeField] private Button selectButton;
     [SerializeField] private Button[] stateButtons;
-    
+    private ItemSlotUI[] slots = null;
+        
     private int selectedSlot = -1;
     private bool isSelecteMode = false;
     public bool IsSelectMode => isSelecteMode;
@@ -31,6 +30,7 @@ public class InventoryUI : MonoBehaviour
     private void Start()
     {
         SaveManager.Instance.LoadItemData();
+        slots = transform.GetChild(0).GetComponentsInChildren<ItemSlotUI>();
         SetItemSlot();
         SetItemButton();
         SetStateButton();
@@ -45,14 +45,13 @@ public class InventoryUI : MonoBehaviour
         ResetItemSlot();
         SetItemSlot();
         itemText.text = "아이템설명";
-        countText.text = "0";
     }
 
     private void SetItemButton()
     {
-        for(int i = 0; i<slots.Count; i++) 
+        for(int i = 0; i<slots.Length; i++) 
         {
-            slots[i].SetItemText(ref itemText, ref countText, i);
+            slots[i].SetItemText(ref itemText, i);
         }
     }
 
@@ -89,17 +88,20 @@ public class InventoryUI : MonoBehaviour
                     break;
             }
 
-            
-            slots[i].SetItem(p.Key, selectedItems.Contains(p.Key));
-            i++;
+            for(int j = 0; j < p.Value; j++)
+            {
+                slots[i].SetItem(p.Key, selectedItems.Contains(p.Key));
+                i++;
+            }
             
         }
     }
 
     private void ResetItemSlot()
     {
+        if (slots == null) return;
         selectedSlot = -1;
-        for (int i = 0; i<slots.Count; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             slots[i].ResetItem();
         }
@@ -116,7 +118,6 @@ public class InventoryUI : MonoBehaviour
                 ResetItemSlot();
                 SetItemSlot();
                 itemText.text = "아이템설명";
-                countText.text = "0";
             });
         }
     }
@@ -146,6 +147,7 @@ public class InventoryUI : MonoBehaviour
     {
         isSelecteMode = !isSelecteMode;
         ChangeSelectedSlot(-1);
+        itemText.text = "아이템설명";
     }
 }
  
