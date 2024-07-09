@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum State
+public enum State
 {
     Quest,
     Inventory,
@@ -79,8 +79,9 @@ public class TabletUI : MonoBehaviour
         }
     }
     
-    public void TurnOnTablet()
+    public void TurnOnTablet(State state)
     {
+        currentState = state;
         tabeltButton.onClick.Invoke();
     }
 
