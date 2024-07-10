@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 [CreateAssetMenu(menuName = "ItemMergeSO")]
 public class ItemMergeSO : ScriptableObject
 {
-    [SerializeField] private ItemSO baseItemA = null;
-    [SerializeField] private ItemSO baseItemB = null;
+    [SerializeField] private ItemSO[] baseItems;
     [SerializeField] private ItemSO mergeItem = null;
 
-    
 
-    public Item ReturnMergeItem(Item itemA, Item itemB)
+
+
+    public ItemSO ReturnMergeItem(Item[] items)
     {
-        if (itemA == null || itemB == null)
+        if (items.Length != baseItems.Length) return null;
+        Item[] inputArr = items.OrderBy(i => i.itemName).ToArray();
+        Item[] thisArr = new Item[baseItems.Length];
+        for(int i = 0; i<baseItems.Length;i++)
         {
-            return null;
+            thisArr[i] = baseItems[i].item;
         }
-        
-        if(itemA.Equals((Item)baseItemA) && itemB.Equals((Item)baseItemB))
+        thisArr = thisArr.OrderBy(i => i.itemName).ToArray();
+
+        if (Enumerable.SequenceEqual(inputArr, thisArr))
             return mergeItem;
 
         return null;
     }
-
 }
