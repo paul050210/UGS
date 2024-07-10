@@ -1627,6 +1627,7 @@ MonoBehaviour:
   nameTxt: {fileID: 926608659}
   descriptTxt: {fileID: 951478418}
   itemMergeCnt: 2
+  itemDecomCnt: 1
 --- !u!1 &390660940
 GameObject:
   m_ObjectHideFlags: 0

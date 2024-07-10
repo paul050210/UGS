@@ -28,11 +28,13 @@ public class InventoryUI : MonoBehaviour
     private List<UIItem> selectedItems = new List<UIItem>();
 
     private InvenState state = InvenState.all;
+    private ItemMerge itemMerge = null;
 
     private void Start()
     {
         SaveManager.Instance.LoadItemData();
         slots = transform.GetChild(0).GetComponentsInChildren<ItemSlotUI>();
+        itemMerge = GetComponent<ItemMerge>();
         SetItemSlot();
         SetItemButton();
         SetStateButton();
@@ -48,6 +50,9 @@ public class InventoryUI : MonoBehaviour
         ResetItemSlot();
         SetItemSlot();
         itemText.text = "아이템설명";
+        if(itemMerge == null)
+            itemMerge = GetComponent<ItemMerge>();
+        maxSelected = itemMerge.GetMaxSelect();
     }
 
     private void SetItemButton()
@@ -174,6 +179,22 @@ public class InventoryUI : MonoBehaviour
         }
 
         return items;
+    }
+
+    public Item GetToDecom()
+    {
+        if(selectedItems.Count == 0)
+        {
+            Debug.LogWarning("분해하려면 아이템 선택을 해주세요");
+            return null;
+        }
+        else if(selectedItems.Count > 1) 
+        {
+            Debug.LogWarning("분해하려면 아이템을 하나만 선택 해주세요");
+            return null;
+        }
+
+        return selectedItems[0].item;
     }
 }
  
