@@ -77,11 +77,7 @@ public class ItemMerge : MonoBehaviour
 
         if (merged != null)
         {
-            //itemPopUp.SetActive(true);
-            //itemImg.sprite = merged.sprite;
-            //nameTxt.text = merged.item.itemName;
-            //descriptTxt.text = merged.item.itemDesc;
-
+            //사용된 아이템제거, 획득한 아이템 저장 추가해야됨
             Transform popup = Instantiate(itemPopUp, transform.parent).transform;
             popup.gameObject.SetActive(true);
             popup.GetChild(0).GetComponent<Image>().sprite = merged.sprite;
@@ -111,7 +107,8 @@ public class ItemMerge : MonoBehaviour
 
         if (items != null)
         {
-            for(int i = 0; i<items.Length; i++)
+            //사용된 아이템제거, 획득한 아이템 저장 추가해야됨
+            for (int i = 0; i<items.Length; i++)
             {
                 Transform popup = Instantiate(itemPopUp, transform.parent).transform;
                 popup.gameObject.SetActive(true);
