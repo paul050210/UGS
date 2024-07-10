@@ -22,11 +22,10 @@ public class InventoryUI : MonoBehaviour
     private ItemSlotUI[] slots = null;
         
     private int selectedSlot = -1;
-    private int maxSelected = 3;
+    private int maxSelected = 5;
     private bool isSelecteMode = false;
     public bool IsSelectMode => isSelecteMode;
-    private List<Item> selectedItems = new List<Item>();
-    private List<Pair<Item, int>> nselectedItems = new List<Pair<Item, int>>();
+    private List<UIItem> selectedItems = new List<UIItem>();
 
     private InvenState state = InvenState.all;
 
@@ -94,7 +93,8 @@ public class InventoryUI : MonoBehaviour
 
             for(int j = 0; j < p.Value; j++)
             {
-                slots[i].SetItem(p.Key, selectedItems.Contains(p.Key));
+                var item = new UIItem(p.Key, j);
+                slots[i].SetItem(item, selectedItems.Contains(item));
                 i++;
             }
             
@@ -104,7 +104,6 @@ public class InventoryUI : MonoBehaviour
     private void ResetItemSlot()
     {
         if (slots == null) return;
-        //selectedSlot = -1;
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].ResetItem();

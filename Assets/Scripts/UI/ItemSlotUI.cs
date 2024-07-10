@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemSlotUI : MonoBehaviour
 {
-    private Item item;
+    private UIItem item;
     private Button button;
     private Text itemText;
     private bool isSelected = false;
@@ -28,10 +28,10 @@ public class ItemSlotUI : MonoBehaviour
         button.onClick.AddListener(OnClickButton);
     }
 
-    public void SetItem(Item item, bool check = false)
+    public void SetItem(UIItem item, bool check = false)
     {
         this.item = item;
-        itemImg.sprite = ItemManager.Instance.GetItemSprite(item);
+        itemImg.sprite = ItemManager.Instance.GetItemSprite(item.item);
         transform.GetChild(2).gameObject.SetActive(check);
     }
 
@@ -43,7 +43,7 @@ public class ItemSlotUI : MonoBehaviour
         CheckOff();
     }
 
-    public Item GetItem()
+    public UIItem GetItem()
     {
         return item;
     }
@@ -54,7 +54,7 @@ public class ItemSlotUI : MonoBehaviour
         isSelected = !isSelected;
         if(isSelected)
         {
-            itemText.text = item.itemDesc;
+            itemText.text = item.item.itemDesc;
             inventory.ChangeSelectedSlot(index);
         }
         else
