@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,9 +22,11 @@ public class InventoryUI : MonoBehaviour
     private ItemSlotUI[] slots = null;
         
     private int selectedSlot = -1;
+    private int maxSelected = 3;
     private bool isSelecteMode = false;
     public bool IsSelectMode => isSelecteMode;
     private List<Item> selectedItems = new List<Item>();
+    private List<Pair<Item, int>> nselectedItems = new List<Pair<Item, int>>();
 
     private InvenState state = InvenState.all;
 
@@ -42,6 +45,7 @@ public class InventoryUI : MonoBehaviour
         state = InvenState.all;
         selectedItems.Clear();
         isSelecteMode = false;
+        selectedSlot = -1;
         ResetItemSlot();
         SetItemSlot();
         itemText.text = "아이템설명";
@@ -100,7 +104,7 @@ public class InventoryUI : MonoBehaviour
     private void ResetItemSlot()
     {
         if (slots == null) return;
-        selectedSlot = -1;
+        //selectedSlot = -1;
         for (int i = 0; i < slots.Length; i++)
         {
             slots[i].ResetItem();
@@ -115,6 +119,7 @@ public class InventoryUI : MonoBehaviour
             stateButtons[temp].onClick.AddListener(() => 
             {
                 state = (InvenState)temp;
+                selectedSlot = -1;
                 ResetItemSlot();
                 SetItemSlot();
                 itemText.text = "아이템설명";
@@ -136,6 +141,12 @@ public class InventoryUI : MonoBehaviour
         if(slots[index].CheckOn())
         {
             selectedItems.Add(slots[index].GetItem());
+            if (selectedItems.Count > maxSelected)
+            {
+                selectedItems.RemoveAt(0);
+                ResetItemSlot();
+                SetItemSlot();
+            }
         }
         else
         {
