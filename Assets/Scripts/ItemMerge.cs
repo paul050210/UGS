@@ -17,10 +17,7 @@ public class ItemMerge : MonoBehaviour
     [SerializeField] private Button doneButton;
     [SerializeField] private Button tabeltButton;
 
-    [SerializeField] private GameObject itemPopUp;
-    [SerializeField] private Image itemImg;
-    [SerializeField] private Text nameTxt;
-    [SerializeField] private Text descriptTxt;
+    [SerializeField] private Transform[] itemPopUps;
 
     [SerializeField] private int itemMergeCnt;
     [SerializeField] private int itemDecomCnt;
@@ -78,18 +75,18 @@ public class ItemMerge : MonoBehaviour
         if (merged != null)
         {
             //사용된 아이템제거, 획득한 아이템 저장 추가해야됨
-            Transform popup = Instantiate(itemPopUp, transform.parent).transform;
-            popup.gameObject.SetActive(true);
-            popup.GetChild(0).GetComponent<Image>().sprite = merged.sprite;
-            popup.GetChild(1).GetComponent<Text>().text = merged.item.itemName;
-            popup.GetChild(2).GetComponent<Text>().text = merged.item.itemDesc;
+            itemPopUps[0].gameObject.SetActive(true);
+            itemPopUps[0].GetChild(1).GetComponent<Image>().sprite = merged.sprite;
+            itemPopUps[0].GetChild(2).GetComponent<Text>().text = merged.item.itemName;
+            itemPopUps[0].GetChild(3).GetComponent<Text>().text = merged.item.itemDesc;
 
         }
         else
         {
-            itemPopUp.SetActive(true);
-            nameTxt.text = "합성실패(임시)";
-            descriptTxt.text = "합성실패(임시)";
+            itemPopUps[0].gameObject.SetActive(true);
+            itemPopUps[0].GetChild(1).GetComponent<Image>().sprite = null;
+            itemPopUps[0].GetChild(2).GetComponent<Text>().text = "합성실패(임시)";
+            itemPopUps[0].GetChild(3).GetComponent<Text>().text = "합성실패(임시)";
         }
         tabeltButton.onClick.Invoke();
     }
@@ -110,18 +107,18 @@ public class ItemMerge : MonoBehaviour
             //사용된 아이템제거, 획득한 아이템 저장 추가해야됨
             for (int i = 0; i<items.Length; i++)
             {
-                Transform popup = Instantiate(itemPopUp, transform.parent).transform;
-                popup.gameObject.SetActive(true);
-                popup.GetChild(0).GetComponent<Image>().sprite = items[i].sprite;
-                popup.GetChild(1).GetComponent<Text>().text = items[i].item.itemName;
-                popup.GetChild(2).GetComponent<Text>().text = items[i].item.itemDesc;
+                itemPopUps[i].gameObject.SetActive(true);
+                itemPopUps[i].GetChild(1).GetComponent<Image>().sprite = items[i].sprite;
+                itemPopUps[i].GetChild(2).GetComponent<Text>().text = items[i].item.itemName;
+                itemPopUps[i].GetChild(3).GetComponent<Text>().text = items[i].item.itemDesc;
             }
         }
         else
         {
-            itemPopUp.SetActive(true);
-            nameTxt.text = "분해실패(임시)";
-            descriptTxt.text = "분해실패(임시)";
+            itemPopUps[0].gameObject.SetActive(true);
+            itemPopUps[0].GetChild(1).GetComponent<Image>().sprite = null;
+            itemPopUps[0].GetChild(2).GetComponent<Text>().text = "분해실패(임시)";
+            itemPopUps[0].GetChild(3).GetComponent<Text>().text = "분해실패(임시)";
         }
 
         tabeltButton.onClick.Invoke();
