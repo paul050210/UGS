@@ -9,7 +9,6 @@ public class MapManager : MonoBehaviour
     public Button[] locationButtons;  // 투명 버튼 배열
     public GameObject black;  // 블랙아웃 
     public Button[] tradeCloseButtons;  // 거래 화면 종료 버튼 배열
-    public GameObject speechBubblePrefab; // 말풍선 UI 프리팹
     private int currentTradeIndex = -1;
 
     // TradeItem 정보 설정
@@ -83,28 +82,8 @@ public class MapManager : MonoBehaviour
     {
         int itemIndex = int.Parse(itemName.Substring(10)) - 1; // TradeItem1, TradeItem2 등의 숫자를 추출해서 인덱스로 변환
         string itemDescription = tradeItemDescriptions[itemIndex]; // 아이템 설명
-
-        // 말풍선 UI 프리팹을 인스턴스화하여 위치 조정 후 텍스트 설정
-        GameObject speechBubble = Instantiate(speechBubblePrefab, transform.position, Quaternion.identity);
-        speechBubble.transform.SetParent(transform, false); // 부모 설정
-        speechBubble.GetComponentInChildren<Text>().text = itemDescription; // 텍스트 설정
-
-        // 일정 시간 후 거래 가능 여부 표시
-        StartCoroutine(ShowTradeAvailability(itemIndex, speechBubble));
     }
 
-    IEnumerator ShowTradeAvailability(int itemIndex, GameObject speechBubble)
-    {
-        yield return new WaitForSeconds(2f); // 2초 후에 거래 가능 여부 텍스트 표시
-
-        // 거래 가능 여부 텍스트 설정
-        string tradeAvailabilityText = (itemIndex == 0 || itemIndex == 2) ? "거래 가능" : "거래 불가능";
-        speechBubble.GetComponentInChildren<Text>().text = tradeItemDescriptions[itemIndex] + "\n\n" + tradeAvailabilityText;
-
-        // 일정 시간 후 말풍선 제거
-        yield return new WaitForSeconds(3f); // 3초 후에 말풍선 제거
-        Destroy(speechBubble);
-    }
 
     void CloseTradePanel()
     {
