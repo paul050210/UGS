@@ -100,6 +100,8 @@ public class InventoryUI : MonoBehaviour
             {
                 var item = new UIItem(p.Key, j);
                 slots[i].SetItem(item, selectedItems.Contains(item));
+                if (i == selectedSlot)
+                    slots[i].OnSelect();
                 i++;
             }
             

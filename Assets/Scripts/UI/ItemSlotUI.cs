@@ -75,6 +75,12 @@ public class ItemSlotUI : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
+    public void OnSelect()
+    {
+        isSelected = true;
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
     public bool CheckOn()
     {
         bool isActive = transform.GetChild(2).gameObject.activeSelf;
