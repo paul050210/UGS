@@ -56,11 +56,15 @@ public class ItemSlotUI : MonoBehaviour
         {
             itemText.text = item.item.itemDesc;
             inventory.ChangeSelectedSlot(index);
+            WestItemManager.Instance.AddSelectedItem(item);
+            itemImg.color = Color.green; // 선택됨 색상으로 변경
         }
         else
         {
             itemText.text = "아이템 설명";
             inventory.ChangeSelectedSlot(-1);
+            WestItemManager.Instance.RemoveSelectedItem(item);
+            itemImg.color = Color.white; // 원본 색상으로 변경
         }
         if(inventory.IsSelectMode) 
         {
