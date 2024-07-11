@@ -17,8 +17,6 @@ public class Item
     public ItemType type;
     public string itemName;
     public string itemDesc;
-    public int baseValue;
-    public int playerPreference;
 
     public override int GetHashCode()
     {

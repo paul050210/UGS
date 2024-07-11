@@ -1,12 +1,10 @@
 using System;
-using UnityEngine;
 
 [Serializable]
 public class UIItem
 {
     public Item item { get; private set;}
     public int index { get; private set; }
-    public GameObject gameObject;
 
     public UIItem(Item item, int index)
     {
