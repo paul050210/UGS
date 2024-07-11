@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class ItemSlotUI : MonoBehaviour
 {
-    private Item item;
+    private UIItem item;
     private Button button;
     private Text itemText;
-    private Text countText;
     private bool isSelected = false;
 
     private Image itemImg;
@@ -29,10 +28,10 @@ public class ItemSlotUI : MonoBehaviour
         button.onClick.AddListener(OnClickButton);
     }
 
-    public void SetItem(Item item, bool check = false)
+    public void SetItem(UIItem item, bool check = false)
     {
         this.item = item;
-        itemImg.sprite = ItemManager.Instance.GetItemSprite(item);
+        itemImg.sprite = ItemManager.Instance.GetItemSprite(item.item);
         transform.GetChild(2).gameObject.SetActive(check);
     }
 
@@ -44,7 +43,7 @@ public class ItemSlotUI : MonoBehaviour
         CheckOff();
     }
 
-    public Item GetItem()
+    public UIItem GetItem()
     {
         return item;
     }
@@ -55,14 +54,12 @@ public class ItemSlotUI : MonoBehaviour
         isSelected = !isSelected;
         if(isSelected)
         {
-            itemText.text = item.itemDesc;
-            countText.text = SaveManager.Instance.itemMap[item].ToString();
+            itemText.text = item.item.itemDesc;
             inventory.ChangeSelectedSlot(index);
         }
         else
         {
             itemText.text = "아이템 설명";
-            countText.text = "0";
             inventory.ChangeSelectedSlot(-1);
         }
         if(inventory.IsSelectMode) 
@@ -78,6 +75,12 @@ public class ItemSlotUI : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
+    public void OnSelect()
+    {
+        isSelected = true;
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
     public bool CheckOn()
     {
         bool isActive = transform.GetChild(2).gameObject.activeSelf;
@@ -90,10 +93,9 @@ public class ItemSlotUI : MonoBehaviour
         transform.GetChild(2).gameObject.SetActive(false);
     }
 
-    public void SetItemText(ref Text itemText, ref Text countText, int index) 
+    public void SetItemText(ref Text itemText, int index) 
     {
         this.itemText = itemText;
-        this.countText = countText;
         this.index = index;
     }
 }

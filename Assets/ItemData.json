@@ -6,7 +6,7 @@
                 "itemName": "herb",
                 "itemDesc": "This is herb"
             },
-            "Value": 2
+            "Value": 3
         },
         {
             "Key": {
@@ -14,7 +14,7 @@
                 "itemName": "stone",
                 "itemDesc": "This is stone"
             },
-            "Value": 1
+            "Value": 3
         },
         {
             "Key": {
@@ -22,7 +22,7 @@
                 "itemName": "bio",
                 "itemDesc": "This is bio"
             },
-            "Value": 1
+            "Value": 2
         },
         {
             "Key": {

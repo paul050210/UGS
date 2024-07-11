@@ -18,9 +18,11 @@ public class CameraMove : MonoBehaviour
     private EventTrigger rightTrigger;
 
     private TabletUI tabletUI;
+    private Camera cam;
 
     private void Start()
     {
+        cam = Camera.main;
         tabletUI = FindObjectOfType<TabletUI>();
         leftTrigger = leftButton.GetComponent<EventTrigger>();
         rightTrigger = rightButton.GetComponent<EventTrigger>();
@@ -56,11 +58,11 @@ public class CameraMove : MonoBehaviour
 
     private void Turn(int lr = 0)
     {
-        if (tabletUI.IsTabletOn()) return;
+        if (tabletUI.IsTabletOn() || !Mathf.Approximately(cam.fieldOfView, 60f)) return;
         if (isMoving) return;
         isMoving = true;
         temp = Mathf.FloorToInt(dir.y / 90f);
-        if(lr == 0)
+        if (lr == 0)
         {
             dir.y -= 90f;
             if (dir.y < 0) dir.y = 270f;
@@ -70,17 +72,21 @@ public class CameraMove : MonoBehaviour
             dir.y += 90f;
             if (dir.y == 360) dir.y = 0f;
         }
-        canvases[Mathf.FloorToInt(dir.y / 90f)].SetActive(true);
+        var newCanvas = canvases[Mathf.FloorToInt(dir.y / 90f)];
+        newCanvas.SetActive(true);
+        newCanvas.transform.GetChild(newCanvas.transform.childCount - 1).gameObject.SetActive(true);
+        canvases[temp].transform.GetChild(canvases[temp].transform.childCount - 1).gameObject.SetActive(true);
         transform.DORotate(dir, moveDelay).SetEase(Ease.Linear).OnComplete(() =>
         {
             isMoving = false;
             canvases[temp].SetActive(false);
+            newCanvas.transform.GetChild(newCanvas.transform.childCount - 1).gameObject.SetActive(false);
         });
     }
 
     private void OnPointerEnter(PointerEventData data) 
     {
-        if (tabletUI.IsTabletOn()) return;
+        if (tabletUI.IsTabletOn() || !Mathf.Approximately(cam.fieldOfView, 60f)) return;
         var img = data.pointerEnter.GetComponent<Image>();
         img.color = new Color(img.color.r, img.color.g, img.color.b, 150f/255f);
     }

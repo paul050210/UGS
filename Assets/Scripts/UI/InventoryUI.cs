@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,22 +16,25 @@ enum InvenState
 }
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private List<ItemSlotUI> slots;
     [SerializeField] private Text itemText;
-    [SerializeField] private Text countText;
     [SerializeField] private Button selectButton;
     [SerializeField] private Button[] stateButtons;
-    
+    private ItemSlotUI[] slots = null;
+        
     private int selectedSlot = -1;
+    private int maxSelected = 5;
     private bool isSelecteMode = false;
     public bool IsSelectMode => isSelecteMode;
-    private List<Item> selectedItems = new List<Item>();
+    private List<UIItem> selectedItems = new List<UIItem>();
 
     private InvenState state = InvenState.all;
+    private ItemMerge itemMerge = null;
 
     private void Start()
     {
         SaveManager.Instance.LoadItemData();
+        slots = transform.GetChild(0).GetComponentsInChildren<ItemSlotUI>();
+        itemMerge = GetComponent<ItemMerge>();
         SetItemSlot();
         SetItemButton();
         SetStateButton();
@@ -42,17 +46,20 @@ public class InventoryUI : MonoBehaviour
         state = InvenState.all;
         selectedItems.Clear();
         isSelecteMode = false;
+        selectedSlot = -1;
         ResetItemSlot();
         SetItemSlot();
         itemText.text = "아이템설명";
-        countText.text = "0";
+        if(itemMerge == null)
+            itemMerge = GetComponent<ItemMerge>();
+        maxSelected = itemMerge.GetMaxSelect();
     }
 
     private void SetItemButton()
     {
-        for(int i = 0; i<slots.Count; i++) 
+        for(int i = 0; i<slots.Length; i++) 
         {
-            slots[i].SetItemText(ref itemText, ref countText, i);
+            slots[i].SetItemText(ref itemText, i);
         }
     }
 
@@ -89,17 +96,22 @@ public class InventoryUI : MonoBehaviour
                     break;
             }
 
-            
-            slots[i].SetItem(p.Key, selectedItems.Contains(p.Key));
-            i++;
+            for(int j = 0; j < p.Value; j++)
+            {
+                var item = new UIItem(p.Key, j);
+                slots[i].SetItem(item, selectedItems.Contains(item));
+                if (i == selectedSlot)
+                    slots[i].OnSelect();
+                i++;
+            }
             
         }
     }
 
     private void ResetItemSlot()
     {
-        selectedSlot = -1;
-        for (int i = 0; i<slots.Count; i++)
+        if (slots == null) return;
+        for (int i = 0; i < slots.Length; i++)
         {
             slots[i].ResetItem();
         }
@@ -113,10 +125,10 @@ public class InventoryUI : MonoBehaviour
             stateButtons[temp].onClick.AddListener(() => 
             {
                 state = (InvenState)temp;
+                selectedSlot = -1;
                 ResetItemSlot();
                 SetItemSlot();
                 itemText.text = "아이템설명";
-                countText.text = "0";
             });
         }
     }
@@ -135,6 +147,12 @@ public class InventoryUI : MonoBehaviour
         if(slots[index].CheckOn())
         {
             selectedItems.Add(slots[index].GetItem());
+            if (selectedItems.Count > maxSelected)
+            {
+                selectedItems.RemoveAt(0);
+                ResetItemSlot();
+                SetItemSlot();
+            }
         }
         else
         {
@@ -146,6 +164,39 @@ public class InventoryUI : MonoBehaviour
     {
         isSelecteMode = !isSelecteMode;
         ChangeSelectedSlot(-1);
+        itemText.text = "아이템설명";
+    }
+
+    public Item[] GetToMerge()
+    {
+        if(selectedItems.Count < 2)
+        {
+            Debug.LogWarning("선택된 아이템 부족");
+            return null;
+        }
+        Item[] items = new Item[selectedItems.Count];
+        for(int i = 0; i<selectedItems.Count; i++) 
+        {
+            items[i] = selectedItems[i].item;
+        }
+
+        return items;
+    }
+
+    public Item GetToDecom()
+    {
+        if(selectedItems.Count == 0)
+        {
+            Debug.LogWarning("분해하려면 아이템 선택을 해주세요");
+            return null;
+        }
+        else if(selectedItems.Count > 1) 
+        {
+            Debug.LogWarning("분해하려면 아이템을 하나만 선택 해주세요");
+            return null;
+        }
+
+        return selectedItems[0].item;
     }
 }
  

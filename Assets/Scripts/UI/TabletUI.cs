@@ -66,6 +66,7 @@ public class TabletUI : MonoBehaviour
     {
         bool isOn = tabeltAnimator.GetBool("IsOn");
         tabeltAnimator.SetBool("IsOn", !isOn);
+        tabeltAnimator.SetTrigger("ButtonClick");
         
         tabeltCanvas[(int)currentState].SetActive(!isOn);
         if(isOn)
@@ -83,7 +84,7 @@ public class TabletUI : MonoBehaviour
     public void TurnOnTablet(State state)
     {
         currentState = state;
-        SetAnimator(false);
+        SetAnimator(true);
     }
 
     public bool IsTabletOn()
