@@ -5,6 +5,7 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using UnityEngine.UI;
 using System.Text;
+using UnityEngine.SceneManagement;
 
 public class UnitySheetTest : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UnitySheetTest : MonoBehaviour
     private int index = 0;
     private bool isTypingDone = false;
     Dictionary<int, DefaultTable.Data> localeMap = new Dictionary<int, DefaultTable.Data>();
+    List<DefaultTable.Data> datas = new List<DefaultTable.Data>();
 
 
     private void Awake()
@@ -23,6 +25,7 @@ public class UnitySheetTest : MonoBehaviour
     private void Start()
     {
         localeMap = DefaultTable.Data.GetDictionary();
+        datas = DefaultTable.Data.GetList();
         SetText();
     }
 
