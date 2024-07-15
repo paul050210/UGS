@@ -6,8 +6,7 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
 {
     private List<DayInfo> days = new List<DayInfo>();
     private int dayCount = 1;
-
-    Quest currentQ;
+    private int questIndex = 0;
 
     private void Start()
     {
@@ -17,13 +16,13 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
             day = Resources.Load<DayInfo>($"SO/Day/day{i + 1}");
             days.Add(day);
         }
-        currentQ = days[GameManager.Instance.CurrentDay - 1].Quests[0];
 
-        Debug.Log(GetQuestText(currentQ)[0].strValue);
+        Debug.Log(GetQuestText()[0].strValue);
     }
 
-    public List<DefaultTable.Data> GetQuestText(Quest q)
+    public List<DefaultTable.Data> GetQuestText()
     {
+        Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
         var datas = DefaultTable.Data.GetList();
         List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
         for(int i = q.StartIndex; i<=q.EndIndex; i++)
@@ -31,5 +30,16 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
             returnList.Add(datas[i]);
         }
         return returnList;
+    }
+
+    public Sprite GetQuestImg()
+    {
+        Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
+        return q.CharSprite;
+    }
+
+    public void SetQuestIndex(int index)
+    {
+        questIndex = index;
     }
 }

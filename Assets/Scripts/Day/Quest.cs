@@ -21,7 +21,9 @@ public class Quest : ScriptableObject
     [SerializeField] private List<ItemSO> rewardItems;
 
     [SerializeField] private Sprite charSprite;
+    public Sprite CharSprite => charSprite;
     [SerializeField] private Sprite simpleCharSprite;
+    public Sprite SimpleCharSprite => simpleCharSprite;
 
     [SerializeField] private int durationTime;
 

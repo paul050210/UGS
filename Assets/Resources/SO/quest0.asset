@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bb080a646efff4e93dc43a9bc3472c, type: 3}
   m_Name: quest0
   m_EditorClassIdentifier: 
-  startIndex: 5
-  endIndex: 8
+  startIndex: 0
+  endIndex: 9
   needItems:
   - {fileID: 11400000, guid: afa9a9387d7b67744ad91fcfcf8c2939, type: 2}
   - {fileID: 11400000, guid: ffb21af5dd1cb844191e4b267d2e31c0, type: 2}
   rewardItems:
   - {fileID: 11400000, guid: 4fdb11c84c64a1b4e857078d9c3025b4, type: 2}
-  charSprite: {fileID: 0}
+  charSprite: {fileID: 21300000, guid: 6901f95099193b94e9ab29b78d10bd0a, type: 3}
   simpleCharSprite: {fileID: 0}
   durationTime: 3
