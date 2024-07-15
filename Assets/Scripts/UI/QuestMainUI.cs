@@ -40,7 +40,7 @@ public class QuestMainUI : MonoBehaviour
             curIndex++;
             if(curIndex > maxIndex)
             {
-                //TODO: 다음 퀘스트로 변경
+                //TODO: TabletUI ON
                 return;
             }
             SetText();
