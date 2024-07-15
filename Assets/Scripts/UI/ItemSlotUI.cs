@@ -9,6 +9,7 @@ public class ItemSlotUI : MonoBehaviour
     private Button button;
     private Text itemText;
     private bool isSelected = false;
+    public Button HandOverButton;
 
     private Image itemImg;
     private GameObject selectImg;

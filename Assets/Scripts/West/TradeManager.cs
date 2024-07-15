@@ -7,10 +7,9 @@ using DG.Tweening;
 public class TradeManager : MonoBehaviour
 {
     public GameObject tradeGuidePanel;
-    public Button tradeButton;
+
     public TradeGuideUI tradeGuideUI;
     public ItemShelfUI itemShelfUI;
-    public CollectionManager collectionManager;
 
     private List<UIItem> selectedItems;
 
@@ -18,7 +17,7 @@ public class TradeManager : MonoBehaviour
     {
         tradeGuidePanel.SetActive(false);
         selectedItems = new List<UIItem>();
-        tradeButton.onClick.AddListener(OnTradeButtonClicked);
+        HandOverButton.onClick.AddListener(OnHandOverButtonClicked);
     }
 
     public void SelectItem(UIItem item)
@@ -37,7 +36,7 @@ public class TradeManager : MonoBehaviour
         }
     }
 
-    void OnTradeButtonClicked()
+    void OnHandOverButtonClicked()
     {
         // Check if trade conditions are met
         bool tradeSuccess = CheckTradeConditions();

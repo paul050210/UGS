@@ -7,7 +7,7 @@ using DG.Tweening;
 public class TradeGuideUI : MonoBehaviour
 {
     [SerializeField] private Text dialogueText;
-    [SerializeField] private Button skipButton;
+    [SerializeField] private Button Dialogue;
     private Queue<string> dialogues;
     private bool isDialogueSkipping = false;
 
