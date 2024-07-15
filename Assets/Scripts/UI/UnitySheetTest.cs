@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UGS;
 using UnityEngine;
-using static UnityEditor.Progress;
 using UnityEngine.UI;
 using System.Text;
-using UnityEngine.SceneManagement;
 
 public class UnitySheetTest : MonoBehaviour
 {
@@ -13,8 +11,10 @@ public class UnitySheetTest : MonoBehaviour
     [SerializeField] Text textName;
     private int index = 0;
     private bool isTypingDone = false;
-    Dictionary<int, DefaultTable.Data> localeMap = new Dictionary<int, DefaultTable.Data>();
     List<DefaultTable.Data> datas = new List<DefaultTable.Data>();
+
+
+    private Quest testQ;
 
 
     private void Awake()
@@ -24,8 +24,8 @@ public class UnitySheetTest : MonoBehaviour
 
     private void Start()
     {
-        localeMap = DefaultTable.Data.GetDictionary();
-        datas = DefaultTable.Data.GetList();
+        testQ = new Quest(0, 9);
+        datas = QuestManager.Instance.GetQuest(testQ);
         SetText();
     }
 
@@ -36,7 +36,7 @@ public class UnitySheetTest : MonoBehaviour
             if(isTypingDone)
             {
                 index++;
-                if (index >= 4) index = 0;
+                if (index >= testQ.scriptLength) index = 0;
                 SetText();
             }
             else
@@ -52,8 +52,8 @@ public class UnitySheetTest : MonoBehaviour
         try
         {
             isTypingDone = false;
-            StartCoroutine(TypeTextEffect(localeMap[index].strValue));
-            textName.text = localeMap[index].name;
+            StartCoroutine(TypeTextEffect(datas[index].strValue));
+            textName.text = datas[index].name;
         }
         catch (KeyNotFoundException)
         {

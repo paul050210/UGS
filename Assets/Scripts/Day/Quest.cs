@@ -1,38 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
-public class Quest
+[CreateAssetMenu(menuName = "QuestSO")]
+public class Quest : ScriptableObject
 {
-    //퀘스트 등장 조건(추가해야됨)
+    //TODO: 퀘스트 등장 조건
 
-    //대화 내용(아마도 스트링 배열로 할꺼 아님)
-    private string[] scripts;
+    //대화 내용
     private string simpleTxt;
 
-    private int startIndex;
+    [SerializeField] private int startIndex;
     public int StartIndex => startIndex;
-    private int endIndex;
+    [SerializeField] private int endIndex;
     public int EndIndex => endIndex;
+    public int scriptLength => (endIndex - startIndex + 1);
 
-    private Item[] needItems;
-    private List<Item> rewardItems;
+    [SerializeField] private ItemSO[] needItems;
+    [SerializeField] private List<ItemSO> rewardItems;
 
-    private int durationTime;
+    [SerializeField] private Sprite charSprite;
+    [SerializeField] private Sprite simpleCharSprite;
+
+    [SerializeField] private int durationTime;
 
     public List<Item> DoneQuest(Item[] items)
     {
         if (items.Length != needItems.Length) return null;
         Item[] inputArr = items.OrderBy(i => i.itemName).ToArray();
-        Item[] thisArr = needItems;
+        Item[] thisArr = new Item[needItems.Length];
+        for (int i = 0; i < needItems.Length; i++)
+        {
+            thisArr[i] = needItems[i].item;
+        }
         thisArr = thisArr.OrderBy(i => i.itemName).ToArray();
 
+        List<Item> returnList = new List<Item>();
+        foreach(var itemSO in rewardItems)
+        {
+            returnList.Add(itemSO.item);
+        }
+
+
         if (Enumerable.SequenceEqual(inputArr, thisArr))
-            return rewardItems;
+            return returnList;
 
         return null;
     }
 
+    public bool CanDoQuest()
+    {
+        return true;
+    }
 
 
     public Quest(int start, int end)
