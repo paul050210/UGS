@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using static UGS.Editor.GoogleDriveExplorerGUI;
 
 
 public class SaveManager : MonoBehaviourSingleton<SaveManager>
 {
     private string GameSettingDataFileName = "GameSettingData.json";
     private string ItemDataFileName = "ItemData.json";
+    private string DayDataFileName = "DayData.json";
 
     public GameData gameSettingData = new GameData();
     public Dictionary<Item, int> itemMap = new Dictionary<Item, int>();
@@ -50,5 +52,27 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
         string filePath = Application.dataPath + "/" + ItemDataFileName;
 
         File.WriteAllText(filePath, ToJsonData);
+    }
+
+    public int LoadDay()
+    {
+        int day = 0;
+        string filePath = Application.dataPath +"/" + DayDataFileName;   
+
+        if(File.Exists(filePath))
+        {
+            string FromJsonData = File.ReadAllText(filePath);
+            day = JsonUtility.FromJson<Day>(FromJsonData).dayInt;
+        }
+        return day;
+    }
+
+    public void SaveDay(Day day)
+    {
+        string ToJsonData = JsonUtility.ToJson(day);
+        Debug.Log($"ToJsonData{ToJsonData}");
+        string filepath = Application.dataPath + "/" + DayDataFileName;
+
+        File.WriteAllText(filepath, ToJsonData);
     }
 }

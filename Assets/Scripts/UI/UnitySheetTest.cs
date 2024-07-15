@@ -25,7 +25,7 @@ public class UnitySheetTest : MonoBehaviour
     private void Start()
     {
         testQ = new Quest(0, 9);
-        datas = QuestManager.Instance.GetQuest(testQ);
+        datas = QuestManager.Instance.GetQuestText(testQ);
         SetText();
     }
 

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DayInfo
+[CreateAssetMenu(menuName = "DaySO")]
+public class DayInfo : ScriptableObject
 {
-    private List<Quest> quests;
+    [SerializeField] private List<Quest> quests;
     public List<Quest> Quests => quests;
-    private int dayIndex;
+    [SerializeField] private int dayIndex;
 
-    List<List<Quest>> questLists;
 
 }

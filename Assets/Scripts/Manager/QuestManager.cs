@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviourSingleton<QuestManager>
 {
-    Quest sampleQ;
+    private List<DayInfo> days = new List<DayInfo>();
+    private int dayCount = 1;
+
+    Quest currentQ;
 
     private void Start()
     {
-        sampleQ = new Quest(0, 10);
-        Debug.Log(GetQuest(sampleQ)[0].strValue);
+        DayInfo day;
+        for(int i = 0; i< dayCount; i++)
+        {
+            day = Resources.Load<DayInfo>($"SO/Day/day{i + 1}");
+            days.Add(day);
+        }
+        currentQ = days[GameManager.Instance.CurrentDay - 1].Quests[0];
+
+        Debug.Log(GetQuestText(currentQ)[0].strValue);
     }
 
-    public List<DefaultTable.Data> GetQuest(Quest q)
+    public List<DefaultTable.Data> GetQuestText(Quest q)
     {
         var datas = DefaultTable.Data.GetList();
         List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
