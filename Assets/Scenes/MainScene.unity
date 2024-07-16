@@ -285,6 +285,8 @@ MonoBehaviour:
   nextButton: {fileID: 597237318}
   npcScrollView: {fileID: 42528497}
   questScrollView: {fileID: 1458959899}
+  yesButton: {fileID: 1320601658}
+  noButton: {fileID: 1126478315}
 --- !u!1 &42528497
 GameObject:
   m_ObjectHideFlags: 0

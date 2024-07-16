@@ -31,6 +31,30 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
         return returnList;
     }
 
+    public List<DefaultTable.Data> GetAcceptText()
+    {
+        Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
+        var datas = DefaultTable.Data.GetList();
+        List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
+        for (int i = q.AcceptStart; i <= q.AcceptEnd; i++)
+        {
+            returnList.Add(datas[i]);
+        }
+        return returnList;
+    }
+
+    public List<DefaultTable.Data> GetRefuseText()
+    {
+        Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
+        var datas = DefaultTable.Data.GetList();
+        List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
+        for (int i = q.RefuseStart; i <= q.RefuseEnd; i++)
+        {
+            returnList.Add(datas[i]);
+        }
+        return returnList;
+    }
+
     public Sprite GetQuestImg()
     {
         Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];

@@ -38,7 +38,7 @@ public class NorthUI : MonoBehaviour
         });
     }
 
-    private void ZoomOut()
+    public void ZoomOut()
     {
         if (fov == 60f) return;
         fov = 60f;

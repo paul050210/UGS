@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startIndex: 0
   endIndex: 9
+  acceptStart: 10
+  acceptEnd: 11
+  refuseStart: 12
+  refuseEnd: 13
   needItems:
   - {fileID: 11400000, guid: afa9a9387d7b67744ad91fcfcf8c2939, type: 2}
   - {fileID: 11400000, guid: ffb21af5dd1cb844191e4b267d2e31c0, type: 2}

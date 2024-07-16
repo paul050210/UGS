@@ -16,9 +16,11 @@ public class QuestMainUI : MonoBehaviour
     [SerializeField] private Button noButton;
 
     private TabletUI tabletUI;
+    private NorthUI north;
 
     private List<DefaultTable.Data> curDatas;
     private bool isTypingDone = false;
+    private bool isLast = false;
 
     private int curIndex;
     private int maxIndex;
@@ -27,6 +29,7 @@ public class QuestMainUI : MonoBehaviour
     {
         nextButton.onClick.AddListener(OnClickNext);
         tabletUI = FindObjectOfType<TabletUI>();
+        north = FindObjectOfType<NorthUI>();
     }
 
     private void OnEnable()
@@ -36,6 +39,7 @@ public class QuestMainUI : MonoBehaviour
         maxIndex = curDatas.Count - 1;
         charImg.sprite = QuestManager.Instance.GetQuestImg();
         isTypingDone = false;
+        isLast = false;
 
         SetText();
     }
@@ -47,10 +51,18 @@ public class QuestMainUI : MonoBehaviour
             curIndex++;
             if(curIndex > maxIndex)
             {
-                tabletUI.TurnOnTablet(State.Quest);
-                AddContents();
-
-                return;
+                if(!isLast)
+                {
+                    isLast = true;
+                    tabletUI.TurnOnTablet(State.Quest);
+                    AddContents();
+                    return;
+                }
+                else
+                {
+                    north.ZoomOut();
+                    return;
+                }
             }
             SetText();
         }
@@ -102,12 +114,22 @@ public class QuestMainUI : MonoBehaviour
 
         yesButton.onClick.AddListener(() => 
         {
-
+            curDatas = QuestManager.Instance.GetAcceptText();
+            curIndex = 0;
+            maxIndex = curDatas.Count - 1;
+            tabletUI.TurnOnTablet(State.Quest);
+            SetText();
             yesButton.onClick.RemoveAllListeners();
+            noButton.onClick.RemoveAllListeners();
         });
         noButton.onClick.AddListener(() => 
         {
-
+            curDatas = QuestManager.Instance.GetRefuseText();
+            curIndex = 0;
+            maxIndex = curDatas.Count - 1;
+            tabletUI.TurnOnTablet(State.Quest);
+            SetText();
+            yesButton.onClick.RemoveAllListeners();
             noButton.onClick.RemoveAllListeners();
         });
     }

@@ -11,10 +11,24 @@ public class Quest : ScriptableObject
     //대화 내용
     private string simpleTxt;
 
+    [Header("기본 대화 내용")]
     [SerializeField] private int startIndex;
     public int StartIndex => startIndex;
     [SerializeField] private int endIndex;
     public int EndIndex => endIndex;
+
+    [Header("수락시 대화 내용")]
+    [SerializeField] private int acceptStart;
+    public int AcceptStart => acceptStart;
+    [SerializeField] private int acceptEnd;
+    public int AcceptEnd => acceptEnd;
+
+    [Header("거절시 대화 내용")]
+    [SerializeField] private int refuseStart;
+    public int RefuseStart => refuseStart;
+    [SerializeField] private int refuseEnd;
+    public int RefuseEnd => refuseEnd;
+
     public int scriptLength => (endIndex - startIndex + 1);
 
     [SerializeField] private ItemSO[] needItems;
