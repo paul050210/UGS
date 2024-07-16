@@ -18,6 +18,7 @@ public class TabletUI : MonoBehaviour
     [SerializeField] private List<Button> stateButtons;
     [SerializeField] private List<GameObject> tabeltCanvas;
     private State currentState = State.Quest;
+    public State CurrentState => currentState;
 
     public UnityEvent onDisable;
     

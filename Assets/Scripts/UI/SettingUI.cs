@@ -77,7 +77,7 @@ public class SettingUI : MonoBehaviour
 
     private IEnumerator Typing(string text)
     {
-        float delay = 0.3f - (speedScrollbar.value * 0.2f);
+        float delay = 0.25f - (speedScrollbar.value * 0.2f);
         playText.text = string.Empty;
 
         StringBuilder stringBuilder = new StringBuilder();

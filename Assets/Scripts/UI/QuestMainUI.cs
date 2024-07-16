@@ -10,6 +10,12 @@ public class QuestMainUI : MonoBehaviour
     [SerializeField] private Text nameTxt;
     [SerializeField] private Text descriptTxt;
     [SerializeField] private Button nextButton;
+    [SerializeField] private GameObject npcScrollView;
+    [SerializeField] private GameObject questScrollView;
+    [SerializeField] private Button yesButton;
+    [SerializeField] private Button noButton;
+
+    private TabletUI tabletUI;
 
     private List<DefaultTable.Data> curDatas;
     private bool isTypingDone = false;
@@ -20,6 +26,7 @@ public class QuestMainUI : MonoBehaviour
     private void Start()
     {
         nextButton.onClick.AddListener(OnClickNext);
+        tabletUI = FindObjectOfType<TabletUI>();
     }
 
     private void OnEnable()
@@ -40,7 +47,9 @@ public class QuestMainUI : MonoBehaviour
             curIndex++;
             if(curIndex > maxIndex)
             {
-                //TODO: TabletUI ON
+                tabletUI.TurnOnTablet(State.Quest);
+                AddContents();
+
                 return;
             }
             SetText();
@@ -62,7 +71,7 @@ public class QuestMainUI : MonoBehaviour
     {
         descriptTxt.text = string.Empty;
         StringBuilder stringBuilder = new StringBuilder();
-        float delay = 0.3f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f);
+        float delay = 0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f);
 
         for(int i = 0; i< text.Length; i++)
         {
@@ -77,5 +86,29 @@ public class QuestMainUI : MonoBehaviour
         }
 
         isTypingDone = true;
+    }
+
+    private void AddContents()
+    {
+        Transform contents = questScrollView.transform;
+        contents = contents.GetChild(0).GetChild(0);
+        contents.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, (curDatas.Count+1) * 100f);
+        for(int i = 0; i<curDatas.Count; i++)
+        {
+            string txt = curDatas[i].strValue;
+            bool isLeft = curDatas[i].name != "A";
+            contents.GetChild(i).GetComponent<QuestContentUI>().SetText(txt, isLeft);
+        }
+
+        yesButton.onClick.AddListener(() => 
+        {
+
+            yesButton.onClick.RemoveAllListeners();
+        });
+        noButton.onClick.AddListener(() => 
+        {
+
+            noButton.onClick.RemoveAllListeners();
+        });
     }
 }

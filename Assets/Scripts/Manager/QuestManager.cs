@@ -17,7 +17,6 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
             days.Add(day);
         }
 
-        Debug.Log(GetQuestText()[0].strValue);
     }
 
     public List<DefaultTable.Data> GetQuestText()
