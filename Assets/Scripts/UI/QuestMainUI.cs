@@ -105,7 +105,7 @@ public class QuestMainUI : MonoBehaviour
         QuestContentControl.Instance.SetContents(curDatas);
         var spr = QuestManager.Instance.GetSipleImg();
         var txt = QuestManager.Instance.GetSimpleText();
-        NpcContentControl.Instance.EnableContent(0, spr, txt, curDatas);
+        NpcContentControl.Instance.EnableContent(spr, txt, curDatas);
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
 

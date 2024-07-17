@@ -8,6 +8,9 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
     private int dayCount = 1;
     private int questIndex = 0;
 
+    private List<Quest> enableQuests= new List<Quest>();
+    public List<Quest> EnableQuests => enableQuests;
+
     private void Start()
     {
         DayInfo day;

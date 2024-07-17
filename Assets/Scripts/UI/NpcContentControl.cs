@@ -6,7 +6,7 @@ public class NpcContentControl : MonoBehaviourSingleton<NpcContentControl>
 {
     private NpcContentUI[] contents;
     private RectTransform rectTransform;
-
+    private int lastIndex = 0;
 
 
     private void OnEnable()
@@ -14,7 +14,7 @@ public class NpcContentControl : MonoBehaviourSingleton<NpcContentControl>
         //ResetContents();
     }
 
-    public void EnableContent(int index, Sprite img, string text, List<DefaultTable.Data> datas)
+    public void EnableContent(Sprite img, string text, List<DefaultTable.Data> datas)
     {
         if (rectTransform == null)
         {
@@ -24,8 +24,8 @@ public class NpcContentControl : MonoBehaviourSingleton<NpcContentControl>
         {
             contents = GetComponentsInChildren<NpcContentUI>();
         }
-        contents[index].gameObject.SetActive(true);
-        contents[index].NpcContentInit(img, text, datas);
+        contents[lastIndex].gameObject.SetActive(true);
+        contents[lastIndex].NpcContentInit(img, text, datas);
     }
 
 
