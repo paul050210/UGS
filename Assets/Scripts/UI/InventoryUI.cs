@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// InvenState 열거형 추가
-public enum InvenState
+
+enum InvenState
 {
     all,
     herb,
@@ -12,15 +14,13 @@ public enum InvenState
     potion,
     another
 }
-
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private Text itemText;
     [SerializeField] private Button selectButton;
     [SerializeField] private Button[] stateButtons;
-    [SerializeField] private TradeInventoryUI tradeInventoryUI; // TradeInventoryUI 참조 추가
-
     private ItemSlotUI[] slots = null;
+        
     private int selectedSlot = -1;
     private int maxSelected = 5;
     private bool isSelecteMode = false;
@@ -30,17 +30,15 @@ public class InventoryUI : MonoBehaviour
     private InvenState state = InvenState.all;
     private ItemMerge itemMerge = null;
 
-    private Dictionary<UIItem, int> itemMap = new Dictionary<UIItem, int>(); // 아이템 데이터를 저장할 맵
-
     private void Start()
     {
-        LoadItemData(); // 데이터 로드
+        SaveManager.Instance.LoadItemData();
         slots = transform.GetChild(0).GetComponentsInChildren<ItemSlotUI>();
         itemMerge = GetComponent<ItemMerge>();
+        SetItemSlot();
         SetItemButton();
         SetStateButton();
         selectButton.onClick.AddListener(SelectButton);
-        UpdateUI();
     }
 
     private void OnEnable()
@@ -49,12 +47,17 @@ public class InventoryUI : MonoBehaviour
         selectedItems.Clear();
         isSelecteMode = false;
         selectedSlot = -1;
-        UpdateUI();
+        ResetItemSlot();
+        SetItemSlot();
+        itemText.text = "아이템설명";
+        if(itemMerge == null)
+            itemMerge = GetComponent<ItemMerge>();
+        maxSelected = itemMerge.GetMaxSelect();
     }
 
     private void SetItemButton()
     {
-        for (int i = 0; i < slots.Length; i++)
+        for(int i = 0; i<slots.Length; i++) 
         {
             slots[i].SetItemText(ref itemText, i);
         }
@@ -63,12 +66,11 @@ public class InventoryUI : MonoBehaviour
     private void SetItemSlot()
     {
         int i = 0;
-        foreach (var p in itemMap)
+        foreach (var p in SaveManager.Instance.itemMap)
         {
             if (p.Value == 0)
                 continue;
-
-            switch (state)
+            switch(state)
             {
                 case InvenState.herb:
                     if (p.Key.type != ItemType.herb)
@@ -90,11 +92,11 @@ public class InventoryUI : MonoBehaviour
                     if (p.Key.type != ItemType.another)
                         continue;
                     break;
-                default:
+                default: 
                     break;
             }
 
-            for (int j = 0; j < p.Value; j++)
+            for(int j = 0; j < p.Value; j++)
             {
                 var item = new UIItem(p.Key, j);
                 slots[i].SetItem(item, selectedItems.Contains(item));
@@ -102,6 +104,7 @@ public class InventoryUI : MonoBehaviour
                     slots[i].OnSelect();
                 i++;
             }
+            
         }
     }
 
@@ -116,22 +119,23 @@ public class InventoryUI : MonoBehaviour
 
     private void SetStateButton()
     {
-        for (int i = 0; i < stateButtons.Length; i++)
+        for(int i = 0; i < stateButtons.Length; i++) 
         {
             int temp = i;
-            stateButtons[temp].onClick.AddListener(() =>
+            stateButtons[temp].onClick.AddListener(() => 
             {
                 state = (InvenState)temp;
                 selectedSlot = -1;
-                UpdateUI();
-                itemText.text = "아이템 설명";
+                ResetItemSlot();
+                SetItemSlot();
+                itemText.text = "아이템설명";
             });
         }
     }
 
     public void ChangeSelectedSlot(int index)
     {
-        if (selectedSlot != -1)
+        if(selectedSlot != -1)
         {
             slots[selectedSlot].OffSelect();
         }
@@ -140,13 +144,14 @@ public class InventoryUI : MonoBehaviour
 
     public void OnClickSelect(int index)
     {
-        if (slots[index].CheckOn())
+        if(slots[index].CheckOn())
         {
             selectedItems.Add(slots[index].GetItem());
             if (selectedItems.Count > maxSelected)
             {
                 selectedItems.RemoveAt(0);
-                UpdateUI();
+                ResetItemSlot();
+                SetItemSlot();
             }
         }
         else
@@ -159,50 +164,39 @@ public class InventoryUI : MonoBehaviour
     {
         isSelecteMode = !isSelecteMode;
         ChangeSelectedSlot(-1);
-        itemText.text = "아이템 설명";
+        itemText.text = "아이템설명";
     }
 
-    private void UpdateUI()
+    public Item[] GetToMerge()
     {
-        ResetItemSlot();
-        SetItemSlot();
-    }
-
-    public void LoadItemData()
-    {
-        // Load item data into itemMap
-    }
-
-    public void AddItem(UIItem item, int count)
-    {
-        if (itemMap.ContainsKey(item))
+        if(selectedItems.Count < 2)
         {
-            itemMap[item] += count;
+            Debug.LogWarning("선택된 아이템 부족");
+            return null;
         }
-        else
+        Item[] items = new Item[selectedItems.Count];
+        for(int i = 0; i<selectedItems.Count; i++) 
         {
-            itemMap[item] = count;
+            items[i] = selectedItems[i].item;
         }
-        UpdateUI();
-        tradeInventoryUI?.UpdateTradeUI(itemMap); // TradeInventoryUI에 업데이트 알림
+
+        return items;
     }
 
-    public void RemoveItem(UIItem item, int count)
+    public Item GetToDecom()
     {
-        if (itemMap.ContainsKey(item))
+        if(selectedItems.Count == 0)
         {
-            itemMap[item] -= count;
-            if (itemMap[item] <= 0)
-            {
-                itemMap.Remove(item);
-            }
-            UpdateUI();
-            tradeInventoryUI?.UpdateTradeUI(itemMap); // TradeInventoryUI에 업데이트 알림
+            Debug.LogWarning("분해하려면 아이템 선택을 해주세요");
+            return null;
         }
-    }
+        else if(selectedItems.Count > 1) 
+        {
+            Debug.LogWarning("분해하려면 아이템을 하나만 선택 해주세요");
+            return null;
+        }
 
-    public Dictionary<UIItem, int> GetItemMap()
-    {
-        return itemMap;
+        return selectedItems[0].item;
     }
 }
+ 
