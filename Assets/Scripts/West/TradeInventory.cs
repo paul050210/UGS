@@ -2,53 +2,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// InvenState 열거형 추가
-public enum InvenState
-{
-    all,
-    herb,
-    stone,
-    bio,
-    potion,
-    another
-}
 
-public class InventoryUI : MonoBehaviour
+public class TradeInventoryUI : MonoBehaviour
 {
     [SerializeField] private Text itemText;
-    [SerializeField] private Button selectButton;
+    [SerializeField] private Button handOverButton;
     [SerializeField] private Button[] stateButtons;
-    [SerializeField] private TradeInventoryUI tradeInventoryUI; // TradeInventoryUI 참조 추가
 
     private ItemSlotUI[] slots = null;
-    private int selectedSlot = -1;
-    private int maxSelected = 5;
-    private bool isSelecteMode = false;
-    public bool IsSelectMode => isSelecteMode;
     private List<UIItem> selectedItems = new List<UIItem>();
-
     private InvenState state = InvenState.all;
-    private ItemMerge itemMerge = null;
 
     private Dictionary<UIItem, int> itemMap = new Dictionary<UIItem, int>(); // 아이템 데이터를 저장할 맵
 
     private void Start()
     {
-        LoadItemData(); // 데이터 로드
         slots = transform.GetChild(0).GetComponentsInChildren<ItemSlotUI>();
-        itemMerge = GetComponent<ItemMerge>();
         SetItemButton();
         SetStateButton();
-        selectButton.onClick.AddListener(SelectButton);
+        handOverButton.onClick.AddListener(HandOverItems);
         UpdateUI();
     }
 
     private void OnEnable()
     {
         state = InvenState.all;
-        selectedItems.Clear();
-        isSelecteMode = false;
-        selectedSlot = -1;
         UpdateUI();
     }
 
@@ -98,8 +76,6 @@ public class InventoryUI : MonoBehaviour
             {
                 var item = new UIItem(p.Key, j);
                 slots[i].SetItem(item, selectedItems.Contains(item));
-                if (i == selectedSlot)
-                    slots[i].OnSelect();
                 i++;
             }
         }
@@ -122,44 +98,39 @@ public class InventoryUI : MonoBehaviour
             stateButtons[temp].onClick.AddListener(() =>
             {
                 state = (InvenState)temp;
-                selectedSlot = -1;
                 UpdateUI();
                 itemText.text = "아이템 설명";
             });
         }
     }
 
-    public void ChangeSelectedSlot(int index)
+    private void HandOverItems()
     {
-        if (selectedSlot != -1)
-        {
-            slots[selectedSlot].OffSelect();
-        }
-        selectedSlot = index;
+        int totalValue = CalculateTotalValue();
+        // TradeGuideUI에 totalValue를 전달하는 로직 추가
+        // 태블릿 종료 로직 추가
+        // 선택한 아이템 정보 유지
+
+        // 예시로 TradeGuideUI를 참조하는 방식
+        TradeGuideUI.Instance.SetTotalValue(totalValue);
+        gameObject.SetActive(false);
     }
 
-    public void OnClickSelect(int index)
+    private int CalculateTotalValue()
     {
-        if (slots[index].CheckOn())
+        int totalValue = 0;
+        foreach (var item in selectedItems)
         {
-            selectedItems.Add(slots[index].GetItem());
-            if (selectedItems.Count > maxSelected)
-            {
-                selectedItems.RemoveAt(0);
-                UpdateUI();
-            }
+            totalValue += item.item.value; // 각 아이템의 값어치를 합산
         }
-        else
-        {
-            selectedItems.Remove(slots[index].GetItem());
-        }
+        handOverButton.interactable = totalValue > 0;
+        return totalValue;
     }
 
-    private void SelectButton()
+    public void UpdateTradeUI(Dictionary<UIItem, int> updatedItemMap)
     {
-        isSelecteMode = !isSelecteMode;
-        ChangeSelectedSlot(-1);
-        itemText.text = "아이템 설명";
+        itemMap = updatedItemMap;
+        UpdateUI();
     }
 
     private void UpdateUI()
@@ -168,41 +139,9 @@ public class InventoryUI : MonoBehaviour
         SetItemSlot();
     }
 
-    public void LoadItemData()
+    public void OnTradeCompleted()
     {
-        // Load item data into itemMap
-    }
-
-    public void AddItem(UIItem item, int count)
-    {
-        if (itemMap.ContainsKey(item))
-        {
-            itemMap[item] += count;
-        }
-        else
-        {
-            itemMap[item] = count;
-        }
+        selectedItems.Clear();
         UpdateUI();
-        tradeInventoryUI?.UpdateTradeUI(itemMap); // TradeInventoryUI에 업데이트 알림
-    }
-
-    public void RemoveItem(UIItem item, int count)
-    {
-        if (itemMap.ContainsKey(item))
-        {
-            itemMap[item] -= count;
-            if (itemMap[item] <= 0)
-            {
-                itemMap.Remove(item);
-            }
-            UpdateUI();
-            tradeInventoryUI?.UpdateTradeUI(itemMap); // TradeInventoryUI에 업데이트 알림
-        }
-    }
-
-    public Dictionary<UIItem, int> GetItemMap()
-    {
-        return itemMap;
     }
 }
