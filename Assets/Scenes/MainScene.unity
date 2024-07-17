@@ -283,11 +283,8 @@ MonoBehaviour:
   nameTxt: {fileID: 1388213157}
   descriptTxt: {fileID: 1605464046}
   nextButton: {fileID: 597237318}
-  npcScrollView: {fileID: 42528497}
-  questScrollView: {fileID: 1458959899}
   yesButton: {fileID: 1320601658}
   noButton: {fileID: 1126478315}
-  contentControl: {fileID: 132468866}
 --- !u!1 &42528497
 GameObject:
   m_ObjectHideFlags: 0
@@ -14323,6 +14320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1319254971}
+  - component: {fileID: 1319254972}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -14350,6 +14348,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 600}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1319254972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319254970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b9fcbb3431f58b46a20309e8cbb1160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1320601656
 GameObject:
   m_ObjectHideFlags: 0
@@ -24790,7 +24800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -10,12 +10,9 @@ public class QuestMainUI : MonoBehaviour
     [SerializeField] private Text nameTxt;
     [SerializeField] private Text descriptTxt;
     [SerializeField] private Button nextButton;
-    [SerializeField] private GameObject npcScrollView;
-    [SerializeField] private GameObject questScrollView;
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
 
-    [SerializeField] private QuestContentControl contentControl;
     private TabletUI tabletUI;
     private NorthUI north;
 
@@ -105,7 +102,10 @@ public class QuestMainUI : MonoBehaviour
 
     private void AddContents()
     {
-        contentControl.SetContents(curDatas);
+        QuestContentControl.Instance.SetContents(curDatas);
+        var spr = QuestManager.Instance.GetSipleImg();
+        var txt = QuestManager.Instance.GetSimpleText();
+        NpcContentControl.Instance.EnableContent(0, spr, txt, curDatas);
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestContentControl : MonoBehaviour
+public class QuestContentControl : MonoBehaviourSingleton<QuestContentControl>
 {
     private QuestContentUI[] contents;
     private RectTransform rectTransform;
@@ -13,16 +13,19 @@ public class QuestContentControl : MonoBehaviour
         rectTransform = GetComponent<RectTransform>();
     }
 
+    private void OnEnable()
+    {
+        ResetContents();
+    }
+
     public void SetContents(List<DefaultTable.Data> datas)
     {
         if(rectTransform == null)
         {
-            Debug.Log("no rect");
             rectTransform = GetComponent<RectTransform>();
         }
         if(contents == null) 
         {
-            Debug.Log("no contents");
             contents = GetComponentsInChildren<QuestContentUI>();
         }
         rectTransform.sizeDelta = new Vector2(0f, (datas.Count + 1) * 100f);
@@ -37,5 +40,23 @@ public class QuestContentControl : MonoBehaviour
     public void SetContentSize(float height)
     {
         rectTransform.sizeDelta = new Vector2(0f, height);
+    }
+
+    public void ResetContents()
+    {
+        if (rectTransform == null)
+        {
+            rectTransform = GetComponent<RectTransform>();
+        }
+        if (contents == null)
+        {
+            contents = GetComponentsInChildren<QuestContentUI>();
+        }
+
+        for (int i = 0; i<contents.Length; i++)
+        {
+            contents[i].SetText(" ", true);
+        }
+        SetContentSize(0f);
     }
 }

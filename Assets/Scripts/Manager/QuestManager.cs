@@ -61,6 +61,16 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
         return q.CharSprite;
     }
 
+    public Sprite GetSipleImg()
+    {
+        return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex].SimpleCharSprite;
+    }
+
+    public string GetSimpleText()
+    {
+        return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex].SimpleTxt;
+    }
+
     public void SetQuestIndex(int index)
     {
         questIndex = index;
