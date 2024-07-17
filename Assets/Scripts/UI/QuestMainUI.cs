@@ -15,6 +15,7 @@ public class QuestMainUI : MonoBehaviour
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
 
+    [SerializeField] private QuestContentControl contentControl;
     private TabletUI tabletUI;
     private NorthUI north;
 
@@ -61,6 +62,8 @@ public class QuestMainUI : MonoBehaviour
                 else
                 {
                     north.ZoomOut();
+                    //TODO: Äù½ºÆ® ÀÎµ¦½º Áõ°¡
+
                     return;
                 }
             }
@@ -102,35 +105,32 @@ public class QuestMainUI : MonoBehaviour
 
     private void AddContents()
     {
-        Transform contents = questScrollView.transform;
-        contents = contents.GetChild(0).GetChild(0);
-        contents.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, (curDatas.Count+1) * 100f);
-        for(int i = 0; i<curDatas.Count; i++)
-        {
-            string txt = curDatas[i].strValue;
-            bool isLeft = curDatas[i].name != "A";
-            contents.GetChild(i).GetComponent<QuestContentUI>().SetText(txt, isLeft);
-        }
+        contentControl.SetContents(curDatas);
+        yesButton.gameObject.SetActive(true);
+        noButton.gameObject.SetActive(true);
+
 
         yesButton.onClick.AddListener(() => 
         {
             curDatas = QuestManager.Instance.GetAcceptText();
-            curIndex = 0;
-            maxIndex = curDatas.Count - 1;
-            tabletUI.TurnOnTablet(State.Quest);
-            SetText();
-            yesButton.onClick.RemoveAllListeners();
-            noButton.onClick.RemoveAllListeners();
+            OnClickChoose();
         });
         noButton.onClick.AddListener(() => 
         {
             curDatas = QuestManager.Instance.GetRefuseText();
-            curIndex = 0;
-            maxIndex = curDatas.Count - 1;
-            tabletUI.TurnOnTablet(State.Quest);
-            SetText();
-            yesButton.onClick.RemoveAllListeners();
-            noButton.onClick.RemoveAllListeners();
+            OnClickChoose();
         });
+    }
+
+    private void OnClickChoose()
+    {
+        curIndex = 0;
+        maxIndex = curDatas.Count - 1;
+        tabletUI.TurnOnTablet(State.Quest);
+        SetText();
+        yesButton.onClick.RemoveAllListeners();
+        noButton.onClick.RemoveAllListeners();
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
     }
 }

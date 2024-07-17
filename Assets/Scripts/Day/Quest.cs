@@ -9,7 +9,9 @@ public class Quest : ScriptableObject
     //TODO: 퀘스트 등장 조건
 
     //대화 내용
-    private string simpleTxt;
+    [Header("퀘스트 요약")]
+    [SerializeField] private string simpleTxt;
+    public string SimpleTxt => simpleTxt;
 
     [Header("기본 대화 내용")]
     [SerializeField] private int startIndex;
