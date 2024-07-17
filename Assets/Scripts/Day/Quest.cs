@@ -72,6 +72,43 @@ public class Quest : ScriptableObject
         return true;
     }
 
+    /// <summary>
+    /// 데이터 리스트 반환해주는 함수
+    /// </summary>
+    /// <param name="type">0은 Quest, 1은 수락, 2는 거절</param>
+    /// <returns></returns>
+    public List<DefaultTable.Data> GetText(int type)
+    {
+        int start;
+        int end;
+        switch(type)
+        {
+            case 0:
+                start = StartIndex;
+                end = endIndex;
+                break;
+            case 1:
+                start = acceptStart;
+                end = acceptEnd;
+                break;
+            case 2:
+                start = refuseStart;
+                end = refuseEnd;
+                break;
+            default:
+                start = StartIndex;
+                end = endIndex;
+                break;
+        }
+        var datas = DefaultTable.Data.GetList();
+        List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
+        for (int i = start; i <= end; i++)
+        {
+            returnList.Add(datas[i]);
+        }
+        return returnList;
+    }
+
 
     public Quest(int start, int end)
     {

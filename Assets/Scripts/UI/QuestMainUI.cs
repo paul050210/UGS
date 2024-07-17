@@ -16,6 +16,7 @@ public class QuestMainUI : MonoBehaviour
     private TabletUI tabletUI;
     private NorthUI north;
 
+    private Quest goingQuest;
     private List<DefaultTable.Data> curDatas;
     private bool isTypingDone = false;
     private bool isLast = false;
@@ -32,10 +33,11 @@ public class QuestMainUI : MonoBehaviour
 
     private void OnEnable()
     {
-        curDatas = QuestManager.Instance.GetQuestText();
+        goingQuest = QuestManager.Instance.GetQuest();
+        curDatas = goingQuest.GetText(0);
         curIndex = 0;
         maxIndex = curDatas.Count - 1;
-        charImg.sprite = QuestManager.Instance.GetQuestImg();
+        charImg.sprite = goingQuest.CharSprite;
         isTypingDone = false;
         isLast = false;
 
@@ -103,8 +105,8 @@ public class QuestMainUI : MonoBehaviour
     private void AddContents()
     {
         QuestContentControl.Instance.SetContents(curDatas);
-        var spr = QuestManager.Instance.GetSipleImg();
-        var txt = QuestManager.Instance.GetSimpleText();
+        var spr = goingQuest.SimpleCharSprite;
+        var txt = goingQuest.SimpleTxt;
         NpcContentControl.Instance.EnableContent(spr, txt, curDatas);
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
@@ -112,12 +114,12 @@ public class QuestMainUI : MonoBehaviour
 
         yesButton.onClick.AddListener(() => 
         {
-            curDatas = QuestManager.Instance.GetAcceptText();
+            curDatas = goingQuest.GetText(1);
             OnClickChoose();
         });
         noButton.onClick.AddListener(() => 
         {
-            curDatas = QuestManager.Instance.GetRefuseText();
+            curDatas = goingQuest.GetText(2);
             OnClickChoose();
         });
     }

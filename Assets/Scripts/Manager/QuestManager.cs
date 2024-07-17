@@ -22,56 +22,9 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
 
     }
 
-    public List<DefaultTable.Data> GetQuestText()
+    public Quest GetQuest()
     {
-        Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
-        var datas = DefaultTable.Data.GetList();
-        List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
-        for(int i = q.StartIndex; i<=q.EndIndex; i++)
-        {
-            returnList.Add(datas[i]);
-        }
-        return returnList;
-    }
-
-    public List<DefaultTable.Data> GetAcceptText()
-    {
-        Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
-        var datas = DefaultTable.Data.GetList();
-        List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
-        for (int i = q.AcceptStart; i <= q.AcceptEnd; i++)
-        {
-            returnList.Add(datas[i]);
-        }
-        return returnList;
-    }
-
-    public List<DefaultTable.Data> GetRefuseText()
-    {
-        Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
-        var datas = DefaultTable.Data.GetList();
-        List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
-        for (int i = q.RefuseStart; i <= q.RefuseEnd; i++)
-        {
-            returnList.Add(datas[i]);
-        }
-        return returnList;
-    }
-
-    public Sprite GetQuestImg()
-    {
-        Quest q = days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
-        return q.CharSprite;
-    }
-
-    public Sprite GetSipleImg()
-    {
-        return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex].SimpleCharSprite;
-    }
-
-    public string GetSimpleText()
-    {
-        return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex].SimpleTxt;
+        return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
     }
 
     public void SetQuestIndex(int index)
