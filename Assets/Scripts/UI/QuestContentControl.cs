@@ -29,7 +29,9 @@ public class QuestContentControl : MonoBehaviourSingleton<QuestContentControl>
             contents = GetComponentsInChildren<QuestContentUI>();
         }
         rectTransform.sizeDelta = new Vector2(0f, (datas.Count + 1) * 100f);
-        for(int i = 0; i<datas.Count; i++) 
+        float yPos = Mathf.Max(0f, (datas.Count - 5) * 100);
+        rectTransform.anchoredPosition = new Vector2(0f, yPos);
+        for (int i = 0; i<datas.Count; i++) 
         {
             string txt = datas[i].strValue;
             bool isLeft = datas[i].name != "A";

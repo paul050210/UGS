@@ -7,11 +7,7 @@ public class NpcContentControl : MonoBehaviourSingleton<NpcContentControl>
     private NpcContentUI[] contents;
     private RectTransform rectTransform;
 
-    private void Start()
-    {
-        contents = GetComponentsInChildren<NpcContentUI>();
-        rectTransform = GetComponent<RectTransform>();
-    }
+
 
     private void OnEnable()
     {
