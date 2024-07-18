@@ -28,6 +28,7 @@ public class QuestContentControl : MonoBehaviourSingleton<QuestContentControl>
         {
             contents = GetComponentsInChildren<QuestContentUI>();
         }
+        ResetContents();
         rectTransform.sizeDelta = new Vector2(0f, (datas.Count + 1) * 100f);
         float yPos = Mathf.Max(0f, (datas.Count - 5) * 100);
         rectTransform.anchoredPosition = new Vector2(0f, yPos);
