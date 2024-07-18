@@ -9,7 +9,6 @@ public class ItemSlotUI : MonoBehaviour
     private Button button;
     private Text itemText;
     private bool isSelected = false;
-    public Button HandOverButton;
 
     private Image itemImg;
     private GameObject selectImg;
@@ -53,7 +52,7 @@ public class ItemSlotUI : MonoBehaviour
     {
         if (object.ReferenceEquals(item, null)) return;
         isSelected = !isSelected;
-        if(isSelected)
+        if (isSelected)
         {
             itemText.text = item.item.itemDesc;
             inventory.ChangeSelectedSlot(index);
@@ -63,7 +62,7 @@ public class ItemSlotUI : MonoBehaviour
             itemText.text = "아이템 설명";
             inventory.ChangeSelectedSlot(-1);
         }
-        if(inventory.IsSelectMode) 
+        if (inventory.IsSelectMode)
         {
             inventory.OnClickSelect(index);
         }
@@ -89,15 +88,14 @@ public class ItemSlotUI : MonoBehaviour
         return !isActive;
     }
 
-    public void CheckOff() 
+    public void CheckOff()
     {
         transform.GetChild(2).gameObject.SetActive(false);
     }
 
-    public void SetItemText(ref Text itemText, int index) 
+    public void SetItemText(ref Text itemText, int index)
     {
         this.itemText = itemText;
         this.index = index;
     }
 }
- 
