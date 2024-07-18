@@ -31,11 +31,21 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
 
     public void AddEnableQuest(Quest q)
     {
+        if(enableQuests.Contains(q))
+        {
+            Debug.Log("중복있음");
+            return;
+        }
         enableQuests.Add(q);
     }
 
     public void RemoveEnableQuest(Quest q) 
     {
+        if(!enableQuests.Contains(q))
+        {
+            Debug.LogWarning("퀘스트를 보유하고 있지 않은데 제거하려고함");
+            return;
+        }
         enableQuests.Remove(q);
     }
 

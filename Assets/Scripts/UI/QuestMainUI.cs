@@ -20,6 +20,7 @@ public class QuestMainUI : MonoBehaviour
     private List<DefaultTable.Data> curDatas;
     private bool isTypingDone = false;
     private bool isLast = false;
+    private bool isChooesd = false;
 
     private int curIndex;
     private int maxIndex;
@@ -29,6 +30,13 @@ public class QuestMainUI : MonoBehaviour
         nextButton.onClick.AddListener(OnClickNext);
         tabletUI = FindObjectOfType<TabletUI>();
         north = FindObjectOfType<NorthUI>();
+        north.OnDisable.AddListener(() => 
+        {
+            yesButton.gameObject.SetActive(false);
+            noButton.gameObject.SetActive(false);
+            if(!isChooesd)
+                QuestManager.Instance.RemoveEnableQuest(goingQuest);
+        });
     }
 
     private void OnEnable()
@@ -46,6 +54,7 @@ public class QuestMainUI : MonoBehaviour
         charImg.sprite = goingQuest.CharSprite;
         isTypingDone = false;
         isLast = false;
+        isChooesd = false;
         SetText();
     }
 
@@ -65,6 +74,7 @@ public class QuestMainUI : MonoBehaviour
                 }
                 else
                 {
+                    north.SetActiveZoomBtn(true);
                     north.ZoomOut();
                     QuestManager.Instance.AddQuestIndex();
                     return;
@@ -114,6 +124,8 @@ public class QuestMainUI : MonoBehaviour
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
 
+        yesButton.onClick.RemoveAllListeners();
+        noButton.onClick.RemoveAllListeners();
         yesButton.onClick.AddListener(() => 
         {
             curDatas = goingQuest.GetText(1);
@@ -133,7 +145,9 @@ public class QuestMainUI : MonoBehaviour
     {
         curIndex = 0;
         maxIndex = curDatas.Count - 1;
+        isChooesd = true;
         tabletUI.TurnOnTablet(State.Quest);
+        north.SetActiveZoomBtn(false);
         SetText();
         yesButton.onClick.RemoveAllListeners();
         noButton.onClick.RemoveAllListeners();
