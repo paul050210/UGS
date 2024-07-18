@@ -19,4 +19,11 @@ public class NpcContentUI : MonoBehaviour
         button.onClick.AddListener(() => QuestContentControl.Instance.SetContents(dataList));
     }
 
+    public void NpcContentReset()
+    {
+        charImg.sprite = null;
+        contentText.text = null;
+        dataList = null;
+        button.onClick.RemoveAllListeners();
+    }
 }

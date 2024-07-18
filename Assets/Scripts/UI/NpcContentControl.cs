@@ -11,7 +11,15 @@ public class NpcContentControl : MonoBehaviourSingleton<NpcContentControl>
 
     private void OnEnable()
     {
-        //ResetContents();
+        if (rectTransform == null)
+        {
+            rectTransform = GetComponent<RectTransform>();
+        }
+        if (contents == null)
+        {
+            contents = GetComponentsInChildren<NpcContentUI>();
+        }
+        Invoke("ResetContents", 0.01f);
     }
 
     public void EnableContent(Sprite img, string text, List<DefaultTable.Data> datas)
@@ -36,19 +44,20 @@ public class NpcContentControl : MonoBehaviourSingleton<NpcContentControl>
 
     public void ResetContents()
     {
-        if (rectTransform == null)
+        for (int i = 0; i<contents.Length; i++)
         {
-            rectTransform = GetComponent<RectTransform>();
-        }
-        if (contents == null)
-        {
-            contents = GetComponentsInChildren<NpcContentUI>();
-        }
-
-        for (int i = 0; i < contents.Length; i++)
-        {
+            contents[i].NpcContentReset();
             contents[i].gameObject.SetActive(false);
         }
-        SetContentSize(0f);
+
+        for(int i = 0; i<QuestManager.Instance.EnableQuests.Count; i++)
+        {
+            Debug.Log(contents.Length);
+            contents[i].gameObject.SetActive(true);
+            Quest q = QuestManager.Instance.EnableQuests[i];
+            contents[i].NpcContentInit(q.SimpleCharSprite, q.SimpleTxt, q.GetText(0));
+            lastIndex = i + 1;
+        }
+        SetContentSize(lastIndex * 100f);
     }
 }

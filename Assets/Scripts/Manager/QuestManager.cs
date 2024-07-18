@@ -27,6 +27,16 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
         return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
     }
 
+    public void AddEnableQuest(Quest q)
+    {
+        enableQuests.Add(q);
+    }
+
+    public void RemoveEnableQuest(Quest q) 
+    {
+        enableQuests.Remove(q);
+    }
+
     public void SetQuestIndex(int index)
     {
         questIndex = index;

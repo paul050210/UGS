@@ -104,13 +104,10 @@ public class QuestMainUI : MonoBehaviour
 
     private void AddContents()
     {
+        QuestManager.Instance.AddEnableQuest(goingQuest);
         QuestContentControl.Instance.SetContents(curDatas);
-        var spr = goingQuest.SimpleCharSprite;
-        var txt = goingQuest.SimpleTxt;
-        NpcContentControl.Instance.EnableContent(spr, txt, curDatas);
         yesButton.gameObject.SetActive(true);
         noButton.gameObject.SetActive(true);
-
 
         yesButton.onClick.AddListener(() => 
         {
@@ -120,6 +117,7 @@ public class QuestMainUI : MonoBehaviour
         noButton.onClick.AddListener(() => 
         {
             curDatas = goingQuest.GetText(2);
+            QuestManager.Instance.RemoveEnableQuest(goingQuest);
             OnClickChoose();
         });
     }

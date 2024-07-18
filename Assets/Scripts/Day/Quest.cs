@@ -110,6 +110,19 @@ public class Quest : ScriptableObject
     }
 
 
+    public override int GetHashCode()
+    {
+        return startIndex.GetHashCode() + endIndex.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+        Quest q = obj as Quest;
+        return q != null && (q.StartIndex == this.startIndex) && (q.EndIndex == this.endIndex);
+    }
+
+
+
     public Quest(int start, int end)
     {
         startIndex = start;
