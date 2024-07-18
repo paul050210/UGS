@@ -18,6 +18,7 @@ public class NorthUI : MonoBehaviour
     private float camY = 1f;
     private float camCloseDuration = 0.3f;
 
+    [HideInInspector]
     public UnityEvent OnDisable;
 
     private void Start()
