@@ -9,6 +9,8 @@ public class NorthUI : MonoBehaviour
 {
     [SerializeField] private Button zoomBtn;
     [SerializeField] private Button zoomOutBtn;
+    [SerializeField] private Button openBtn;
+    [SerializeField] private Button closeBtn;
     [SerializeField] private Image leftBtn;
     [SerializeField] private Image rightBtn;
     [SerializeField] private GameObject questWindow;
@@ -26,6 +28,8 @@ public class NorthUI : MonoBehaviour
         cam = Camera.main;
         zoomBtn.onClick.AddListener(Zoom);
         zoomOutBtn.onClick.AddListener(ZoomOut);
+        openBtn.onClick.AddListener(OpenWindow);
+        closeBtn.onClick.AddListener(CloseWindow);
     }
 
     private void Zoom()
@@ -36,28 +40,40 @@ public class NorthUI : MonoBehaviour
         cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
         cam.gameObject.transform.DOMoveY(camY, camCloseDuration).SetEase(Ease.Linear).OnComplete(() =>
         {
-            questWindow.SetActive(true);
+            zoomOutBtn.gameObject.SetActive(true);
+            openBtn.gameObject.SetActive(true);
             leftBtn.raycastTarget = false;
             rightBtn.raycastTarget = false;
         });
     }
 
-    public void ZoomOut()
+    private void ZoomOut()
     {
-        if (fov == 60f) return;
+        if (!Mathf.Approximately(cam.fieldOfView, 40f)) return;
         fov = 60f;
         camY = 1f;
-        questWindow.SetActive(false);
+        zoomOutBtn.gameObject.SetActive(false);
+        openBtn.gameObject.SetActive(false);
         leftBtn.raycastTarget = true;
         rightBtn.raycastTarget = true;
         cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
         cam.gameObject.transform.DOMoveY(camY, camCloseDuration).SetEase(Ease.Linear);
+    }
+
+    private void OpenWindow()
+    {
+        questWindow.SetActive(true);
+    }
+
+    public void CloseWindow()
+    {
+        questWindow.SetActive(false);
         OnDisable.Invoke();
     }
 
-    public void SetActiveZoomBtn(bool on)
+    public void SetActiveCloseBtn(bool on)
     {
-        zoomOutBtn.gameObject.SetActive(on);
+        closeBtn.gameObject.SetActive(on);
     }
 
 }

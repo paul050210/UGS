@@ -19,7 +19,6 @@ public class QuestMainUI : MonoBehaviour
     private Quest goingQuest;
     private List<DefaultTable.Data> curDatas;
     private bool isTypingDone = false;
-    private bool isLast = false;
     private bool isChooesd = false;
 
     private int curIndex;
@@ -56,7 +55,6 @@ public class QuestMainUI : MonoBehaviour
             charImg.sprite = goingQuest.CharSprite;
             isChooesd = false;
         }
-        isLast = false;
         if(curIndex <= maxIndex)
             isTypingDone = false;
         SetText();
@@ -71,7 +69,6 @@ public class QuestMainUI : MonoBehaviour
             {
                 if(!isChooesd)
                 {
-                    isLast = true;
                     tabletUI.TurnOnTablet(State.Quest);
                     AddContents();
                     return;
@@ -79,8 +76,8 @@ public class QuestMainUI : MonoBehaviour
                 else
                 {
                     goingQuest = null;
-                    north.SetActiveZoomBtn(true);
-                    north.ZoomOut();
+                    north.SetActiveCloseBtn(true);
+                    north.CloseWindow();
                     QuestManager.Instance.AddQuestIndex();
                     return;
                 }
@@ -157,7 +154,7 @@ public class QuestMainUI : MonoBehaviour
         maxIndex = curDatas.Count - 1;
         isChooesd = true;
         tabletUI.TurnOnTablet(State.Quest);
-        north.SetActiveZoomBtn(false);
+        north.SetActiveCloseBtn(false);
         SetText();
         yesButton.onClick.RemoveAllListeners();
         noButton.onClick.RemoveAllListeners();
