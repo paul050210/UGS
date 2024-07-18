@@ -69,7 +69,7 @@ public class QuestMainUI : MonoBehaviour
             curIndex++;
             if(curIndex > maxIndex)
             {
-                if(!isLast)
+                if(!isChooesd)
                 {
                     isLast = true;
                     tabletUI.TurnOnTablet(State.Quest);
