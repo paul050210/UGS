@@ -24,8 +24,7 @@ public class UnitySheetTest : MonoBehaviour
 
     private void Start()
     {
-        testQ = new Quest(0, 9);
-        SetText();
+        //SetText();
     }
 
     private void Update()

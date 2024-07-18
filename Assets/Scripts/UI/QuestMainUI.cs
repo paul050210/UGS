@@ -108,6 +108,7 @@ public class QuestMainUI : MonoBehaviour
 
     private void AddContents()
     {
+        goingQuest.isAceepted = true;
         QuestManager.Instance.AddEnableQuest(goingQuest);
         QuestContentControl.Instance.SetContents(curDatas);
         yesButton.gameObject.SetActive(true);
@@ -122,6 +123,8 @@ public class QuestMainUI : MonoBehaviour
         {
             curDatas = goingQuest.GetText(2);
             QuestManager.Instance.RemoveEnableQuest(goingQuest);
+            goingQuest.isAceepted = false;
+            QuestManager.Instance.AddEnableQuest(goingQuest);
             OnClickChoose();
         });
     }

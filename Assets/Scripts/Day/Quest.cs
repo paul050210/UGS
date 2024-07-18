@@ -43,6 +43,9 @@ public class Quest : ScriptableObject
 
     [SerializeField] private int durationTime;
 
+    [HideInInspector]
+    public bool isAceepted = false;
+
     public List<Item> DoneQuest(Item[] items)
     {
         if (items.Length != needItems.Length) return null;
@@ -119,13 +122,5 @@ public class Quest : ScriptableObject
     {
         Quest q = obj as Quest;
         return q != null && (q.StartIndex == this.startIndex) && (q.EndIndex == this.endIndex);
-    }
-
-
-
-    public Quest(int start, int end)
-    {
-        startIndex = start;
-        endIndex = end;
     }
 }
