@@ -34,13 +34,18 @@ public class QuestMainUI : MonoBehaviour
     private void OnEnable()
     {
         goingQuest = QuestManager.Instance.GetQuest();
+        if(goingQuest == null)
+        {
+            //TODO: 디버그에서 퀘스트 없을때 해야되는걸로 변경
+            Debug.LogWarning("퀘스트 더이상 없음");
+            return;
+        }
         curDatas = goingQuest.GetText(0);
         curIndex = 0;
         maxIndex = curDatas.Count - 1;
         charImg.sprite = goingQuest.CharSprite;
         isTypingDone = false;
         isLast = false;
-
         SetText();
     }
 
@@ -61,8 +66,7 @@ public class QuestMainUI : MonoBehaviour
                 else
                 {
                     north.ZoomOut();
-                    //TODO: 퀘스트 인덱스 증가
-
+                    QuestManager.Instance.AddQuestIndex();
                     return;
                 }
             }

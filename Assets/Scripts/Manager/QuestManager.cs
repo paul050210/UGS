@@ -24,6 +24,8 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
 
     public Quest GetQuest()
     {
+        if (questIndex >= days[GameManager.Instance.CurrentDay - 1].Quests.Count)
+            return null;
         return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
     }
 
@@ -40,5 +42,10 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
     public void SetQuestIndex(int index)
     {
         questIndex = index;
+    }
+
+    public void AddQuestIndex()
+    {
+        questIndex++;
     }
 }
