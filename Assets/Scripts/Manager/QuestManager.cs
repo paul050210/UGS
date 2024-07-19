@@ -5,7 +5,7 @@ using UnityEngine;
 public class QuestManager : MonoBehaviourSingleton<QuestManager>
 {
     private List<DayInfo> days = new List<DayInfo>();
-    private int dayCount = 1;
+    private int dayCount = 2;
     private int questIndex = 0;
 
     private List<Quest> enableQuests= new List<Quest>();
