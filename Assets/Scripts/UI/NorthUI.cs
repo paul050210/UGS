@@ -13,6 +13,7 @@ public class NorthUI : MonoBehaviour
     [SerializeField] private Button closeBtn;
     [SerializeField] private Image leftBtn;
     [SerializeField] private Image rightBtn;
+    [SerializeField] private Text dayText;
     [SerializeField] private GameObject questWindow;
 
     private Camera cam;
@@ -30,6 +31,11 @@ public class NorthUI : MonoBehaviour
         zoomOutBtn.onClick.AddListener(ZoomOut);
         openBtn.onClick.AddListener(OpenWindow);
         closeBtn.onClick.AddListener(CloseWindow);
+        GameManager.Instance.OnDayChanged.AddListener(() => 
+        {
+            dayText.text = $"Day{GameManager.Instance.CurrentDay}";
+        });
+        dayText.text = $"Day{GameManager.Instance.CurrentDay}";
     }
 
     private void Zoom()
@@ -62,6 +68,7 @@ public class NorthUI : MonoBehaviour
 
     private void OpenWindow()
     {
+        //TODO: 페이드인 효과
         questWindow.SetActive(true);
     }
 
@@ -75,5 +82,7 @@ public class NorthUI : MonoBehaviour
     {
         closeBtn.gameObject.SetActive(on);
     }
+
+
 
 }

@@ -47,6 +47,9 @@ public class QuestMainUI : MonoBehaviour
             {
                 //TODO: 디버그에서 퀘스트 없을때 해야되는걸로 변경
                 Debug.LogWarning("퀘스트 더이상 없음");
+                charImg.sprite = null;
+                nameTxt.text = " ";
+                descriptTxt.text = "진행가능 퀘스트 없음(임시)";
                 return;
             }
             curDatas = goingQuest.GetText(0);
@@ -160,5 +163,14 @@ public class QuestMainUI : MonoBehaviour
         noButton.onClick.RemoveAllListeners();
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
+    }
+
+    public void ResetQuestUI()
+    {
+        goingQuest = null;
+        curDatas = null;
+        curIndex = 0;
+        maxIndex = 0;
+        isChooesd = true;
     }
 }

@@ -24,6 +24,11 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
 
     public Quest GetQuest()
     {
+        if(GameManager.Instance.CurrentDay - 1 >= days.Count)
+        {
+            Debug.LogWarning("Day¾øÀ½");
+            return null;
+        }
         if (questIndex >= days[GameManager.Instance.CurrentDay - 1].Quests.Count)
             return null;
         return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];

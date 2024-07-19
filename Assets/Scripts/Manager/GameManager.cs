@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
     private int currentDay;
     public int CurrentDay => currentDay;
 
+    public UnityEvent OnDayChanged;
+    [SerializeField] private QuestMainUI questMain;
 
     private void Awake()
     {
@@ -18,6 +21,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         currentDay++;
         QuestManager.Instance.SetQuestIndex(0);
+        OnDayChanged.Invoke();
+        questMain.ResetQuestUI();
         //saveday
     }
 }
