@@ -11,7 +11,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "Reader", menuName = "Scriptable Object/ItemDataReader", order = int.MaxValue)]
 public class ItemDataReader : DataReaderBase
 {
-    [Header("스프레드시트에서 읽혀져 직렬화 된 오브젝트")][SerializeField] public List<ItemData> DataList = new List<ItemData>();
+    [Header("스프레드시트에                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       서 읽혀져 직렬화 된 오브젝트")][SerializeField] public List<ItemData> DataList = new List<ItemData>();
 
     internal void UpdateStats(List<GSTU_Cell> list, int itemID)
     {

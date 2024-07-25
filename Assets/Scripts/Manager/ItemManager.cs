@@ -9,7 +9,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
 
     public void AddItem(Item item, int i)
     {
-        if(SaveManager.Instance.itemMap.ContainsKey(item)) 
+        if (SaveManager.Instance.itemMap.ContainsKey(item))
         {
             Debug.Log("¼öÁ¤");
             SaveManager.Instance.itemMap[item] = Mathf.Max(0, i);
@@ -24,7 +24,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
 
     public int GetItem(Item item)
     {
-        if(SaveManager.Instance.itemMap.ContainsKey(item))
+        if (SaveManager.Instance.itemMap.ContainsKey(item))
             return SaveManager.Instance.itemMap[item];
         else
             return 0;
@@ -32,7 +32,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
 
     public void ResetMap()
     {
-        for(int i = 0; i<itemSOs.Length; i++) 
+        for (int i = 0; i < itemSOs.Length; i++)
         {
             AddItem(itemSOs[i].item, 1);
         }
@@ -40,7 +40,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
 
     public Sprite GetItemSprite(Item item)
     {
-        for(int i = 0; i < itemSOs.Length; i++) 
+        for (int i = 0; i < itemSOs.Length; i++)
         {
             if (itemSOs[i].item.Equals(item))
                 return itemSOs[i].sprite;
