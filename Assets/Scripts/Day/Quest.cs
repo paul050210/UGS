@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum QuestState
+{
+    Default,
+    Accept,
+    Refuse,
+    Done
+}
+
 [CreateAssetMenu(menuName = "QuestSO")]
 public class Quest : ScriptableObject
 {
@@ -34,6 +42,7 @@ public class Quest : ScriptableObject
     public int scriptLength => (endIndex - startIndex + 1);
 
     [SerializeField] private ItemSO[] needItems;
+    [SerializeField] private ItemSO halfItem;
     [SerializeField] private List<ItemSO> rewardItems;
 
     [SerializeField] private Sprite charSprite;
@@ -42,9 +51,12 @@ public class Quest : ScriptableObject
     public Sprite SimpleCharSprite => simpleCharSprite;
 
     [SerializeField] private int durationTime;
+    public int DurationTime => durationTime;
 
     [HideInInspector]
     public bool isAceepted = false;
+    [HideInInspector]
+    public QuestState questState = QuestState.Default;
 
     public List<Item> DoneQuest(Item[] items)
     {

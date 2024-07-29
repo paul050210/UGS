@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public void MoveToNextDay()
     {
         currentDay++;
-        QuestManager.Instance.SetQuestIndex(0);
+        QuestManager.Instance.ResetIndex();
         OnDayChanged.Invoke();
         questMain.ResetQuestUI();
         //saveday

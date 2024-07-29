@@ -19,6 +19,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
             Debug.Log("추가");
             SaveManager.Instance.itemMap.Add(item, Mathf.Max(0, i));
         }
+        // 나중엔 주석 해제해줘야됨
         //SaveManager.Instance.SaveItemData();
     }
 
