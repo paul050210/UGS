@@ -1,89 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
-
 public class UIManager : MonoBehaviour
 {
-    public GameObject mapPanel;
-    public GameObject collectionPanel;
-    public Button mapButton;
-    public Button collectionButton;
-    public Button mapCloseButton;
-    public Button collectionCloseButton;
-    public CollectionManager collectionManager;
-
-    private Camera cam;
-    private float fov = 60f;
-    private float camCloseDuration = 0.3f;
-    private Vector3 defaultCamPos = new Vector3(0, 1f, 0f);
-    private Vector3 mapPanelCamPos = new Vector3(4.3f, 1.5f, 0f);
-    private Vector3 collectionPanelCamPos = new Vector3(0f, -1f, 0f);
+    public GameObject mapPanel; public GameObject collectionPanel; public Button mapButton; public Button collectionButton; public Button mapCloseButton; public Button collectionCloseButton; public CollectionManager collectionManager;
 
     void Start()
     {
-        cam = Camera.main;
-        mapPanel.SetActive(false);
-        collectionPanel.SetActive(false);
-        mapButton.onClick.AddListener(ShowMapPanel);
-        collectionButton.onClick.AddListener(ShowCollectionPanel);
-        mapCloseButton.onClick.AddListener(CloseMapPanel);
-        collectionCloseButton.onClick.AddListener(CloseCollectionPanel);
-
-        // Ensure initial camera position
-        cam.gameObject.transform.position = defaultCamPos;
+        mapPanel.SetActive(false); collectionPanel.SetActive(false);
+        mapButton.onClick.AddListener(ShowMapPanel); collectionButton.onClick.AddListener(ShowCollectionPanel); mapCloseButton.onClick.AddListener(CloseMapPanel); collectionCloseButton.onClick.AddListener(CloseCollectionPanel);
     }
 
     void ShowMapPanel()
     {
-        if (Mathf.Approximately(cam.fieldOfView, 60f))
+        if (!collectionPanel.activeSelf)
         {
-            fov = 30f;
-            cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                mapPanel.SetActive(true);
-                collectionPanel.SetActive(false);
-                collectionButton.interactable = false; // Disable the collection button
-            });
-            cam.gameObject.transform.DOMove(mapPanelCamPos, camCloseDuration).SetEase(Ease.Linear);
+            mapPanel.SetActive(true); collectionPanel.SetActive(false); collectionButton.interactable = false;  // Disable the collection button
         }
     }
 
     void ShowCollectionPanel()
     {
-        if (Mathf.Approximately(cam.fieldOfView, 60f))
-        {
-            fov = 30f;
-            cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear).OnComplete(() =>
-            {
-                mapPanel.SetActive(false);
-                collectionPanel.SetActive(true);
-                mapButton.interactable = false; // Disable the map button
-                collectionManager.ShowPage(0);
-            });
-            cam.gameObject.transform.DOMove(collectionPanelCamPos, camCloseDuration).SetEase(Ease.Linear);
-        }
+        if (!mapPanel.activeSelf)  // Only allow showing the collection panel if the map panel is not active
+        { mapPanel.SetActive(false); collectionPanel.SetActive(true); mapButton.interactable = false; collectionManager.ShowPage(0); }
     }
 
-    void CloseMapPanel()
-    {
-        mapPanel.SetActive(false);
-        collectionButton.interactable = true;
-        Invoke(nameof(ResetCamera), 0.1f); // Add a short delay before starting the camera reset
-    }
+    void CloseMapPanel() { mapPanel.SetActive(false); collectionButton.interactable = true; }
+    void CloseCollectionPanel() { collectionPanel.SetActive(false); mapButton.interactable = true; }
 
-    void CloseCollectionPanel()
-    {
-        collectionPanel.SetActive(false);
-        mapButton.interactable = true;
-        Invoke(nameof(ResetCamera), 0.1f); // Add a short delay before starting the camera reset
-    }
-
-    void ResetCamera()
-    {
-        fov = 60f;
-        cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
-        cam.gameObject.transform.DOMove(defaultCamPos, camCloseDuration).SetEase(Ease.Linear);
-    }
 }
+
+
+
+
+
