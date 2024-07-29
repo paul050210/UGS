@@ -26,7 +26,7 @@ public class TradeInventoryUI : MonoBehaviour
     private ItemSlotUI[] slots = null;
 
     private int selectedSlot = -1;
-    private int maxSelected = 1000;
+    private int maxSelected = 1000;                
     private bool isSelecteMode = false;
     public bool IsSelectMode => isSelecteMode;
     private List<UIItem> selectedItems = new List<UIItem>();

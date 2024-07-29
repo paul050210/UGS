@@ -19,7 +19,7 @@ public struct ItemData
 }
 
 
-public class TradeManager : MonoBehaviour
+    public class TradeManager : MonoBehaviour
 {
     public static TradeManager Instance;
 
