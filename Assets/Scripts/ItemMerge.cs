@@ -75,6 +75,14 @@ public class ItemMerge : MonoBehaviour
         if (merged != null)
         {
             //사용된 아이템제거, 획득한 아이템 저장 추가해야됨
+            for(int i = 0; i< itemArr.Length; i++)
+            {
+                int cnt = ItemManager.Instance.GetItem(itemArr[i]);
+                ItemManager.Instance.AddItem(itemArr[i], cnt-1);
+            }
+            int n = ItemManager.Instance.GetItem(merged.item);
+            ItemManager.Instance.AddItem(merged.item, n+1);
+
             itemPopUps[0].gameObject.SetActive(true);
             itemPopUps[0].GetChild(1).GetComponent<Image>().sprite = merged.sprite;
             itemPopUps[0].GetChild(2).GetComponent<Text>().text = merged.item.itemName;
@@ -104,9 +112,14 @@ public class ItemMerge : MonoBehaviour
 
         if (items != null)
         {
+            int cnt = ItemManager.Instance.GetItem(item);
+            ItemManager.Instance.AddItem(item, cnt - 1);
             //사용된 아이템제거, 획득한 아이템 저장 추가해야됨
             for (int i = 0; i<items.Length; i++)
             {
+                int n = ItemManager.Instance.GetItem(items[i].item);
+                ItemManager.Instance.AddItem(items[i].item, n + 1);
+
                 itemPopUps[i].gameObject.SetActive(true);
                 itemPopUps[i].GetChild(1).GetComponent<Image>().sprite = items[i].sprite;
                 itemPopUps[i].GetChild(2).GetComponent<Text>().text = items[i].item.itemName;

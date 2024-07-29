@@ -19,7 +19,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
             Debug.Log("Ãß°¡");
             SaveManager.Instance.itemMap.Add(item, Mathf.Max(0, i));
         }
-        SaveManager.Instance.SaveItemData();
+        //SaveManager.Instance.SaveItemData();
     }
 
     public int GetItem(Item item)
