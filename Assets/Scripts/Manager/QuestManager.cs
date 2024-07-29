@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviourSingleton<QuestManager>
@@ -27,22 +28,24 @@ public class QuestManager : MonoBehaviourSingleton<QuestManager>
 
     public Quest GetQuest()
     {
-        for(int i = 0; i<acceptQuests.Count; i++)
+        for (int i = 0; i < acceptQuests.Count; i++)
         {
-            if(acceptQuests[i].Value == GameManager.Instance.CurrentDay && i > acceptIndex)
+            if (acceptQuests[i].Value == GameManager.Instance.CurrentDay && i > acceptIndex)
             {
                 acceptIndex = i;
                 return acceptQuests[i].Key;
             }
         }
 
-        if(GameManager.Instance.CurrentDay - 1 >= days.Count)
+        if (GameManager.Instance.CurrentDay - 1 >= days.Count)
         {
             Debug.LogWarning("Day¾øÀ½");
             return null;
         }
         if (questIndex >= days[GameManager.Instance.CurrentDay - 1].Quests.Count)
             return null;
+
+        days[GameManager.Instance.CurrentDay - 1].Quests[questIndex].questState = QuestState.Default;
         return days[GameManager.Instance.CurrentDay - 1].Quests[questIndex];
     }
 

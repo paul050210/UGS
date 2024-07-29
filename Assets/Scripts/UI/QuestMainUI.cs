@@ -52,7 +52,15 @@ public class QuestMainUI : MonoBehaviour
                 descriptTxt.text = "진행가능 퀘스트 없음(임시)";
                 return;
             }
-            curDatas = goingQuest.GetText(0);
+            if(goingQuest.questState == QuestState.Accept) 
+            {
+                Debug.Log(goingQuest.questState.ToString());
+                curDatas = goingQuest.GetText(3);
+            }
+            else
+            {
+                curDatas = goingQuest.GetText(0);
+            }
             curIndex = 0;
             maxIndex = curDatas.Count - 1;
             charImg.sprite = goingQuest.CharSprite;
@@ -72,8 +80,15 @@ public class QuestMainUI : MonoBehaviour
             {
                 if(!isChooesd)
                 {
-                    tabletUI.TurnOnTablet(State.Quest);
-                    AddContents();
+                    if(goingQuest.questState == QuestState.Accept)
+                    {
+                        tabletUI.TurnOnTablet(State.Inventory);
+                    }
+                    else
+                    {
+                        tabletUI.TurnOnTablet(State.Quest);
+                        AddContents();
+                    }
                     return;
                 }
                 else

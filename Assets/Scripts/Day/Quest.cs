@@ -110,6 +110,10 @@ public class Quest : ScriptableObject
                 start = refuseStart;
                 end = refuseEnd;
                 break;
+            case 3:
+                start = 14;
+                end = 14;
+                break;
             default:
                 start = StartIndex;
                 end = endIndex;
