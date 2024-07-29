@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: quest1
   m_EditorClassIdentifier: 
   simpleTxt: "\uB538\uAE30 \uD018\uC2A4\uD2B8"
-  startIndex: 15
-  endIndex: 20
-  acceptStart: 21
-  acceptEnd: 22
-  refuseStart: 23
-  refuseEnd: 24
+  startIndex: 18
+  endIndex: 23
+  acceptStart: 24
+  acceptEnd: 25
+  refuseStart: 26
+  refuseEnd: 27
   needItems:
   - {fileID: 11400000, guid: f417ddaf6aa1803469d23c6f5773edbe, type: 2}
-  halfItem: {fileID: 0}
+  halfItem: {fileID: 11400000, guid: ffb21af5dd1cb844191e4b267d2e31c0, type: 2}
   rewardItems:
-  - {fileID: 11400000, guid: 12abbdac63342ff4a8eca7179ea5d41b, type: 2}
+  - {fileID: 11400000, guid: afa9a9387d7b67744ad91fcfcf8c2939, type: 2}
   charSprite: {fileID: 21300000, guid: 7edebf285eb4aa2428eab3d6527e5941, type: 3}
   simpleCharSprite: {fileID: 21300000, guid: b2afa56667af6a249ba292fc371eb496, type: 3}
   durationTime: 2
-  isAceepted: 1
-  questState: 1
+  isAceepted: 0
+  questState: 2
