@@ -20,7 +20,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
             SaveManager.Instance.itemMap.Add(item, Mathf.Max(0, i));
         }
         // 나중엔 주석 해제해줘야됨
-        //SaveManager.Instance.SaveItemData();
+        SaveManager.Instance.SaveItemData();
     }
 
     public int GetItem(Item item)
@@ -49,5 +49,13 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
 
         Debug.Log("return null");
         return null;
+    }
+
+    public void ItemInitForTest()
+    {
+        for(int i = 0; i<itemSOs.Length; i++)
+        {
+            AddItem(itemSOs[i].item, 1);
+        }
     }
 }

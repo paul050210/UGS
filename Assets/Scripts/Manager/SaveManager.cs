@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using static UGS.Editor.GoogleDriveExplorerGUI;
+
 
 
 public class SaveManager : MonoBehaviourSingleton<SaveManager>
@@ -44,6 +44,10 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
             itemMap = DictionaryJsonUtility.FromJson<Item, int>(FromJsonData);
             
         }
+        else
+        {
+            ItemManager.Instance.ItemInitForTest();
+        }
     }
 
     public void SaveItemData()
@@ -56,7 +60,7 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
 
     public int LoadDay()
     {
-        int day = 0;
+        int day = 1;
         string filePath = Application.dataPath +"/" + DayDataFileName;   
 
         if(File.Exists(filePath))

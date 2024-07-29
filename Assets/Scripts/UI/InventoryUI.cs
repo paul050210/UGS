@@ -32,7 +32,9 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
         SaveManager.Instance.LoadItemData();
+#endif
         slots = transform.GetChild(0).GetComponentsInChildren<ItemSlotUI>();
         itemMerge = GetComponent<ItemMerge>();
         SetItemSlot();
@@ -99,6 +101,10 @@ public class InventoryUI : MonoBehaviour
             for(int j = 0; j < p.Value; j++)
             {
                 var item = new UIItem(p.Key, j);
+                if (slots == null)
+                {
+                    slots = transform.GetChild(0).GetComponentsInChildren<ItemSlotUI>();
+                }
                 slots[i].SetItem(item, selectedItems.Contains(item));
                 if (i == selectedSlot)
                     slots[i].OnSelect();

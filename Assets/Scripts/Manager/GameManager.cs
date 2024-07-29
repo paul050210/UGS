@@ -7,14 +7,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 {
     private int currentDay;
     public int CurrentDay => currentDay;
-
-    public UnityEvent OnDayChanged;
+    
+    [HideInInspector] public UnityEvent OnDayChanged;
     [SerializeField] private QuestMainUI questMain;
 
     private void Awake()
     {
         currentDay = SaveManager.Instance.LoadDay();
         SaveManager.Instance.LoadGameSettingData();
+        SaveManager.Instance.LoadItemData();
     }
 
     public void MoveToNextDay()
