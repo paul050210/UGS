@@ -11,13 +11,6 @@ public class MapManager : MonoBehaviour
     public Button[] tradeCloseButtons;  // 거래 화면 종료 버튼 배열
     private int currentTradeIndex = -1;
 
-    // TradeItem 정보 설정
-    private string[] tradeItemDescriptions = {
-        "광석\n\n거래 가능",
-        "전투복\n\n거래 불가능",
-        "얼음\n\n거래 가능",
-        "빛\n\n거래 불가능"
-    };
 
     void Start()
     {
@@ -70,19 +63,8 @@ public class MapManager : MonoBehaviour
             button.interactable = false;
         }
 
-        // TradeItem 클릭 시 처리
-        Button[] tradeItems = tradePanels[index].GetComponentsInChildren<Button>();
-        foreach (var item in tradeItems)
-        {
-            item.onClick.AddListener(() => OnTradeItemClick(item.name));  // TradeItem 클릭 이벤트 추가
-        }
     }
 
-    void OnTradeItemClick(string itemName)
-    {
-        int itemIndex = int.Parse(itemName.Substring(10)) - 1; // TradeItem1, TradeItem2 등의 숫자를 추출해서 인덱스로 변환
-        string itemDescription = tradeItemDescriptions[itemIndex]; // 아이템 설명
-    }
 
 
     void CloseTradePanel()
