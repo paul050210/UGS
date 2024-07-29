@@ -37,6 +37,7 @@ public class QuestMainUI : MonoBehaviour
         {
             yesButton.gameObject.SetActive(false);
             noButton.gameObject.SetActive(false);
+            doneButton.onClick.RemoveListener(QuestDone);
             if(!isChooesd && goingQuest.questState == QuestState.Default)
                 QuestManager.Instance.RemoveEnableQuest(goingQuest);
         });
@@ -197,11 +198,7 @@ public class QuestMainUI : MonoBehaviour
         }
         Item[] items = inventoryUI.GetToQuest();
         if (items == null) return;
-        for(int i = 0; i < items.Length;i++)
-        {
-            int n = ItemManager.Instance.GetItem(items[i]);
-            ItemManager.Instance.AddItem(items[i], n - 1);
-        }
+        
         goingQuest.questState = QuestState.Done;
         List<Item> reward = goingQuest.DoneQuest(items);
         if(reward != null)
@@ -212,11 +209,21 @@ public class QuestMainUI : MonoBehaviour
                 int n = ItemManager.Instance.GetItem(reward[i]);
                 ItemManager.Instance.AddItem(reward[i], n + 1);
             }
+            for (int i = 0; i < items.Length; i++)
+            {
+                int n = ItemManager.Instance.GetItem(items[i]);
+                ItemManager.Instance.AddItem(items[i], n - 1);
+            }
             //성공
         }
         else if (items[0].Equals((Item)goingQuest.HalfItem))
         {
             curDatas = goingQuest.GetText(5);
+            for (int i = 0; i < items.Length; i++)
+            {
+                int n = ItemManager.Instance.GetItem(items[i]);
+                ItemManager.Instance.AddItem(items[i], n - 1);
+            }
             //절반 성공
         }
         else
