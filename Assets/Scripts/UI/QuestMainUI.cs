@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,9 +13,11 @@ public class QuestMainUI : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
+    [SerializeField] private Button doneButton;
 
     private TabletUI tabletUI;
     private NorthUI north;
+    private InventoryUI inventoryUI;
 
     private Quest goingQuest;
     private List<DefaultTable.Data> curDatas;
@@ -29,11 +32,12 @@ public class QuestMainUI : MonoBehaviour
         nextButton.onClick.AddListener(OnClickNext);
         tabletUI = FindObjectOfType<TabletUI>();
         north = FindObjectOfType<NorthUI>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
         north.OnDisable.AddListener(() => 
         {
             yesButton.gameObject.SetActive(false);
             noButton.gameObject.SetActive(false);
-            if(!isChooesd)
+            if(!isChooesd && goingQuest.questState == QuestState.Default)
                 QuestManager.Instance.RemoveEnableQuest(goingQuest);
         });
     }
@@ -83,6 +87,7 @@ public class QuestMainUI : MonoBehaviour
                     if(goingQuest.questState == QuestState.Accept)
                     {
                         tabletUI.TurnOnTablet(State.Inventory);
+                        doneButton.onClick.AddListener(QuestDone);
                     }
                     else
                     {
@@ -93,10 +98,11 @@ public class QuestMainUI : MonoBehaviour
                 }
                 else
                 {
+                    if(goingQuest?.questState != QuestState.Done)
+                        QuestManager.Instance.AddQuestIndex();
                     goingQuest = null;
                     north.SetActiveCloseBtn(true);
                     north.CloseWindow();
-                    QuestManager.Instance.AddQuestIndex();
                     return;
                 }
             }
@@ -181,6 +187,51 @@ public class QuestMainUI : MonoBehaviour
         noButton.onClick.RemoveAllListeners();
         yesButton.gameObject.SetActive(false);
         noButton.gameObject.SetActive(false);
+    }
+
+    private void QuestDone()
+    {
+        if(inventoryUI == null)
+        {
+            inventoryUI = FindObjectOfType<InventoryUI>();
+        }
+        Item[] items = inventoryUI.GetToQuest();
+        if (items == null) return;
+        for(int i = 0; i < items.Length;i++)
+        {
+            int n = ItemManager.Instance.GetItem(items[i]);
+            ItemManager.Instance.AddItem(items[i], n - 1);
+        }
+        goingQuest.questState = QuestState.Done;
+        List<Item> reward = goingQuest.DoneQuest(items);
+        if(reward != null)
+        {
+            curDatas = goingQuest.GetText(4);
+            for (int i = 0; i < reward.Count; i++)
+            {
+                int n = ItemManager.Instance.GetItem(reward[i]);
+                ItemManager.Instance.AddItem(reward[i], n + 1);
+            }
+            //성공
+        }
+        else if (items[0].Equals((Item)goingQuest.HalfItem))
+        {
+            curDatas = goingQuest.GetText(5);
+            //절반 성공
+        }
+        else
+        {
+            curDatas = goingQuest.GetText(6);
+            //실패
+        }
+
+        doneButton.onClick.RemoveListener(QuestDone);
+        curIndex = 0;
+        maxIndex = curDatas.Count - 1;
+        isChooesd = true;
+        tabletUI.TurnOnTablet(State.Inventory);
+        north.SetActiveCloseBtn(false);
+        SetText();
     }
 
     public void ResetQuestUI()

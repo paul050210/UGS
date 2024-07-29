@@ -43,6 +43,7 @@ public class Quest : ScriptableObject
 
     [SerializeField] private ItemSO[] needItems;
     [SerializeField] private ItemSO halfItem;
+    public ItemSO HalfItem => halfItem;
     [SerializeField] private List<ItemSO> rewardItems;
 
     [SerializeField] private Sprite charSprite;
@@ -90,7 +91,7 @@ public class Quest : ScriptableObject
     /// <summary>
     /// 데이터 리스트 반환해주는 함수
     /// </summary>
-    /// <param name="type">0은 Quest, 1은 수락, 2는 거절</param>
+    /// <param name="type">0은 Quest, 1은 수락, 2는 거절, 3은 퀘스트 완료할때, 4는 완벽성공, 5는 중간성공, 6은 실패</param>
     /// <returns></returns>
     public List<DefaultTable.Data> GetText(int type)
     {
@@ -111,8 +112,20 @@ public class Quest : ScriptableObject
                 end = refuseEnd;
                 break;
             case 3:
-                start = 14;
-                end = 14;
+                start = refuseEnd+1;
+                end = refuseEnd+1;
+                break;
+            case 4:
+                start = refuseEnd+2;
+                end = refuseEnd + 2;
+                break;
+            case 5:
+                start = refuseEnd+3;
+                end = refuseEnd+3;
+                break;
+            case 6:
+                start = refuseEnd +4;
+                end = refuseEnd+4;
                 break;
             default:
                 start = StartIndex;

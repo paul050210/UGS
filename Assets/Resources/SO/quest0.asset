@@ -22,11 +22,11 @@ MonoBehaviour:
   needItems:
   - {fileID: 11400000, guid: afa9a9387d7b67744ad91fcfcf8c2939, type: 2}
   - {fileID: 11400000, guid: ffb21af5dd1cb844191e4b267d2e31c0, type: 2}
-  halfItem: {fileID: 0}
+  halfItem: {fileID: 11400000, guid: 12abbdac63342ff4a8eca7179ea5d41b, type: 2}
   rewardItems:
   - {fileID: 11400000, guid: 4fdb11c84c64a1b4e857078d9c3025b4, type: 2}
   charSprite: {fileID: 21300000, guid: 6901f95099193b94e9ab29b78d10bd0a, type: 3}
   simpleCharSprite: {fileID: 21300000, guid: 9d6f02363bab23a439a20c03f5cbb323, type: 3}
   durationTime: 2
   isAceepted: 1
-  questState: 1
+  questState: 3

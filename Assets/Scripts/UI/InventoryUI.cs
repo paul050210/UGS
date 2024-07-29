@@ -198,5 +198,26 @@ public class InventoryUI : MonoBehaviour
 
         return selectedItems[0].item;
     }
+
+    public Item[] GetToQuest()
+    {
+        if (selectedItems.Count < 1)
+        {
+            Debug.LogWarning("선택된 아이템 부족");
+            return null;
+        }
+        else if(selectedItems.Count > 2)
+        {
+            Debug.LogWarning("2개이상 선택 불가");
+            return null;
+        }
+        Item[] items = new Item[selectedItems.Count];
+        for (int i = 0; i < selectedItems.Count; i++)
+        {
+            items[i] = selectedItems[i].item;
+        }
+
+        return items;
+    }
 }
  
