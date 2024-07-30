@@ -6,6 +6,12 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
 {
     [SerializeField] private ItemSO[] itemSOs;
 
+    private void Awake()
+    {
+        // TODO: itemSOs를 리소스폴더에서 불러오는걸로 변경
+        Resources.LoadAll<ItemSO>("SO/Item");
+    }
+
 
     public void AddItem(Item item, int i)
     {
@@ -51,11 +57,4 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
         return null;
     }
 
-    public void ItemInitForTest()
-    {
-        for(int i = 0; i<itemSOs.Length; i++)
-        {
-            AddItem(itemSOs[i].item, 1);
-        }
-    }
 }
