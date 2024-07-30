@@ -1,6 +1,8 @@
+using GoogleSheet.Core.Type;
 using System;
 using System.Diagnostics;
 
+[UGS(typeof(ItemType))]
 [Serializable]
 public enum ItemType
 {

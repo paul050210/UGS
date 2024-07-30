@@ -27,5 +27,5 @@ MonoBehaviour:
   charSprite: {fileID: 21300000, guid: 7edebf285eb4aa2428eab3d6527e5941, type: 3}
   simpleCharSprite: {fileID: 21300000, guid: b2afa56667af6a249ba292fc371eb496, type: 3}
   durationTime: 2
-  isAceepted: 0
-  questState: 2
+  isAceepted: 1
+  questState: 3
