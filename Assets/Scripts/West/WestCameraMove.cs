@@ -18,8 +18,8 @@ public class WestCameraMove : MonoBehaviour
     private float fov = 30f;
     private float camCloseDuration = 0.3f;
     private Vector3 defaultCamPos = new Vector3(0, 1f, 0f);
-    private Vector3 mapPanelCamPos = new Vector3(0f, 1f, 0f);
-    private Vector3 collectionPanelCamPos = new Vector3(0f, -1f, 0f);
+    private Vector3 mapPanelCamPos = new Vector3(0f, 1.2f, 0f);
+    private Vector3 collectionPanelCamPos = new Vector3(0f, -1.4f, 0f);
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class WestCameraMove : MonoBehaviour
     {
         if (Mathf.Approximately(cam.fieldOfView, 60f))
         {
-            fov = 30f;
+            fov = 45f;
             cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear).OnComplete(() =>
             {
                 mapPanel.SetActive(true);
@@ -54,7 +54,7 @@ public class WestCameraMove : MonoBehaviour
     {
         if (Mathf.Approximately(cam.fieldOfView, 60f))
         {
-            fov = 30f;
+            fov = 29f;
             cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear).OnComplete(() =>
             {
                 mapPanel.SetActive(false);
