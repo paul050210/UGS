@@ -31,6 +31,10 @@ public class ItemSlotUI : MonoBehaviour
     public void SetItem(UIItem item, bool check = false)
     {
         this.item = item;
+        if(itemImg == null)
+        {
+            Awake();
+        }
         itemImg.sprite = ItemManager.Instance.GetItemSprite(item.item);
         transform.GetChild(2).gameObject.SetActive(check);
     }
