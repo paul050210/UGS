@@ -11,16 +11,17 @@ public class UIManager : MonoBehaviour
     }
 
     void ShowMapPanel()
+
     {
         if (!collectionPanel.activeSelf)
         {
-            mapPanel.SetActive(true); collectionPanel.SetActive(false); collectionButton.interactable = false;  // Disable the collection button
+            mapPanel.SetActive(true); collectionPanel.SetActive(false); collectionButton.interactable = false;  // 컬렉션 버튼 비활성화
         }
     }
 
     void ShowCollectionPanel()
     {
-        if (!mapPanel.activeSelf)  // Only allow showing the collection panel if the map panel is not active
+        if (!mapPanel.activeSelf)  // 맵 패널이 비활성화 상태일 때만 컬렉션 패널 활성화
         { mapPanel.SetActive(false); collectionPanel.SetActive(true); mapButton.interactable = false; collectionManager.ShowPage(0); }
     }
 
