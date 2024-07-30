@@ -46,7 +46,7 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
         }
         else
         {
-            ItemManager.Instance.ItemInitForTest();
+            ItemManager.Instance.ResetMap();
         }
     }
 
