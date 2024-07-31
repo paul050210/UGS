@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 [System.Serializable]
-[CreateAssetMenu(menuName = "ItemMergeSO")]
+[CreateAssetMenu(menuName = "Item/ItemMergeSO", order = 1)]
 public class ItemMergeSO : ScriptableObject
 {
     [SerializeField] private ItemSO[] baseItems;

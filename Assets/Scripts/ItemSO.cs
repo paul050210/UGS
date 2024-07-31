@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-[CreateAssetMenu(menuName = "ItemSO")]
+[CreateAssetMenu(menuName = "Item/ItemSO", order = 0)]
 public class ItemSO : ScriptableObject
 {
     public Item item;

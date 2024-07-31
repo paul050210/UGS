@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(menuName = "ItemDecomSO")]
+[CreateAssetMenu(menuName = "Item/ItemDecomSO", order = 2)]
 public class ItemDecomSO : ScriptableObject
 {
     [SerializeField] private ItemSO baseItem;
