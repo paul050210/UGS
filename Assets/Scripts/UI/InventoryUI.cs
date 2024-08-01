@@ -32,9 +32,6 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_EDITOR
-        SaveManager.Instance.LoadItemData();
-#endif
         slots = transform.GetChild(1).GetComponentsInChildren<ItemSlotUI>();
         itemMerge = GetComponent<ItemMerge>();
         SetItemSlot();

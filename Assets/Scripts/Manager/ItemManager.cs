@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviourSingleton<ItemManager>
 {
-    [SerializeField] private ItemSO[] itemSOs;
+    private ItemSO[] itemSOs;
 
     private void Awake()
     {
         // TODO: itemSOs를 리소스폴더에서 불러오는걸로 변경
-        Resources.LoadAll<ItemSO>("SO/Item");
+        itemSOs = Resources.LoadAll<ItemSO>("SO/Item");
     }
 
 
@@ -39,6 +39,10 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
 
     public void ResetMap()
     {
+        if(itemSOs == null)
+        {
+            itemSOs = Resources.LoadAll<ItemSO>("SO/Item");
+        }
         for(int i = 0; i<itemSOs.Length; i++) 
         {
             AddItem(itemSOs[i].item, 1);
