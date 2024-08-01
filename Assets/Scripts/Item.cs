@@ -19,6 +19,7 @@ public class Item
     public ItemType type;
     public string itemName;
     public string itemDesc;
+    public int itemPrice;
 
     public override int GetHashCode()
     {

@@ -1027,8 +1027,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 848039609}
+  descText: {fileID: 1645904799}
   charImage: {fileID: 1614949680}
   closeButton: {fileID: 1084427852}
+  doneButton: {fileID: 166161255}
   slots:
   - {fileID: 987063208}
   - {fileID: 876211540}

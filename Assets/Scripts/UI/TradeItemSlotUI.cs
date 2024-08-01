@@ -33,7 +33,7 @@ public class TradeItemSlotUI : MonoBehaviour
         this.index = index;
         slotImage.sprite = ItemManager.Instance.GetItemSprite(item);
         isSelected = false;
-        // 선택이미지 비활성화
+        transform.GetChild(1).gameObject.SetActive(false);
     }
 
     private void OnClickButton()
@@ -43,19 +43,21 @@ public class TradeItemSlotUI : MonoBehaviour
         if(isSelected)
         {
             descText.text = slotDesc;
-            tradeUI.ChangeSelectedSlot(index);
+            tradeUI.ChangeSelectedSlot(index, slotItem);
         }
         else
         {
             descText.text = "빈칸채우기용";
             tradeUI.ChangeSelectedSlot(-1);
         }
-        // 선택이미지 활성/비활성화
+        transform.GetChild(1).gameObject.SetActive(isSelected);
+        
     }
 
     public void OffSelect()
     {
         isSelected = false;
-        // 선택이미지 비활성화
+        transform.GetChild(1).gameObject.SetActive(false);
+        
     }
 }
