@@ -1,0 +1,103 @@
+{
+    "data": [
+        {
+            "Key": {
+                "type": 0,
+                "itemName": "apple",
+                "itemDesc": "사과에요",
+                "itemPrice": 1
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 1,
+                "itemName": "banana",
+                "itemDesc": "바나나에요",
+                "itemPrice": 2
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 4,
+                "itemName": "fui",
+                "itemDesc": "과일더미",
+                "itemPrice": 10
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 4,
+                "itemName": "hammer",
+                "itemDesc": "망치",
+                "itemPrice": 1
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 3,
+                "itemName": "Hello",
+                "itemDesc": "몰라요",
+                "itemPrice": 4
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 0,
+                "itemName": "사과",
+                "itemDesc": "이것사과다",
+                "itemPrice": 1
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 1,
+                "itemName": "stone",
+                "itemDesc": "This is stone",
+                "itemPrice": 1
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 2,
+                "itemName": "bio",
+                "itemDesc": "This is bio",
+                "itemPrice": 1
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 3,
+                "itemName": "potion",
+                "itemDesc": "This is potion",
+                "itemPrice": 2
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 4,
+                "itemName": "another",
+                "itemDesc": "This is another",
+                "itemPrice": 2
+            },
+            "Value": 1
+        },
+        {
+            "Key": {
+                "type": 2,
+                "itemName": "watermleon",
+                "itemDesc": "수박이에요",
+                "itemPrice": 3
+            },
+            "Value": 1
+        }
+    ]
+}
