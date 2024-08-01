@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1ee9e22c054ac4499fa3c61b3aca98, type: 3}
-  m_Name: New Item SO 2
+  m_Script: {fileID: 11500000, guid: 88008874bf8d06c45b573a7fb4808172, type: 3}
+  m_Name: ItemMerge2
   m_EditorClassIdentifier: 
-  item:
-    type: 2
-    itemName: bio
-    itemDesc: This is bio
-    itemPrice: 1
-  sprite: {fileID: 21300000, guid: ed63c8d24e144944f84895376433d6e4, type: 3}
+  baseItems:
+  - {fileID: 0}
+  mergeItem: {fileID: 0}

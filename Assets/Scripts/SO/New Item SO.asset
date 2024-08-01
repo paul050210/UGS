@@ -17,4 +17,4 @@ MonoBehaviour:
     itemName: herb
     itemDesc: This is herb
     itemPrice: 1
-  sprite: {fileID: 21300000, guid: 2d089513ae4adfc48a683c362ad9992c, type: 3}
+  sprite: {fileID: 21300000, guid: 7607ae215407de342bd49f64bcce58ea, type: 3}

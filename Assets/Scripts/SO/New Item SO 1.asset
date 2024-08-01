@@ -17,4 +17,4 @@ MonoBehaviour:
     itemName: stone
     itemDesc: This is stone
     itemPrice: 1
-  sprite: {fileID: 21300000, guid: fb1e48043961d8f44948225f539a83bb, type: 3}
+  sprite: {fileID: 21300000, guid: bc32feebcea68a14ba8a2b1f9a8f8c86, type: 3}

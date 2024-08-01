@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e1ee9e22c054ac4499fa3c61b3aca98, type: 3}
-  m_Name: New Item SO 2
+  m_Script: {fileID: 11500000, guid: 05a2a39021705714db534f962667e5a2, type: 3}
+  m_Name: ItemDecom1
   m_EditorClassIdentifier: 
-  item:
-    type: 2
-    itemName: bio
-    itemDesc: This is bio
-    itemPrice: 1
-  sprite: {fileID: 21300000, guid: ed63c8d24e144944f84895376433d6e4, type: 3}
+  baseItem: {fileID: 0}
+  decomItems:
+  - {fileID: 0}
+  - {fileID: 0}
