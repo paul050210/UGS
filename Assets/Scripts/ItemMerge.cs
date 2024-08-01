@@ -84,7 +84,8 @@ public class ItemMerge : MonoBehaviour
             ItemManager.Instance.AddItem(merged.item, n+1);
 
             itemPopUps[0].gameObject.SetActive(true);
-            itemPopUps[0].GetChild(1).GetComponent<Image>().sprite = merged.sprite;
+            itemPopUps[0].GetChild(1).GetChild(0).GetComponent<Image>().sprite = merged.sprite;
+            itemPopUps[0].GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(255f, 255f, 255f, 1f);
             itemPopUps[0].GetChild(2).GetComponent<Text>().text = merged.item.itemName;
             itemPopUps[0].GetChild(3).GetComponent<Text>().text = merged.item.itemDesc;
 
@@ -92,7 +93,8 @@ public class ItemMerge : MonoBehaviour
         else
         {
             itemPopUps[0].gameObject.SetActive(true);
-            itemPopUps[0].GetChild(1).GetComponent<Image>().sprite = null;
+            itemPopUps[0].GetChild(1).GetChild(0).GetComponent<Image>().sprite = null;
+            itemPopUps[0].GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
             itemPopUps[0].GetChild(2).GetComponent<Text>().text = "합성실패(임시)";
             itemPopUps[0].GetChild(3).GetComponent<Text>().text = "합성실패(임시)";
         }
@@ -121,7 +123,8 @@ public class ItemMerge : MonoBehaviour
                 ItemManager.Instance.AddItem(items[i].item, n + 1);
 
                 itemPopUps[i].gameObject.SetActive(true);
-                itemPopUps[i].GetChild(1).GetComponent<Image>().sprite = items[i].sprite;
+                itemPopUps[i].GetChild(1).GetChild(0).GetComponent<Image>().sprite = items[i].sprite;
+                itemPopUps[0].GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(255f, 255f, 255f, 1f);
                 itemPopUps[i].GetChild(2).GetComponent<Text>().text = items[i].item.itemName;
                 itemPopUps[i].GetChild(3).GetComponent<Text>().text = items[i].item.itemDesc;
             }
@@ -129,7 +132,8 @@ public class ItemMerge : MonoBehaviour
         else
         {
             itemPopUps[0].gameObject.SetActive(true);
-            itemPopUps[0].GetChild(1).GetComponent<Image>().sprite = null;
+            itemPopUps[0].GetChild(1).GetChild(0).GetComponent<Image>().sprite = null;
+            itemPopUps[0].GetChild(1).GetChild(0).GetComponent<Image>().color = new Color(0f,0f,0f,0f);
             itemPopUps[0].GetChild(2).GetComponent<Text>().text = "분해실패(임시)";
             itemPopUps[0].GetChild(3).GetComponent<Text>().text = "분해실패(임시)";
         }
