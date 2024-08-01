@@ -193,12 +193,12 @@ public class InventoryUI : MonoBehaviour
     {
         if(selectedItems.Count == 0)
         {
-            Debug.LogWarning("분해하려면 아이템 선택을 해주세요");
+            Debug.LogWarning("분해&거래를 하려면 아이템 선택을 해주세요");
             return null;
         }
         else if(selectedItems.Count > 1) 
         {
-            Debug.LogWarning("분해하려면 아이템을 하나만 선택 해주세요");
+            Debug.LogWarning("분해&거래를 하려면 아이템을 하나만 선택 해주세요");
             return null;
         }
 

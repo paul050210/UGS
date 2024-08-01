@@ -1,43 +1,48 @@
 {
     "data": [
         {
-            "Key": {
-                "type": 0,
-                "itemName": "herb",
-                "itemDesc": "This is herb"
-            },
+          "Key": {
+            "type": 0,
+            "itemName": "herb",
+            "itemDesc": "This is herb",
+            "itemPrice":  1
+          },
             "Value": 3
         },
         {
-            "Key": {
-                "type": 1,
-                "itemName": "stone",
-                "itemDesc": "This is stone"
-            },
+          "Key": {
+            "type": 1,
+            "itemName": "stone",
+            "itemDesc": "This is stone",
+            "itemPrice": 1
+          },
             "Value": 3
         },
         {
-            "Key": {
-                "type": 2,
-                "itemName": "bio",
-                "itemDesc": "This is bio"
-            },
+          "Key": {
+            "type": 2,
+            "itemName": "bio",
+            "itemDesc": "This is bio",
+            "itemPrice": 1
+          },
             "Value": 2
         },
         {
-            "Key": {
-                "type": 3,
-                "itemName": "potion",
-                "itemDesc": "This is potion"
-            },
+          "Key": {
+            "type": 3,
+            "itemName": "potion",
+            "itemDesc": "This is potion",
+            "itemPrice": 2
+          },
             "Value": 1
         },
         {
-            "Key": {
-                "type": 4,
-                "itemName": "another",
-                "itemDesc": "This is another"
-            },
+          "Key": {
+            "type": 4,
+            "itemName": "another",
+            "itemDesc": "This is another",
+            "itemPrice": 2
+          },
             "Value": 1
         }
     ]
