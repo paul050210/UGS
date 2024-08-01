@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ItemSlotUI : MonoBehaviour
 {
+    [SerializeField] private Sprite defaultImage;
+
     private UIItem item;
     private Button button;
     private Text itemText;
@@ -42,7 +44,7 @@ public class ItemSlotUI : MonoBehaviour
     public void ResetItem()
     {
         item = null;
-        transform.GetChild(1).GetComponent<Image>().sprite = null;
+        transform.GetChild(1).GetComponent<Image>().sprite = defaultImage;
         OffSelect();
         CheckOff();
     }

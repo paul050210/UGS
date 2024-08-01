@@ -279,33 +279,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3266,8 +3242,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -4216,37 +4192,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_HighlightedSprite
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9570,33 +9518,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9838,8 +9762,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -12013,33 +11937,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (9)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12863,33 +12763,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13636,7 +13512,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -15784,7 +15660,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -16067,8 +15943,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -16670,8 +16546,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -17048,33 +16924,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19388,33 +19240,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19666,33 +19494,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20381,7 +20185,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 21300000, guid: bcd362ffc9007f242ac10fc8a946694b, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: bcd362ffc9007f242ac10fc8a946694b, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -20578,7 +20382,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 21300000, guid: bcd362ffc9007f242ac10fc8a946694b, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: bcd362ffc9007f242ac10fc8a946694b, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -21087,8 +20891,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: e71f96f612a2d9c429fcb0792f704040, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -22227,33 +22031,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22353,33 +22133,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent (10)
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22642,49 +22398,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Transition
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_PressedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 3122048919553076558, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_SpriteState.m_SelectedSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: dd0ac189107aec4438ce4c7b0ee7b2b9, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 115edfa4a2dd37341aa6f840616ea411, type: 3}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8887249643625575603, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
       propertyPath: m_Name
       value: NpcContent
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082556217776296617, guid: c6fb92a838c75354fb1266f22aac9a26, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
