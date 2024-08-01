@@ -60,6 +60,7 @@ namespace ItemTable
 		public ItemType itemType;
 		public System.String itemName;
 		public System.String itemDesc;
+		public System.Int32 itemPrice;
   
 
 #region fuctions
