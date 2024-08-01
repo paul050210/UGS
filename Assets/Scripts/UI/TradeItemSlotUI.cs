@@ -47,7 +47,7 @@ public class TradeItemSlotUI : MonoBehaviour
         }
         else
         {
-            descText.text = " ";
+            descText.text = "빈칸채우기용";
             tradeUI.ChangeSelectedSlot(-1);
         }
         // 선택이미지 활성/비활성화

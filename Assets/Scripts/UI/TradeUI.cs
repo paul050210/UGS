@@ -8,10 +8,16 @@ public class TradeUI : MonoBehaviour
 {
     [SerializeField] private Text nameText;
     [SerializeField] private Image charImage;
+    [SerializeField] private Button closeButton;
     [SerializeField] private List<TradeItemSlotUI> slots;
     
     private int selectedSlot = -1;
     private Item selectedItem;
+
+    private void Start()
+    {
+        closeButton.onClick.AddListener(CloseTrade);
+    }
 
     public void TurnOn(TradeInfo tInfo)
     {
@@ -41,6 +47,12 @@ public class TradeUI : MonoBehaviour
         }
         selectedSlot = index;
         selectedItem = item;
+    }
+
+    private void CloseTrade()
+    {
+        gameObject.SetActive(false);
+
     }
 
     // 현재 선택된 아이템을 알고 있어야됨
