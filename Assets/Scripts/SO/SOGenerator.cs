@@ -22,6 +22,7 @@ public class SOGenerator : MonoBehaviour
             testItem.type = data.itemType;
             testItem.itemName = data.itemName;
             testItem.itemDesc = data.itemDesc;
+            testItem.itemPrice = data.itemPrice;
 
             ItemSO testSO = ScriptableObject.CreateInstance<ItemSO>();
             testSO.item = testItem;
