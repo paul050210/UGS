@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         currentDay = SaveManager.Instance.LoadDay();
         SaveManager.Instance.LoadGameSettingData();
         SaveManager.Instance.LoadItemData();
-        SaveManager.Instance.SaveItemData();
+        //SaveManager.Instance.SaveItemData();
     }
 
     public void MoveToNextDay()
