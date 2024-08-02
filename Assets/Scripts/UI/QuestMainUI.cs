@@ -9,7 +9,8 @@ public class QuestMainUI : MonoBehaviour
 {
     [SerializeField] private Image charImg;
     [SerializeField] private Text nameTxt;
-    [SerializeField] private Text descriptTxt;
+    [SerializeField] private Text descriptTxt1;
+    [SerializeField] private Text descriptTxt2;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
@@ -22,7 +23,7 @@ public class QuestMainUI : MonoBehaviour
     private Quest goingQuest;
     private List<DefaultTable.Data> curDatas;
     private bool isTypingDone = false;
-    private bool isChooesd = false;
+    private bool isChosen = false;
 
     private int curIndex;
     private int maxIndex;
@@ -38,7 +39,7 @@ public class QuestMainUI : MonoBehaviour
             yesButton.gameObject.SetActive(false);
             noButton.gameObject.SetActive(false);
             doneButton.onClick.RemoveListener(QuestDone);
-            if(!isChooesd && goingQuest.questState == QuestState.Default)
+            if(!isChosen && goingQuest.questState == QuestState.Accept)
                 QuestManager.Instance.RemoveEnableQuest(goingQuest);
         });
     }
@@ -54,7 +55,7 @@ public class QuestMainUI : MonoBehaviour
                 Debug.LogWarning("퀘스트 더이상 없음");
                 charImg.sprite = null;
                 nameTxt.text = " ";
-                descriptTxt.text = "진행가능 퀘스트 없음(임시)";
+                descriptTxt1.text = "진행가능 퀘스트 없음(임시)";
                 return;
             }
             if(goingQuest.questState == QuestState.Accept) 
@@ -69,7 +70,7 @@ public class QuestMainUI : MonoBehaviour
             curIndex = 0;
             maxIndex = curDatas.Count - 1;
             charImg.sprite = goingQuest.CharSprite;
-            isChooesd = false;
+            isChosen = false;
         }
         if(curIndex <= maxIndex)
             isTypingDone = false;
@@ -83,9 +84,9 @@ public class QuestMainUI : MonoBehaviour
             curIndex++;
             if(curIndex > maxIndex)
             {
-                if(!isChooesd)
+                if(!isChosen)
                 {
-                    if(goingQuest.questState == QuestState.Accept)
+                    if(goingQuest.questState == QuestState.Refuse)                 
                     {
                         tabletUI.TurnOnTablet(State.Inventory);
                         doneButton.onClick.AddListener(QuestDone);
@@ -129,7 +130,7 @@ public class QuestMainUI : MonoBehaviour
 
     private IEnumerator TypeTextEffect(string text)
     {
-        descriptTxt.text = string.Empty;
+        descriptTxt1.text = string.Empty;
         StringBuilder stringBuilder = new StringBuilder();
         float delay = 0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f);
 
@@ -137,15 +138,35 @@ public class QuestMainUI : MonoBehaviour
         {
             if(isTypingDone)
             {
-                descriptTxt.text = text;
+                descriptTxt1.text = text;
                 break;
             }
             stringBuilder.Append(text[i]);
-            descriptTxt.text = stringBuilder.ToString();
+            descriptTxt1.text = stringBuilder.ToString();
             yield return new WaitForSeconds(delay);
         }
 
-        isTypingDone = true;
+        if(descriptTxt2!=null)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (isTypingDone)
+                {
+                    descriptTxt2.text = text;
+                    break;
+                }
+                stringBuilder.Append(text[i]);
+                descriptTxt2.text = stringBuilder.ToString();
+                yield return new WaitForSeconds(delay);
+            }
+            isTypingDone = true;
+
+        }
+        else
+        {
+            isTypingDone = true;
+
+        }
     }
 
     private void AddContents()
@@ -180,7 +201,7 @@ public class QuestMainUI : MonoBehaviour
     {
         curIndex = 0;
         maxIndex = curDatas.Count - 1;
-        isChooesd = true;
+        isChosen = true;
         tabletUI.TurnOnTablet(State.Quest);
         north.SetActiveCloseBtn(false);
         SetText();
@@ -235,7 +256,7 @@ public class QuestMainUI : MonoBehaviour
         doneButton.onClick.RemoveListener(QuestDone);
         curIndex = 0;
         maxIndex = curDatas.Count - 1;
-        isChooesd = true;
+        isChosen = true;
         tabletUI.TurnOnTablet(State.Inventory);
         north.SetActiveCloseBtn(false);
         SetText();
@@ -247,6 +268,6 @@ public class QuestMainUI : MonoBehaviour
         curDatas = null;
         curIndex = 0;
         maxIndex = 0;
-        isChooesd = true;
+        isChosen = true;
     }
 }

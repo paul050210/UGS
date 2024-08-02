@@ -1804,7 +1804,7 @@ GameObject:
   - component: {fileID: 237873737}
   - component: {fileID: 237873736}
   m_Layer: 0
-  m_Name: Text (Legacy)
+  m_Name: 'DayText '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3901,12 +3901,12 @@ GameObject:
   - component: {fileID: 452336652}
   - component: {fileID: 452336651}
   m_Layer: 0
-  m_Name: Button (Legacy)
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &452336650
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11665,7 +11665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1057604591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14908,12 +14908,12 @@ GameObject:
   - component: {fileID: 1279399253}
   - component: {fileID: 1279399252}
   m_Layer: 0
-  m_Name: Button (Legacy)
+  m_Name: DialogButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1279399251
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15808,7 +15808,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f9bb0e28da56e44bb38277c54e6190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSOs: []
 --- !u!1001 &1347721337
 PrefabInstance:
   m_ObjectHideFlags: 0
