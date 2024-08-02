@@ -28,6 +28,7 @@ public class EastUI : MonoBehaviour
             camvec = new Vector3(0f, 1f, 0f);
             cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
             cam.gameObject.transform.DOMove(camvec, camCloseDuration).SetEase(Ease.Linear);
+            ItemManager.Instance.canSelect = false;
         });
         mergeButton.onClick.AddListener(() => OnClickButton(0));
         decomButton.onClick.AddListener(() => OnClickButton(1));
@@ -39,7 +40,8 @@ public class EastUI : MonoBehaviour
         if (Mathf.Approximately(cam.fieldOfView, 60f))
         {
             fov = 30f;
-            if(i == 0)
+            ItemManager.Instance.canSelect = true;
+            if (i == 0)
             {
                 camvec = new Vector3(0f, -1.6f, 5f);
                 itemMerge.SetMergeState(ItemMergeState.Merge);

@@ -66,6 +66,7 @@ public class TradeUI : MonoBehaviour
     private void CloseTrade()
     {
         gameObject.SetActive(false);
+        ItemManager.Instance.canSelect = false;
         doneButton.onClick.RemoveListener(Trade);
     }
 

@@ -44,7 +44,7 @@ public class InventoryUI : MonoBehaviour
     {
         state = InvenState.all;
         selectedItems.Clear();
-        isSelecteMode = false;
+        isSelecteMode = ItemManager.Instance.canSelect;
         selectedSlot = -1;
         ResetItemSlot();
         SetItemSlot();

@@ -75,6 +75,7 @@ public class NorthUI : MonoBehaviour
     public void CloseWindow()
     {
         questWindow.SetActive(false);
+        ItemManager.Instance.canSelect = false;
         OnDisable.Invoke();
     }
 

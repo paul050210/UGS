@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemManager : MonoBehaviourSingleton<ItemManager>
 {
     private ItemSO[] itemSOs;
+    [HideInInspector] public bool canSelect = false;
 
     private void Awake()
     {

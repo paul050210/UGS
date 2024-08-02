@@ -87,6 +87,7 @@ public class QuestMainUI : MonoBehaviour
                 {
                     if(goingQuest.questState == QuestState.Accept)
                     {
+                        ItemManager.Instance.canSelect = true;
                         tabletUI.TurnOnTablet(State.Inventory);
                         doneButton.onClick.AddListener(QuestDone);
                     }
@@ -198,7 +199,8 @@ public class QuestMainUI : MonoBehaviour
         }
         Item[] items = inventoryUI.GetToQuest();
         if (items == null) return;
-        
+
+        ItemManager.Instance.canSelect = false;
         goingQuest.questState = QuestState.Done;
         List<Item> reward = goingQuest.DoneQuest(items);
         if(reward != null)

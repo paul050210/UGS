@@ -17,6 +17,7 @@ public class TradeNpcUI : MonoBehaviour
 
     private void TurnOnTrade()
     {
+        ItemManager.Instance.canSelect = true;
         tradeUI.TurnOn(tradeInfo);
     }
 }
