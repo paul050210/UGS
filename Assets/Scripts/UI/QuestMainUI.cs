@@ -9,8 +9,7 @@ public class QuestMainUI : MonoBehaviour
 {
     [SerializeField] private Image charImg;
     [SerializeField] private Text nameTxt;
-    [SerializeField] private Text descriptTxt1;
-    [SerializeField] private Text descriptTxt2;
+    [SerializeField] private Text descriptTxt;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button yesButton;
     [SerializeField] private Button noButton;
@@ -55,7 +54,7 @@ public class QuestMainUI : MonoBehaviour
                 Debug.LogWarning("퀘스트 더이상 없음");
                 charImg.sprite = null;
                 nameTxt.text = " ";
-                descriptTxt1.text = "진행가능 퀘스트 없음(임시)";
+                descriptTxt.text = "진행가능 퀘스트 없음(임시)";
                 return;
             }
             if(goingQuest.questState == QuestState.Accept) 
@@ -130,7 +129,7 @@ public class QuestMainUI : MonoBehaviour
 
     private IEnumerator TypeTextEffect(string text)
     {
-        descriptTxt1.text = string.Empty;
+        descriptTxt.text = string.Empty;
         StringBuilder stringBuilder = new StringBuilder();
         float delay = 0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f);
 
@@ -138,35 +137,22 @@ public class QuestMainUI : MonoBehaviour
         {
             if(isTypingDone)
             {
-                descriptTxt1.text = text;
+                descriptTxt.text = text;
                 break;
+                if (text[i] = '*')
+                {
+                    break;
+
+                }
             }
+            else 
             stringBuilder.Append(text[i]);
-            descriptTxt1.text = stringBuilder.ToString();
+            descriptTxt.text = stringBuilder.ToString();
             yield return new WaitForSeconds(delay);
         }
-
-        if(descriptTxt2!=null)
-        {
-            for (int i = 0; i < text.Length; i++)
-            {
-                if (isTypingDone)
-                {
-                    descriptTxt2.text = text;
-                    break;
-                }
-                stringBuilder.Append(text[i]);
-                descriptTxt2.text = stringBuilder.ToString();
-                yield return new WaitForSeconds(delay);
-            }
+   
             isTypingDone = true;
-
-        }
-        else
-        {
-            isTypingDone = true;
-
-        }
+         
     }
 
     private void AddContents()

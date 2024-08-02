@@ -457,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charImg: {fileID: 906972487}
   nameTxt: {fileID: 1388213157}
-  descriptTxt: {fileID: 1605464046}
+  descriptTxt: {fileID: 0}
   nextButton: {fileID: 597237318}
   yesButton: {fileID: 1320601658}
   noButton: {fileID: 1126478315}
@@ -3906,7 +3906,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &452336650
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5294,7 +5294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2e07adad6f23f0a4eb46f5ddb7002763, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9477,7 +9477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &916744204
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11665,7 +11665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1057604591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14913,7 +14913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1279399251
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16267,7 +16267,7 @@ GameObject:
   - component: {fileID: 1388213158}
   - component: {fileID: 1388213157}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18506,7 +18506,7 @@ GameObject:
   - component: {fileID: 1605464047}
   - component: {fileID: 1605464046}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: MainText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
