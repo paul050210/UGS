@@ -57,11 +57,11 @@ public class TradeNpcUI : MonoBehaviour
     private IEnumerator FadeOut()
     {
         yield return new WaitForSeconds(0.5f);
+        tradeUI.TurnOn(tradeInfo);
         fadeImage.DOFade(0, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
         {
             fadeImage.gameObject.SetActive(false);
             ItemManager.Instance.canSelect = true;
-            tradeUI.TurnOn(tradeInfo);
         });
     }
 
