@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,9 +28,18 @@ public class WestUI : MonoBehaviour
 
     private void CloseMap()
     {
-        mapPanel.SetActive(false);
-        mapCloseButton.gameObject.SetActive(false);
-        leftBtn.raycastTarget = true;
-        rightBtn.raycastTarget = true;
+        if(Mathf.Approximately(Camera.main.fieldOfView, 30f))
+        {
+            TradeNpcControl.Instance.TurnOffAll();
+            Camera.main.DOFieldOfView(60f, 0.3f).SetEase(Ease.Linear);
+            Camera.main.gameObject.transform.DOMove(new Vector3(0f, 1f, 0f), 0.3f).SetEase(Ease.Linear);
+        }
+        else if(Mathf.Approximately(Camera.main.fieldOfView, 60f))
+        {
+            mapPanel.SetActive(false);
+            mapCloseButton.gameObject.SetActive(false);
+            leftBtn.raycastTarget = true;
+            rightBtn.raycastTarget = true;
+        }
     }
 }
