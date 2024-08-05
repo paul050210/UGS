@@ -8,14 +8,27 @@ public class WestUI : MonoBehaviour
 {
     [SerializeField] private Button mapButton;
     [SerializeField] private Button mapCloseButton;
+    [SerializeField] private Button dictionaryButton;
+    [SerializeField] private Button dictionaryCloseButton;
     [SerializeField] private Image leftBtn;
     [SerializeField] private Image rightBtn;
     [SerializeField] private GameObject mapPanel;
+    [SerializeField] private GameObject dictionaryPanel;
 
     private void Start()
     {
         mapButton.onClick.AddListener(OpenMap);
         mapCloseButton.onClick.AddListener(CloseMap);
+        dictionaryButton.onClick.AddListener(() => 
+        { 
+            dictionaryPanel.SetActive(true);
+            dictionaryCloseButton.gameObject.SetActive(true);
+        });
+        dictionaryCloseButton.onClick.AddListener(() => 
+        {
+            dictionaryPanel.SetActive(false);
+            dictionaryCloseButton.gameObject.SetActive(false);
+        });
     }
 
     private void OpenMap()

@@ -62,4 +62,20 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
         return null;
     }
 
+    public void AddDic(Item item)
+    {
+        SaveManager.Instance.itemDicMap[item] = true;
+    }
+
+    public void ResetItemDic()
+    {
+        if (itemSOs == null)
+        {
+            itemSOs = Resources.LoadAll<ItemSO>("SO/Item");
+        }
+        for (int i = 0; i < itemSOs.Length; i++)
+        {
+            SaveManager.Instance.itemDicMap.Add(itemSOs[i], false);
+        }
+    }
 }

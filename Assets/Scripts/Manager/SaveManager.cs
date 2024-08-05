@@ -9,11 +9,12 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
 {
     private string GameSettingDataFileName = "GameSettingData.json";
     private string ItemDataFileName = "ItemData.json";
+    private string ItemDicDataFileName = "ItemDicData.json";
     private string DayDataFileName = "DayData.json";
 
     public GameData gameSettingData = new GameData();
     public Dictionary<Item, int> itemMap = new Dictionary<Item, int>();
-    
+    public Dictionary<Item, bool> itemDicMap = new Dictionary<Item, bool>();
 
     public void LoadGameSettingData()
     {
@@ -54,6 +55,29 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
     {
         string ToJsonData = DictionaryJsonUtility.ToJson(itemMap, true);
         string filePath = Application.dataPath + "/" + ItemDataFileName;
+
+        File.WriteAllText(filePath, ToJsonData);
+    }
+
+    public void LoadItemDicData()
+    {
+        string filePath = Application.dataPath + "/" + ItemDicDataFileName;
+
+        if (File.Exists(filePath))
+        {
+            string FromJsonData = File.ReadAllText(filePath);
+            itemDicMap = DictionaryJsonUtility.FromJson<Item, bool>(FromJsonData);
+        }
+        else
+        {
+            ItemManager.Instance.ResetItemDic();
+        }
+    }
+
+    public void SaveItemDicData()
+    {
+        string ToJsonData = DictionaryJsonUtility.ToJson(itemDicMap, true);
+        string filePath = Application.dataPath + "/" + ItemDicDataFileName;
 
         File.WriteAllText(filePath, ToJsonData);
     }
