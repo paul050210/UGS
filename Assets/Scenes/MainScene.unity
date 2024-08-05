@@ -457,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charImg: {fileID: 906972487}
   nameTxt: {fileID: 1388213157}
-  descriptTxt: {fileID: 0}
+  descriptTxt: {fileID: 1605464046}
   nextButton: {fileID: 597237318}
   yesButton: {fileID: 1320601658}
   noButton: {fileID: 1126478315}
