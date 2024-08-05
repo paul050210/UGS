@@ -10,6 +10,7 @@ public class TradeNpcUI : MonoBehaviour
     [SerializeField] private TradeInfo tradeInfo;
     [SerializeField] private Button moveButton;
     [SerializeField] private Vector3 camVec = Vector3.zero;
+    [SerializeField] private Image fadeImage;
 
     [SerializeField] private string nameStr;
     [SerializeField] private string descStr;
@@ -28,15 +29,15 @@ public class TradeNpcUI : MonoBehaviour
     {
         TradeNpcControl.Instance.TurnOffAll();
         cam.DOFieldOfView(30f, 0.3f).SetEase(Ease.Linear);
-        cam.gameObject.transform.DOMove(camVec, 0.3f).SetEase(Ease.Linear).OnComplete(() => 
+        cam.gameObject.transform.DOMove(camVec, 0.3f).SetEase(Ease.Linear).OnComplete(() =>
         {
-            for(int i = 0; i<3; i++) 
+            for (int i = 0; i < 3; i++)
             {
                 transform.GetChild(i).gameObject.SetActive(true);
             }
             transform.GetChild(0).GetComponent<Text>().text = nameStr;
             transform.GetChild(1).GetComponent<Text>().text = descStr;
-            
+
         });
     }
 
@@ -46,8 +47,22 @@ public class TradeNpcUI : MonoBehaviour
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
-        ItemManager.Instance.canSelect = true;
-        tradeUI.TurnOn(tradeInfo);
+        fadeImage.gameObject.SetActive(true);
+        fadeImage.DOFade(1, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            StartCoroutine(FadeOut());
+        });
+    }
+
+    private IEnumerator FadeOut()
+    {
+        yield return new WaitForSeconds(0.5f);
+        fadeImage.DOFade(0, 1.5f).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            fadeImage.gameObject.SetActive(false);
+            ItemManager.Instance.canSelect = true;
+            tradeUI.TurnOn(tradeInfo);
+        });
     }
 
     public void TurnOffTrade()
@@ -57,4 +72,6 @@ public class TradeNpcUI : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+
+    
 }
