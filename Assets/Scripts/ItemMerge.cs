@@ -19,30 +19,18 @@ public class ItemMerge : MonoBehaviour
 
     [SerializeField] private Transform[] itemPopUps;
 
-    [SerializeField] private int itemMergeCnt;
-    [SerializeField] private int itemDecomCnt;
-
-    private List<ItemMergeSO> itemMergeSOs = new List<ItemMergeSO>();
-    private List<ItemDecomSO> itemDecomSOs = new List<ItemDecomSO>();
+    private ItemMergeSO[] itemMergeSOs;
+    private ItemDecomSO[] itemDecomSOs;
     private ItemMergeState mergeState = ItemMergeState.None;
     private InventoryUI inventoryUI;
 
     private void Start()
     {
         inventoryUI = GetComponent<InventoryUI>();
+        
+        itemMergeSOs = Resources.LoadAll<ItemMergeSO>("SO/ItemMerge");
+        itemDecomSOs = Resources.LoadAll<ItemDecomSO>("SO/ItemDecom");
 
-        ItemMergeSO so;
-        ItemDecomSO so2;
-        for (int i = 0; i < itemMergeCnt; i++)
-        {
-            so = Resources.Load<ItemMergeSO>($"SO/itemMerge{i}");
-            itemMergeSOs.Add(so);
-        }
-        for(int i = 0; i< itemDecomCnt; i++)
-        {
-            so2 = Resources.Load<ItemDecomSO>($"SO/itemDecom{i}");
-            itemDecomSOs.Add(so2);
-        }
         doneButton.onClick.AddListener(OnClickDone);
     }
 
@@ -65,7 +53,7 @@ public class ItemMerge : MonoBehaviour
     {
         if (itemArr == null) return;
         ItemSO merged = null;
-        for(int i = 0; i< itemMergeSOs.Count; i++)
+        for(int i = 0; i< itemMergeSOs.Length; i++)
         {
             merged = itemMergeSOs[i].ReturnMergeItem(itemArr);
             if (merged != null)
@@ -74,7 +62,7 @@ public class ItemMerge : MonoBehaviour
 
         if (merged != null)
         {
-            //사용된 아이템제거, 획득한 아이템 저장 추가해야됨
+            
             for(int i = 0; i< itemArr.Length; i++)
             {
                 int cnt = ItemManager.Instance.GetItem(itemArr[i]);
@@ -105,7 +93,7 @@ public class ItemMerge : MonoBehaviour
     {
         if (item == null) return;
         ItemSO[] items = null;
-        for(int i = 0; i<itemDecomSOs.Count; i++)
+        for(int i = 0; i<itemDecomSOs.Length; i++)
         {
             items = itemDecomSOs[i].ReturnDecomItem(item);
             if (items != null)
@@ -116,7 +104,7 @@ public class ItemMerge : MonoBehaviour
         {
             int cnt = ItemManager.Instance.GetItem(item);
             ItemManager.Instance.AddItem(item, cnt - 1);
-            //사용된 아이템제거, 획득한 아이템 저장 추가해야됨
+            
             for (int i = 0; i<items.Length; i++)
             {
                 int n = ItemManager.Instance.GetItem(items[i].item);
