@@ -81,20 +81,28 @@ public class TradeUI : MonoBehaviour
             Debug.LogWarning("거래할 아이템을 선택하세요.");
             return;
         }
-        Item myItem = inventoryUI.GetToDecom();
-        if (myItem == null) return;
+        Item[] myItems = inventoryUI.GetToMerge(1);
+        if (myItems == null) return;
 
         slots[selectedSlot].OffSelect();
         selectedSlot = -1;
         tabletUI.TurnOnTablet(State.Inventory);
+        int myPrice = 0;
+        for(int i = 0; i<myItems.Length; i++)
+        {
+            myPrice += myItems[i].itemPrice;
+        }
         // 아이템가치+호감도로 수치 비교
-        if(myItem.itemPrice >= selectedItem.itemPrice)
+        if(myPrice >= selectedItem.itemPrice)
         {
             descText.text = "거래 성공";
             int n = ItemManager.Instance.GetItem(selectedItem);
             ItemManager.Instance.AddItem(selectedItem, n+1);
-            n = ItemManager.Instance.GetItem(myItem);
-            ItemManager.Instance.AddItem(myItem, n - 1);
+            for (int i = 0; i < myItems.Length; i++)
+            {
+                n = ItemManager.Instance.GetItem(myItems[i]);
+                ItemManager.Instance.AddItem(myItems[i], n - 1);
+            }
         }
         else
         {

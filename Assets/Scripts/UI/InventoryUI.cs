@@ -170,9 +170,9 @@ public class InventoryUI : MonoBehaviour
         itemText.text = "아이템설명";
     }
 
-    public Item[] GetToMerge()
+    public Item[] GetToMerge(int cnt = 2)
     {
-        if(selectedItems.Count < 2)
+        if(selectedItems.Count < cnt)
         {
             Debug.LogWarning("선택된 아이템 부족");
             return null;
