@@ -70,6 +70,7 @@ public class ItemMerge : MonoBehaviour
             }
             int n = ItemManager.Instance.GetItem(merged.item);
             ItemManager.Instance.AddItem(merged.item, n+1);
+            SaveManager.Instance.itemDicMap[merged.item] = true;
 
             itemPopUps[0].gameObject.SetActive(true);
             itemPopUps[0].GetChild(1).GetChild(0).GetComponent<Image>().sprite = merged.sprite;
