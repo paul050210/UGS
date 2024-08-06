@@ -23,6 +23,8 @@ public class QuestMainUI : MonoBehaviour
     private List<DefaultTable.Data> curDatas;
     private bool isTypingDone = false;
     private bool isChooesd = false;
+    private bool starnextClicked = false;
+
 
     private int curIndex;
     private int maxIndex;
@@ -33,19 +35,19 @@ public class QuestMainUI : MonoBehaviour
         tabletUI = FindObjectOfType<TabletUI>();
         north = FindObjectOfType<NorthUI>();
         inventoryUI = FindObjectOfType<InventoryUI>();
-        north.OnDisable.AddListener(() => 
+        north.OnDisable.AddListener(() =>
         {
             yesButton.gameObject.SetActive(false);
             noButton.gameObject.SetActive(false);
             doneButton.onClick.RemoveListener(QuestDone);
-            if(!isChooesd && goingQuest.questState == QuestState.Default)
+            if (!isChooesd && goingQuest.questState == QuestState.Default)
                 QuestManager.Instance.RemoveEnableQuest(goingQuest);
         });
     }
 
     private void OnEnable()
     {
-        if(goingQuest == null)
+        if (goingQuest == null)
         {
             goingQuest = QuestManager.Instance.GetQuest();
             if (goingQuest == null)
@@ -57,7 +59,7 @@ public class QuestMainUI : MonoBehaviour
                 descriptTxt.text = "진행가능 퀘스트 없음(임시)";
                 return;
             }
-            if(goingQuest.questState == QuestState.Accept) 
+            if (goingQuest.questState == QuestState.Accept)
             {
                 Debug.Log(goingQuest.questState.ToString());
                 curDatas = goingQuest.GetText(3);
@@ -71,23 +73,24 @@ public class QuestMainUI : MonoBehaviour
             charImg.sprite = goingQuest.CharSprite;
             isChooesd = false;
         }
-        if(curIndex <= maxIndex)
+        if (curIndex <= maxIndex)
             isTypingDone = false;
         SetText();
     }
 
     private void OnClickNext()
     {
-        if(isTypingDone)
+        starnextClicked = true;
+
+        if (isTypingDone)
         {
             curIndex++;
-            if(curIndex > maxIndex)
+            if (curIndex > maxIndex)
             {
-                if(!isChooesd)
+                if (!isChooesd)
                 {
-                    if(goingQuest.questState == QuestState.Accept)
+                    if (goingQuest.questState == QuestState.Accept)
                     {
-                        ItemManager.Instance.canSelect = true;
                         tabletUI.TurnOnTablet(State.Inventory);
                         doneButton.onClick.AddListener(QuestDone);
                     }
@@ -100,7 +103,7 @@ public class QuestMainUI : MonoBehaviour
                 }
                 else
                 {
-                    if(goingQuest?.questState != QuestState.Done)
+                    if (goingQuest?.questState != QuestState.Done)
                         QuestManager.Instance.AddQuestIndex();
                     goingQuest = null;
                     north.SetActiveCloseBtn(true);
@@ -118,7 +121,7 @@ public class QuestMainUI : MonoBehaviour
 
     private void SetText()
     {
-        if(curIndex > maxIndex)
+        if (curIndex > maxIndex)
         {
             Debug.LogWarning("인덱스 오류");
             return;
@@ -132,22 +135,48 @@ public class QuestMainUI : MonoBehaviour
     {
         descriptTxt.text = string.Empty;
         StringBuilder stringBuilder = new StringBuilder();
-        float delay = 0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f);
+        float delay = Mathf.Clamp(0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f), 0.01f, 0.25f);
 
-        for(int i = 0; i< text.Length; i++)
+        isTypingDone = false;
+        starnextClicked = false;
+
+        for (int i = 0; i < text.Length; i++)
         {
-            if(isTypingDone)
+            if (text[i] == '*')
+            {
+                Debug.Log("Asterisk encountered. Waiting for user input...");
+                i++;
+                yield return new WaitUntil(() => starnextClicked);
+                Debug.Log("User input received.");
+
+                starnextClicked = false;
+                isTypingDone = false;
+
+                if (i < text.Length)
+                {
+                    stringBuilder.Append(text[i]);
+                }
+            }
+            else
+            {
+                stringBuilder.Append(text[i]);
+            }
+
+            descriptTxt.text = stringBuilder.ToString();
+
+            if (isTypingDone)
             {
                 descriptTxt.text = text;
                 break;
             }
-            stringBuilder.Append(text[i]);
-            descriptTxt.text = stringBuilder.ToString();
+
             yield return new WaitForSeconds(delay);
         }
 
         isTypingDone = true;
+        Debug.Log("Typing effect completed.");
     }
+
 
     private void AddContents()
     {
@@ -160,13 +189,13 @@ public class QuestMainUI : MonoBehaviour
 
         yesButton.onClick.RemoveAllListeners();
         noButton.onClick.RemoveAllListeners();
-        yesButton.onClick.AddListener(() => 
+        yesButton.onClick.AddListener(() =>
         {
             curDatas = goingQuest.GetText(1);
             QuestManager.Instance.AddAcceptQuest(goingQuest);
             OnClickChoose();
         });
-        noButton.onClick.AddListener(() => 
+        noButton.onClick.AddListener(() =>
         {
             curDatas = goingQuest.GetText(2);
             QuestManager.Instance.RemoveEnableQuest(goingQuest);
@@ -193,17 +222,16 @@ public class QuestMainUI : MonoBehaviour
 
     private void QuestDone()
     {
-        if(inventoryUI == null)
+        if (inventoryUI == null)
         {
             inventoryUI = FindObjectOfType<InventoryUI>();
         }
         Item[] items = inventoryUI.GetToQuest();
         if (items == null) return;
 
-        ItemManager.Instance.canSelect = false;
         goingQuest.questState = QuestState.Done;
         List<Item> reward = goingQuest.DoneQuest(items);
-        if(reward != null)
+        if (reward != null)
         {
             curDatas = goingQuest.GetText(4);
             for (int i = 0; i < reward.Count; i++)
