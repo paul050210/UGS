@@ -46,6 +46,7 @@ public class DictionarySlotUI : MonoBehaviour
         {
             plusTexts[i].SetActive(false);
         }
+        if (slotInfo.Equals(null)) return;
 
         if (slotInfo.Value)
         {
