@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -24,186 +23,14 @@ public class QuestMainUI : MonoBehaviour
     private List<DefaultTable.Data> curDatas;
     private bool isTypingDone = false;
     private bool isChooesd = false;
-    private bool nextButtonClicked = false;
+    private bool starnextClicked = false;
 
 
     private int curIndex;
     private int maxIndex;
 
-    private void Start()
-    {
-        nextButton.onClick.AddListener(OnClickNext);
-        tabletUI = FindObjectOfType<TabletUI>();
-        north = FindObjectOfType<NorthUI>();
-        inventoryUI = FindObjectOfType<InventoryUI>();
-        north.OnDisable.AddListener(() =>
-        {
-            yesButton.gameObject.SetActive(false);
-            noButton.gameObject.SetActive(false);
-            doneButton.onClick.RemoveListener(QuestDone);
-            if (!isChooesd && goingQuest.questState == QuestState.Default)
-                QuestManager.Instance.RemoveEnableQuest(goingQuest);
-        });
-    }
-
-    private void OnEnable()
-    {
-        if (goingQuest == null)
-        {
-            goingQuest = QuestManager.Instance.GetQuest();
-            if (goingQuest == null)
-            {
-                //TODO: 디버그에서 퀘스트 없을때 해야되는걸로 변경
-                Debug.LogWarning("퀘스트 더이상 없음");
-                charImg.sprite = null;
-                nameTxt.text = " ";
-                descriptTxt.text = "진행가능 퀘스트 없음(임시)";
-                return;
-            }
-            if (goingQuest.questState == QuestState.Accept)
-            {
-                Debug.Log(goingQuest.questState.ToString());
-                curDatas = goingQuest.GetText(3);
-            }
-            else
-            {
-                curDatas = goingQuest.GetText(0);
-            }
-            curIndex = 0;
-            maxIndex = curDatas.Count - 1;
-            charImg.sprite = goingQuest.CharSprite;
-            isChooesd = false;
-        }
-        if (curIndex <= maxIndex)
-            isTypingDone = false;
-        SetText();
-    }
-
-    private void OnClickNext()
-    {
-        nextButtonClicked = true;
-
-        if (isTypingDone)
-        {
-            curIndex++;
-            if (curIndex > maxIndex)
-            {
-                if (!isChooesd)
-                {
-                    if (goingQuest.questState == QuestState.Accept)
-                    {
-                        tabletUI.TurnOnTablet(State.Inventory);
-                        doneButton.onClick.AddListener(QuestDone);
-                    }
-                    else
-                    {
-                        tabletUI.TurnOnTablet(State.Quest);
-                        AddContents();
-                    }
-                    return;
-                }
-                else
-                {
-                    if (goingQuest?.questState != QuestState.Done)
-                        QuestManager.Instance.AddQuestIndex();
-                    goingQuest = null;
-                    north.SetActiveCloseBtn(true);
-                    north.CloseWindow();
-                    return;
-                }
-            }
-            SetText();
-        }
-        else
-        {
-            isTypingDone = true;
-        }
-    }
-
-    private void SetText()
-    {
-        if (curIndex > maxIndex)
-        {
-            Debug.LogWarning("인덱스 오류");
-            return;
-        }
-        isTypingDone = false;
-        StartCoroutine(TypeTextEffect(curDatas[curIndex].strValue));
-        nameTxt.text = curDatas[curIndex].name;
-    }
 
 
-
-    private IEnumerator TypeTextEffect(string text)
-    {
-
-        descriptTxt.text = string.Empty;
-        StringBuilder stringBuilder = new StringBuilder();
-        float delay = 0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f);
-
-        for (int i = 0; i < text.Length; i++)
-        {
-            if (text[i]=='*')
-            {
-                nextButtonClicked = false;
-                stringBuilder.Clear();
-                yield return new WaitUntil(() => nextButtonClicked); 
-                continue;
-            }
-            if (isTypingDone)
-            {
-                descriptTxt.text = text;
-                break;
-            }
-            stringBuilder.Append(text[i]);
-            descriptTxt.text = stringBuilder.ToString();
-            yield return new WaitForSeconds(delay);
-        }
-
-        isTypingDone = true;
-    }
-
-    private void AddContents()
-    {
-        goingQuest.isAceepted = true;
-        goingQuest.questState = QuestState.Accept;
-        QuestManager.Instance.AddEnableQuest(goingQuest);
-        QuestContentControl.Instance.SetContents(curDatas);
-        yesButton.gameObject.SetActive(true);
-        noButton.gameObject.SetActive(true);
-
-        yesButton.onClick.RemoveAllListeners();
-        noButton.onClick.RemoveAllListeners();
-        yesButton.onClick.AddListener(() =>
-        {
-            curDatas = goingQuest.GetText(1);
-            QuestManager.Instance.AddAcceptQuest(goingQuest);
-            OnClickChoose();
-        });
-        noButton.onClick.AddListener(() =>
-        {
-            curDatas = goingQuest.GetText(2);
-            QuestManager.Instance.RemoveEnableQuest(goingQuest);
-            goingQuest.isAceepted = false;
-            goingQuest.questState = QuestState.Refuse;
-            QuestManager.Instance.AddEnableQuest(goingQuest);
-            OnClickChoose();
-        });
-    }
-
-    private void OnClickChoose()
-    {
-        curIndex = 0;
-        maxIndex = curDatas.Count - 1;
-        isChooesd = true;
-        tabletUI.TurnOnTablet(State.Quest);
-        north.SetActiveCloseBtn(false);
-        SetText();
-        yesButton.onClick.RemoveAllListeners();
-        noButton.onClick.RemoveAllListeners();
-        yesButton.gameObject.SetActive(false);
-        noButton.gameObject.SetActive(false);
-    }
 
     private void QuestDone()
     {
@@ -255,6 +82,187 @@ public class QuestMainUI : MonoBehaviour
         north.SetActiveCloseBtn(false);
         SetText();
     }
+    private void OnClickChoose()
+    {
+        curIndex = 0;
+        maxIndex = curDatas.Count - 1;
+        isChooesd = true;
+        tabletUI.TurnOnTablet(State.Quest);
+        north.SetActiveCloseBtn(false);
+        SetText();
+        yesButton.onClick.RemoveAllListeners();
+        noButton.onClick.RemoveAllListeners();
+        yesButton.gameObject.SetActive(false);
+        noButton.gameObject.SetActive(false);
+    }
+    private void AddContents()
+    {
+        goingQuest.isAceepted = true;
+        goingQuest.questState = QuestState.Accept;
+        QuestManager.Instance.AddEnableQuest(goingQuest);
+        QuestContentControl.Instance.SetContents(curDatas);
+        yesButton.gameObject.SetActive(true);
+        noButton.gameObject.SetActive(true);
+
+        yesButton.onClick.RemoveAllListeners();
+        noButton.onClick.RemoveAllListeners();
+        yesButton.onClick.AddListener(() =>
+        {
+            curDatas = goingQuest.GetText(1);
+            QuestManager.Instance.AddAcceptQuest(goingQuest);
+            OnClickChoose();
+        });
+        noButton.onClick.AddListener(() =>
+        {
+            curDatas = goingQuest.GetText(2);
+            QuestManager.Instance.RemoveEnableQuest(goingQuest);
+            goingQuest.isAceepted = false;
+            goingQuest.questState = QuestState.Refuse;
+            QuestManager.Instance.AddEnableQuest(goingQuest);
+            OnClickChoose();
+        });
+    }
+
+    
+
+    private void Start()
+    {
+        nextButton.onClick.AddListener(OnClickNext);
+        tabletUI = FindObjectOfType<TabletUI>();
+        north = FindObjectOfType<NorthUI>();
+        inventoryUI = FindObjectOfType<InventoryUI>();
+        north.OnDisable.AddListener(() =>
+        {
+            yesButton.gameObject.SetActive(false);
+            noButton.gameObject.SetActive(false);
+            doneButton.onClick.RemoveListener(QuestDone);
+            if (!isChooesd && goingQuest.questState == QuestState.Default)
+                QuestManager.Instance.RemoveEnableQuest(goingQuest);
+        });
+    }
+
+    private void OnEnable()
+    {
+
+        if (goingQuest == null)
+        {
+            goingQuest = QuestManager.Instance.GetQuest();
+            if (goingQuest == null)
+            {
+                //TODO: 디버그에서 퀘스트 없을때 해야되는걸로 변경
+                Debug.LogWarning("퀘스트 더이상 없음");
+                charImg.sprite = null;
+                nameTxt.text = " ";
+                descriptTxt.text = "진행가능 퀘스트 없음(임시)";
+                return;
+            }
+            if (goingQuest.questState == QuestState.Accept)
+            {
+                Debug.Log(goingQuest.questState.ToString());
+                curDatas = goingQuest.GetText(3);
+            }
+            else
+            {
+                curDatas = goingQuest.GetText(0);
+            }
+            curIndex = 0;
+            maxIndex = curDatas.Count - 1;
+            charImg.sprite = goingQuest.CharSprite;
+            isChooesd = false;
+        }
+        if (curIndex <= maxIndex)
+            isTypingDone = false;
+        SetText();
+    }
+
+    private void OnClickNext()
+    {
+        starnextClicked = true;
+
+        if (isTypingDone)
+        {
+            curIndex++;
+            if (curIndex > maxIndex)
+            {
+                if (!isChooesd)
+                {
+                    if (goingQuest.questState == QuestState.Accept)
+                    {
+                        tabletUI.TurnOnTablet(State.Inventory);
+                        doneButton.onClick.AddListener(QuestDone);
+                    }
+                    else
+                    {
+                        tabletUI.TurnOnTablet(State.Quest);
+                        AddContents();
+                    }
+                    return;
+                }
+                else
+                {
+                    if (goingQuest?.questState != QuestState.Done)
+                        QuestManager.Instance.AddQuestIndex();
+                    goingQuest = null;
+                    north.SetActiveCloseBtn(true);
+                    north.CloseWindow();
+                    return;
+                }
+            }
+            SetText();
+        }
+        else
+        {
+            isTypingDone = true;
+        }
+    }
+
+    private void SetText()
+    {
+        if (curIndex > maxIndex)
+        {
+            Debug.LogWarning("인덱스 오류");
+            return;
+        }
+        isTypingDone = false;
+        StartCoroutine(TypeTextEffect(curDatas[curIndex].strValue));
+        nameTxt.text = curDatas[curIndex].name;
+    }
+
+    private IEnumerator TypeTextEffect(string text)
+    {
+        isTypingDone = false;
+
+        descriptTxt.text = string.Empty;
+        StringBuilder stringBuilder = new StringBuilder();
+        float delay = 0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f);
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            if (text[i] == '*')
+            {            // wait            
+                Debug.Log("* started");
+                starnextClicked = false;
+                isTypingDone = false;
+                do while (starnextClicked != true)
+                {
+                        descriptTxt.text = stringBuilder.ToString();
+
+                }
+            }
+                
+            }
+            if (isTypingDone)
+            {
+                descriptTxt.text = text;
+                break;
+            }
+            stringBuilder.Append(text[i]);
+            descriptTxt.text = stringBuilder.ToString();
+            yield return new WaitForSeconds(delay);
+        }
+
+        isTypingDone = true;
+    }
 
     public void ResetQuestUI()
     {
@@ -264,4 +272,5 @@ public class QuestMainUI : MonoBehaviour
         maxIndex = 0;
         isChooesd = true;
     }
+
 }
