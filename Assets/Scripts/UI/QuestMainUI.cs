@@ -135,33 +135,48 @@ public class QuestMainUI : MonoBehaviour
     {
         descriptTxt.text = string.Empty;
         StringBuilder stringBuilder = new StringBuilder();
-        float delay = 0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f);
+        float delay = Mathf.Clamp(0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f), 0.01f, 0.25f);
+
+        isTypingDone = false;
+        starnextClicked = false;
 
         for (int i = 0; i < text.Length; i++)
         {
-            starnextClicked = false;
-
             if (text[i] == '*')
-            {                                   // wait            
-                Debug.Log("* started");
-                isTypingDone = false;
+            {
+                Debug.Log("Asterisk encountered. Waiting for user input...");
+                i++; 
                 yield return new WaitUntil(() => starnextClicked);
-                descriptTxt.text = stringBuilder.ToString();
-                
-                continue;
+                Debug.Log("User input received.");
+
+                starnextClicked = false;
+                isTypingDone = false;
+
+                if (i < text.Length)
+                {
+                    stringBuilder.Append(text[i]);
+                }
             }
+            else
+            {
+                stringBuilder.Append(text[i]);
+            }
+
+            descriptTxt.text = stringBuilder.ToString();
+
             if (isTypingDone)
             {
                 descriptTxt.text = text;
                 break;
             }
-            stringBuilder.Append(text[i]);
-            descriptTxt.text = stringBuilder.ToString();
+
             yield return new WaitForSeconds(delay);
         }
 
-        isTypingDone = true;
+        isTypingDone = true; 
+        Debug.Log("Typing effect completed.");
     }
+
 
     private void AddContents()
     {
