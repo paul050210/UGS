@@ -5,12 +5,13 @@ using UnityEngine;
 public class ItemManager : MonoBehaviourSingleton<ItemManager>
 {
     private ItemSO[] itemSOs;
+    private ItemDicSO[] itemDicSOs;
     [HideInInspector] public bool canSelect = false;
 
     private void Awake()
     {
-        // TODO: itemSOs를 리소스폴더에서 불러오는걸로 변경
         itemSOs = Resources.LoadAll<ItemSO>("SO/Item");
+        itemDicSOs = Resources.LoadAll<ItemDicSO>("SO/ItemDic");
     }
 
 
@@ -77,5 +78,18 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
         {
             SaveManager.Instance.itemDicMap.Add(itemSOs[i], i%2 == 0);
         }
+    }
+
+    public List<ItemSO> GetDicData(Item item)
+    {
+        for(int i = 0; i<itemDicSOs.Length; i++)
+        {
+            if (itemDicSOs[i].mainItem.item.Equals(item))
+            {
+                return itemDicSOs[i].madeItems;
+            }
+        }
+
+        return null;
     }
 }

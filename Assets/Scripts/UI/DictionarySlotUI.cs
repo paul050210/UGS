@@ -12,6 +12,8 @@ public class DictionarySlotUI : MonoBehaviour
     [SerializeField] private Image itemImage;
     [SerializeField] private Text nameText;
     [SerializeField] private Text descText;
+    [SerializeField] private Image[] productImages;
+    [SerializeField] private GameObject[] plusTexts;
     private KeyValuePair<Item, bool> slotInfo;
 
 
@@ -36,11 +38,40 @@ public class DictionarySlotUI : MonoBehaviour
 
     private void OnClickButton()
     {
-        if(slotInfo.Value)
+        for (int i = 0; i < productImages.Length; i++)
+        {
+            productImages[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < plusTexts.Length; i++)
+        {
+            plusTexts[i].SetActive(false);
+        }
+
+        if (slotInfo.Value)
         {
             itemImage.sprite = ItemManager.Instance.GetItemSprite(slotInfo.Key);
             nameText.text = slotInfo.Key.itemName;
             descText.text = slotInfo.Key.itemDesc;
+            var items = ItemManager.Instance.GetDicData(slotInfo.Key);
+            if (items == null) return;
+            
+
+            for(int i = 0; i<items.Count; i++)
+            {
+                productImages[i].gameObject.SetActive(true);
+                if (SaveManager.Instance.itemDicMap[items[i].item])
+                {
+                    productImages[i].sprite = items[i].sprite;
+                }
+                else
+                {
+                    productImages[i].sprite = defaultImage;
+                }
+                if(i < items.Count-1)
+                {
+                    plusTexts[i].SetActive(true);
+                }
+            }
         }
         else
         {
