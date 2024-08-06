@@ -75,7 +75,7 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
         }
         for (int i = 0; i < itemSOs.Length; i++)
         {
-            SaveManager.Instance.itemDicMap.Add(itemSOs[i], false);
+            SaveManager.Instance.itemDicMap.Add(itemSOs[i], i%2 == 0);
         }
     }
 }

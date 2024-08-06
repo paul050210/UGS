@@ -17,4 +17,4 @@ MonoBehaviour:
     itemName: Hello
     itemDesc: "\uBAB0\uB77C\uC694"
     itemPrice: 4
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 31d9fd9a71fd2fa46b253808d9db9ab2, type: 3}
