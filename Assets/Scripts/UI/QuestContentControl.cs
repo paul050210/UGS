@@ -35,8 +35,8 @@ public class QuestContentControl : MonoBehaviourSingleton<QuestContentControl>
         for (int i = 0; i<datas.Count; i++) 
         {
             string txt = datas[i].strValue;
-            bool isLeft = datas[i].name != "A";
-            contents[i].SetText(txt, isLeft);
+            bool isLeft = datas[i].name != "го©Ь";
+            contents[i].SetText(txt, isLeft, i);
         }
     }
 
@@ -58,7 +58,7 @@ public class QuestContentControl : MonoBehaviourSingleton<QuestContentControl>
 
         for (int i = 0; i<contents.Length; i++)
         {
-            contents[i].SetText(" ", true);
+            contents[i].SetText(" ", true, 0);
         }
         SetContentSize(0f);
     }

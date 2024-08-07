@@ -7,7 +7,7 @@ public class QuestContentUI : MonoBehaviour
 {
     [SerializeField] private Text thisTxt;
 
-    public void SetText(string text, bool isLeft)
+    public void SetText(string text, bool isLeft, int index)
     {
         thisTxt.text = text;
         if(isLeft)
@@ -18,5 +18,6 @@ public class QuestContentUI : MonoBehaviour
         {
             thisTxt.alignment = TextAnchor.MiddleRight;
         }
+        GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f - (100f * index));
     }
 }
