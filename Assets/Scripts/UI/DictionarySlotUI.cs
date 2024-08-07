@@ -12,6 +12,7 @@ public class DictionarySlotUI : MonoBehaviour
     [SerializeField] private Image itemImage;
     [SerializeField] private Text nameText;
     [SerializeField] private Text descText;
+    [SerializeField] private RectTransform contents;
     [SerializeField] private Image[] productImages;
     [SerializeField] private GameObject[] plusTexts;
     private KeyValuePair<Item, bool> slotInfo;
@@ -46,16 +47,17 @@ public class DictionarySlotUI : MonoBehaviour
         {
             plusTexts[i].SetActive(false);
         }
-        if (slotInfo.Equals(null)) return;
-
+        if (slotInfo.Key == null) return;
+        
+        contents.anchoredPosition = new Vector2(0f, 0f);
         if (slotInfo.Value)
         {
+            contents.sizeDelta = new Vector2(0f, 1500f);
             itemImage.sprite = ItemManager.Instance.GetItemSprite(slotInfo.Key);
             nameText.text = slotInfo.Key.itemName;
             descText.text = slotInfo.Key.itemDesc;
             var items = ItemManager.Instance.GetDicData(slotInfo.Key);
             if (items == null) return;
-            
 
             for(int i = 0; i<items.Count; i++)
             {
@@ -80,6 +82,7 @@ public class DictionarySlotUI : MonoBehaviour
             itemImage.sprite = null;
             nameText.text = "¹ÌÈ¹µæ ¾ÆÀÌÅÛ";
             descText.text = "¾ÆÁ÷ È¹µæÇÏÁö ¸øÇÑ ¾ÆÀÌÅÛ ÀÔ´Ï´Ù";
+            contents.sizeDelta = new Vector2(0f, 700f);
         }
     }
 }

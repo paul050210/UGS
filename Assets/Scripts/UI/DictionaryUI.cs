@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DictionaryUI : MonoBehaviour
 {
+    private const int onePageSlot = 30;
+
     [SerializeField] private Image itemImage;
     [SerializeField] private Text nameText;
     [SerializeField] private Text descText;
@@ -13,7 +15,6 @@ public class DictionaryUI : MonoBehaviour
     private DictionarySlotUI[] slots;
     private List<KeyValuePair<Item, bool>> pageItemList = new List<KeyValuePair<Item, bool>>();
     private int curPage;
-    private const int onePageSlot = 10;
 
 
 
@@ -43,9 +44,18 @@ public class DictionaryUI : MonoBehaviour
         int start = (curPage - 1) * onePageSlot;
         for(int i = 0; i<onePageSlot;i++)
         {
-            slots[i].SetSlot(pageItemList[start + i]);
+            if(start+i >= pageItemList.Count) 
+            {
+                KeyValuePair<Item, bool> pair = new KeyValuePair<Item, bool>(null, false);
+                slots[i].SetSlot(pair);
+                slots[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                slots[i].gameObject.SetActive(true);
+                slots[i].SetSlot(pageItemList[start + i]);
+            }
         }
     }
-
 
 }
