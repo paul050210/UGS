@@ -17,4 +17,4 @@ MonoBehaviour:
     itemName: banana
     itemDesc: "\uBC14\uB098\uB098\uC5D0\uC694"
     itemPrice: 2
-  sprite: {fileID: 21300000, guid: 9f69b220176e6964fbd87f5f158d45e3, type: 3}
+  sprite: {fileID: 0}

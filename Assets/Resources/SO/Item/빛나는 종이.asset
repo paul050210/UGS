@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e1ee9e22c054ac4499fa3c61b3aca98, type: 3}
-  m_Name: Hello
+  m_Name: "\uBE5B\uB098\uB294 \uC885\uC774"
   m_EditorClassIdentifier: 
   item:
-    type: 3
-    itemName: Hello
-    itemDesc: "\uBAB0\uB77C\uC694"
-    itemPrice: 4
+    type: 4
+    itemName: "\uBE5B\uB098\uB294 \uC885\uC774"
+    itemDesc: "\uD3C9\uBC94\uD55C \uC885\uC774\uCC98\uB7FC \uBCF4\uC774\uC9C0\uB9CC
+      \uC660\uC9C0 \uBAA8\uB974\uAC8C \uBE5B\uC774 \uB09C\uB2E4. \uC804\uAE30\uB85C
+      \uC791\uB3D9\uD558\uB294 \uAC83\uC740 \uC544\uB2CC\uAC83 \uAC19\uB2E4."
+    itemPrice: 5
   sprite: {fileID: 0}

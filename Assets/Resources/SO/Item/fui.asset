@@ -17,4 +17,4 @@ MonoBehaviour:
     itemName: fui
     itemDesc: "\uACFC\uC77C\uB354\uBBF8"
     itemPrice: 10
-  sprite: {fileID: 21300000, guid: d8562397fd7dd16489c1aa65ecd5e66d, type: 3}
+  sprite: {fileID: 0}
