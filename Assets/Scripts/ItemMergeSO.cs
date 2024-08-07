@@ -8,8 +8,9 @@ using System.Linq;
 public class ItemMergeSO : ScriptableObject
 {
     [SerializeField] private ItemSO[] baseItems;
+    public ItemSO[] BaseItems => baseItems;
     [SerializeField] private ItemSO mergeItem = null;
-
+    public ItemSO MergeItem => mergeItem;
 
 
 

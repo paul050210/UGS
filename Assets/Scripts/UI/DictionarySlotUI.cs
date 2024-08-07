@@ -15,6 +15,7 @@ public class DictionarySlotUI : MonoBehaviour
     [SerializeField] private RectTransform contents;
     [SerializeField] private Image[] productImages;
     [SerializeField] private GameObject[] plusTexts;
+    [SerializeField] private CombiUI[] combis;
     private KeyValuePair<Item, bool> slotInfo;
 
 
@@ -47,12 +48,16 @@ public class DictionarySlotUI : MonoBehaviour
         {
             plusTexts[i].SetActive(false);
         }
+        for(int i = 0; i<combis.Length; i++)
+        {
+            combis[i].RestCombi();
+        }
         if (slotInfo.Key == null) return;
         
         contents.anchoredPosition = new Vector2(0f, 0f);
         if (slotInfo.Value)
         {
-            contents.sizeDelta = new Vector2(0f, 1500f);
+            contents.sizeDelta = new Vector2(0f, 950f);
             itemImage.sprite = ItemManager.Instance.GetItemSprite(slotInfo.Key);
             nameText.text = slotInfo.Key.itemName;
             descText.text = slotInfo.Key.itemDesc;
@@ -74,6 +79,14 @@ public class DictionarySlotUI : MonoBehaviour
                 {
                     plusTexts[i].SetActive(true);
                 }
+            }
+            
+            var recipes = ItemManager.Instance.GetDicData2(slotInfo.Key);
+            if (recipes == null) return;
+            contents.sizeDelta = new Vector2(0f, (recipes.Count - 1) * 100f + 950f);
+            for (int i = 0; i<recipes.Count; i++)
+            {
+                combis[i].SetCombi(recipes[i].BaseItems, recipes[i].MergeItem);
             }
         }
         else

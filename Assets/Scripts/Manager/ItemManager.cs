@@ -92,4 +92,17 @@ public class ItemManager : MonoBehaviourSingleton<ItemManager>
 
         return null;
     }
+
+    public List<ItemMergeSO> GetDicData2(Item item)
+    {
+        for (int i = 0; i < itemDicSOs.Length; i++)
+        {
+            if (itemDicSOs[i].mainItem.item.Equals(item))
+            {
+                return itemDicSOs[i].useItems;
+            }
+        }
+
+        return null;
+    }
 }
