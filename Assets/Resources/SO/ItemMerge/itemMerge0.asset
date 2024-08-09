@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: itemMerge0
   m_EditorClassIdentifier: 
   baseItems:
-  - {fileID: 11400000, guid: f417ddaf6aa1803469d23c6f5773edbe, type: 2}
-  - {fileID: 11400000, guid: 12abbdac63342ff4a8eca7179ea5d41b, type: 2}
-  mergeItem: {fileID: 11400000, guid: afa9a9387d7b67744ad91fcfcf8c2939, type: 2}
+  - {fileID: 11400000, guid: c57c2d7e836dabd479c1f72d8ccf0007, type: 2}
+  - {fileID: 11400000, guid: 9a7bbdd25b7180f43b4dd81fbaef97dd, type: 2}
+  mergeItem: {fileID: 11400000, guid: e1c06064b40ce874181d33ba90a5c32f, type: 2}

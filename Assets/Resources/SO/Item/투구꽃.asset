@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e1ee9e22c054ac4499fa3c61b3aca98, type: 3}
-  m_Name: New Item SO 2
+  m_Name: "\uD22C\uAD6C\uAF43"
   m_EditorClassIdentifier: 
   item:
-    type: 2
-    itemName: bio
-    itemDesc: This is bio
-    itemPrice: 1
-  sprite: {fileID: 21300000, guid: ed63c8d24e144944f84895376433d6e4, type: 3}
+    type: 0
+    itemName: "\uD22C\uAD6C\uAF43"
+    itemDesc: "\uBCF4\uB77C\uC0C9 \uD22C\uAD6C\uAF43"
+    itemPrice: 3
+  sprite: {fileID: 0}
