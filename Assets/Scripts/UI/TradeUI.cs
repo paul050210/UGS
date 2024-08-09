@@ -68,8 +68,7 @@ public class TradeUI : MonoBehaviour
     {
         gameObject.SetActive(false);
         ItemManager.Instance.canSelect = false;
-        Camera.main.DOFieldOfView(60f, 0.3f).SetEase(Ease.Linear);
-        Camera.main.gameObject.transform.DOMove(new Vector3(0f, 1f, 0f), 0.3f).SetEase(Ease.Linear);
+
         doneButton.onClick.RemoveListener(Trade);
     }
 
