@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88008874bf8d06c45b573a7fb4808172, type: 3}
-  m_Name: ItemMerge2
+  m_Script: {fileID: 11500000, guid: 4e1ee9e22c054ac4499fa3c61b3aca98, type: 3}
+  m_Name: "\uD68C\uBCF5\uD3EC\uC158"
   m_EditorClassIdentifier: 
-  baseItems:
-  - {fileID: 0}
-  mergeItem: {fileID: 0}
+  item:
+    type: 3
+    itemName: "\uD68C\uBCF5\uD3EC\uC158"
+    itemDesc: "\uD68C\uBCF5\uD3EC\uC158"
+    itemPrice: 3
+  sprite: {fileID: 0}

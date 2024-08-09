@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a2a39021705714db534f962667e5a2, type: 3}
   m_Name: itemDecom0
   m_EditorClassIdentifier: 
-  baseItem: {fileID: 11400000, guid: ffb21af5dd1cb844191e4b267d2e31c0, type: 2}
+  baseItem: {fileID: 11400000, guid: 25a9b0ec0d37ba748a2d5af73fa79d89, type: 2}
   decomItems:
-  - {fileID: 11400000, guid: f417ddaf6aa1803469d23c6f5773edbe, type: 2}
-  - {fileID: 11400000, guid: 12abbdac63342ff4a8eca7179ea5d41b, type: 2}
+  - {fileID: 11400000, guid: 543a10c0bff9d5449a67978919be7838, type: 2}
+  - {fileID: 11400000, guid: a57a70c27c36aef4ca3236ed4ae46ee6, type: 2}
