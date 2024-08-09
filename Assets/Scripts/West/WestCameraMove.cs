@@ -12,7 +12,7 @@ public class WestCameraMove : MonoBehaviour
     public Button collectionButton;
     public Button mapCloseButton;
     public Button collectionCloseButton;
-    public CollectionManager collectionManager;
+    
 
     private Camera cam;
     private float fov = 30f;
@@ -60,7 +60,7 @@ public class WestCameraMove : MonoBehaviour
                 mapPanel.SetActive(false);
                 collectionPanel.SetActive(true);
                 mapButton.interactable = false; // Disable the map button
-                collectionManager.ShowPage(0);
+                
             });
             cam.gameObject.transform.DOMove(collectionPanelCamPos, camCloseDuration).SetEase(Ease.Linear);
         }

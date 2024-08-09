@@ -145,10 +145,8 @@ public class QuestMainUI : MonoBehaviour
         {
             if (text[i] == '*')
             {
-                Debug.Log("Asterisk encountered. Waiting for user input...");
                 i++;
                 yield return new WaitUntil(() => starnextClicked);
-                Debug.Log("User input received.");
 
                 starnextClicked = false;
                 isTypingDone = false;
@@ -175,7 +173,6 @@ public class QuestMainUI : MonoBehaviour
         }
 
         isTypingDone = true;
-        Debug.Log("Typing effect completed.");
     }
 
 

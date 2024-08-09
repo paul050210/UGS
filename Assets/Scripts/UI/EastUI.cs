@@ -43,12 +43,12 @@ public class EastUI : MonoBehaviour
             ItemManager.Instance.canSelect = true;
             if (i == 0)
             {
-                camvec = new Vector3(0f, -1.6f, 5f);
+                camvec = new Vector3(0f, 0.8f, 5f);
                 itemMerge.SetMergeState(ItemMergeState.Merge);
             }
             else
             {
-                camvec = new Vector3(0f, -1.6f, -3f);
+                camvec = new Vector3(0f, 0.8f, -2.4f);
                 itemMerge.SetMergeState(ItemMergeState.Decom);
             }
         }
