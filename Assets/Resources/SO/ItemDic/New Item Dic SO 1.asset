@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146b1f2f25568aa45b1c54f73de8b6c2, type: 3}
   m_Name: New Item Dic SO 1
   m_EditorClassIdentifier: 
-  mainItem: {fileID: 11400000, guid: ffb21af5dd1cb844191e4b267d2e31c0, type: 2}
+  mainItem: {fileID: 11400000, guid: eaee66af578bec6409231cd716250a2e, type: 2}
   madeItems:
-  - {fileID: 11400000, guid: 6208b6e61ba256d48b4528d8c5ad6983, type: 2}
-  - {fileID: 11400000, guid: be627d591ab0d674c8fc55396fffa188, type: 2}
-  - {fileID: 11400000, guid: 68207e8c9f1cc1448acbc5183b69ba7f, type: 2}
-  - {fileID: 11400000, guid: 12abbdac63342ff4a8eca7179ea5d41b, type: 2}
-  - {fileID: 11400000, guid: 4fdb11c84c64a1b4e857078d9c3025b4, type: 2}
+  - {fileID: 11400000, guid: 053ba89b5f1f3dd41af6252aaebf4a55, type: 2}
+  - {fileID: 11400000, guid: 6c33fd05617d866479ba5c799e20540b, type: 2}
+  - {fileID: 11400000, guid: 9a7bbdd25b7180f43b4dd81fbaef97dd, type: 2}
+  - {fileID: 11400000, guid: 45d900c67e643cc45afaa7100370532d, type: 2}
+  - {fileID: 11400000, guid: 7dc3acac99fa2004ebd9b8f5dfffd46f, type: 2}
   useItems:
   - {fileID: 11400000, guid: 0d569543892fac440bb1c7b49ca586a0, type: 2}
-  - {fileID: 11400000, guid: 70eec4a657dae614d904c6acf56c3d7c, type: 2}
+  - {fileID: 11400000, guid: 0d569543892fac440bb1c7b49ca586a0, type: 2}
