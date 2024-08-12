@@ -10,6 +10,7 @@ public class ItemSlotUI : MonoBehaviour
     private UIItem item;
     private Button button;
     private Text itemText;
+    private Text nameText;
     private bool isSelected = false;
 
     private Image itemImg;
@@ -60,11 +61,13 @@ public class ItemSlotUI : MonoBehaviour
         isSelected = !isSelected;
         if(isSelected)
         {
+            nameText.text = item.item.itemName;
             itemText.text = item.item.itemDesc;
             inventory.ChangeSelectedSlot(index);
         }
         else
         {
+            nameText.text = "아이템 이름";
             itemText.text = "아이템 설명";
             inventory.ChangeSelectedSlot(-1);
         }
@@ -99,8 +102,9 @@ public class ItemSlotUI : MonoBehaviour
         transform.GetChild(2).gameObject.SetActive(false);
     }
 
-    public void SetItemText(ref Text itemText, int index) 
+    public void SetItemText(ref Text NameText, ref Text itemText, int index) 
     {
+        this.nameText = NameText;
         this.itemText = itemText;
         this.index = index;
     }

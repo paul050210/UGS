@@ -16,6 +16,7 @@ enum InvenState
 }
 public class InventoryUI : MonoBehaviour
 {
+    [SerializeField] private Text nameText;
     [SerializeField] private Text itemText;
     [SerializeField] private Button selectButton;
     [SerializeField] private Button[] stateButtons;
@@ -58,7 +59,7 @@ public class InventoryUI : MonoBehaviour
     {
         for(int i = 0; i<slots.Length; i++) 
         {
-            slots[i].SetItemText(ref itemText, i);
+            slots[i].SetItemText(ref nameText, ref itemText, i);
         }
     }
 

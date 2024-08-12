@@ -6966,6 +6966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49dd9a97adf83c54d83d5d73781d45cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameText: {fileID: 2002001945}
   itemText: {fileID: 1559280721}
   selectButton: {fileID: 1330033344}
   stateButtons:
