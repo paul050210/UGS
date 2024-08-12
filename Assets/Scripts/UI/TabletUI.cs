@@ -17,6 +17,8 @@ public class TabletUI : MonoBehaviour
     [SerializeField] private Animator tabeltAnimator;
     [SerializeField] private List<Button> stateButtons;
     [SerializeField] private List<GameObject> tabeltCanvas;
+    [SerializeField] private Image TabletBG;
+
     private State currentState = State.Quest;
     public State CurrentState => currentState;
 
@@ -68,20 +70,23 @@ public class TabletUI : MonoBehaviour
         bool isOn = tabeltAnimator.GetBool("IsOn");
         tabeltAnimator.SetBool("IsOn", !isOn);
         tabeltAnimator.SetTrigger("ButtonClick");
-        
+
+        TabletBG.gameObject.SetActive(!isOn);
+
         tabeltCanvas[(int)currentState].SetActive(!isOn);
-        if(isOn)
+        if (isOn)
         {
-            onDisable.Invoke();
+            onDisable?.Invoke();
         }
 
         if (!isFree) return;
-        for(int i = 0; i<stateButtons.Count; i++)
+        for (int i = 0; i < stateButtons.Count; i++)
         {
             stateButtons[i].gameObject.SetActive(!isOn);
         }
     }
-    
+
+
     public void TurnOnTablet(State state)
     {
         currentState = state;
