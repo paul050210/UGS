@@ -16,7 +16,7 @@ public class WestUI : MonoBehaviour
     [SerializeField] private GameObject mapPanel;
     [SerializeField] private GameObject dictionaryPanel;
 
-    [SerializeField] private Camera cam;
+    private Camera cam;
     private float fov = 30f;
     private float camCloseDuration = 0.3f;
     private Vector3 defaultCamPos = new Vector3(0, 1f, 0f);
@@ -31,7 +31,7 @@ public class WestUI : MonoBehaviour
         dictionaryButton.onClick.AddListener(ShowDictionaryPanel);
         mapCloseButton.onClick.AddListener(CloseMapBtnClicked);
         dictionaryCloseButton.onClick.AddListener(CloseDictionaryPanel);
-
+        cam = Camera.main;
         cam.gameObject.transform.position = defaultCamPos;
     }
 
