@@ -8,7 +8,10 @@ public enum QuestState
     Default,
     Accept,
     Refuse,
-    Done
+    Done,
+    Perfect,
+    Half,
+    Fail
 }
 
 [CreateAssetMenu(menuName = "QuestSO")]
@@ -141,6 +144,71 @@ public class Quest : ScriptableObject
         return returnList;
     }
 
+    public List<DefaultTable.Data> GetText()
+    {
+        var datas = DefaultTable.Data.GetList();
+        List<DefaultTable.Data> returnList = new List<DefaultTable.Data>();
+        int start = StartIndex;
+        int end = endIndex;
+        
+        for (int i = start; i <= end; i++)
+        {
+            returnList.Add(datas[i]);
+        }
+
+        if (questState == QuestState.Accept || questState == QuestState.Refuse)
+        {
+            if(isAceepted)
+            {
+                start = acceptStart;
+                end = acceptEnd;
+            }
+            else
+            {
+                start = refuseStart;
+                end = refuseEnd;
+            }
+            for (int i = start; i <= end; i++)
+            {
+                returnList.Add(datas[i]);
+            }
+        }
+        else if(questState == QuestState.Done || questState == QuestState.Perfect || questState == QuestState.Half || questState == QuestState.Fail)
+        {
+            start = refuseEnd + 1;
+            end = refuseEnd + 1;
+            for (int i = start; i <= end; i++)
+            {
+                returnList.Add(datas[i]);
+            }
+
+            if(questState == QuestState.Perfect)
+            {
+                start = refuseEnd + 2;
+                end = refuseEnd + 2;
+            }
+            else if(questState == QuestState.Half)
+            {
+                start = refuseEnd + 3;
+                end = refuseEnd + 3;
+            }
+            else if(questState == QuestState.Fail)
+            {
+                start = refuseEnd + 4;
+                end = refuseEnd + 4;
+            }
+            for (int i = start; i <= end; i++)
+            {
+                returnList.Add(datas[i]);
+            }
+        }
+        else
+        {
+            return null;
+        }
+
+        return returnList;
+    }
 
     public override int GetHashCode()
     {

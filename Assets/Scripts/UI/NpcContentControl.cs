@@ -39,7 +39,7 @@ public class NpcContentControl : MonoBehaviourSingleton<NpcContentControl>
         {
             contents[i].gameObject.SetActive(true);
             Quest q = QuestManager.Instance.EnableQuests[i];
-            contents[i].NpcContentInit(q.SimpleCharSprite, q.SimpleTxt, q.GetText(0), q.isAceepted);
+            contents[i].NpcContentInit(q.SimpleCharSprite, q.SimpleTxt, q.GetText(), q.isAceepted);
             lastIndex = i + 1;
         }
         SetContentSize(lastIndex * 100f);

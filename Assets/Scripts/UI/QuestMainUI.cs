@@ -104,7 +104,7 @@ public class QuestMainUI : MonoBehaviour
                 }
                 else
                 {
-                    if (goingQuest?.questState != QuestState.Done)
+                    if (goingQuest?.questState != QuestState.Perfect && goingQuest?.questState != QuestState.Half && goingQuest?.questState != QuestState.Fail)
                         QuestManager.Instance.AddQuestIndex();
                     goingQuest = null;
                     north.SetActiveCloseBtn(true);
@@ -228,7 +228,7 @@ public class QuestMainUI : MonoBehaviour
         if (items == null) return;
 
         ItemManager.Instance.canSelect = false;
-        goingQuest.questState = QuestState.Done;
+        //goingQuest.questState = QuestState.Done;
         List<Item> reward = goingQuest.DoneQuest(items);
         if (reward != null)
         {
@@ -243,6 +243,7 @@ public class QuestMainUI : MonoBehaviour
                 int n = ItemManager.Instance.GetItem(items[i]);
                 ItemManager.Instance.AddItem(items[i], n - 1);
             }
+            goingQuest.questState = QuestState.Perfect;
             //성공
         }
         else if (items[0].Equals((Item)goingQuest.HalfItem))
@@ -253,11 +254,13 @@ public class QuestMainUI : MonoBehaviour
                 int n = ItemManager.Instance.GetItem(items[i]);
                 ItemManager.Instance.AddItem(items[i], n - 1);
             }
+            goingQuest.questState = QuestState.Half;
             //절반 성공
         }
         else
         {
             curDatas = goingQuest.GetText(6);
+            goingQuest.questState = QuestState.Fail;
             //실패
         }
 
