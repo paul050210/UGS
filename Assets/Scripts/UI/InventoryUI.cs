@@ -21,7 +21,8 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Button selectButton;
     [SerializeField] private Button[] stateButtons;
     private ItemSlotUI[] slots = null;
-        
+
+
     private int selectedSlot = -1;
     private int maxSelected = 5;
     private bool isSelecteMode = false;
@@ -50,14 +51,16 @@ public class InventoryUI : MonoBehaviour
         ResetItemSlot();
         SetItemSlot();
         itemText.text = "아이템설명";
-        if(itemMerge == null)
+        if (itemMerge == null)
             itemMerge = GetComponent<ItemMerge>();
         maxSelected = itemMerge.GetMaxSelect();
+        CameraMove cameraMove = FindObjectOfType<CameraMove>();
+        
     }
 
     private void SetItemButton()
     {
-        for(int i = 0; i<slots.Length; i++) 
+        for (int i = 0; i < slots.Length; i++)
         {
             slots[i].SetItemText(ref nameText, ref itemText, i);
         }
@@ -70,7 +73,7 @@ public class InventoryUI : MonoBehaviour
         {
             if (p.Value == 0)
                 continue;
-            switch(state)
+            switch (state)
             {
                 case InvenState.herb:
                     if (p.Key.type != ItemType.herb)
@@ -92,11 +95,11 @@ public class InventoryUI : MonoBehaviour
                     if (p.Key.type != ItemType.another)
                         continue;
                     break;
-                default: 
+                default:
                     break;
             }
 
-            for(int j = 0; j < p.Value; j++)
+            for (int j = 0; j < p.Value; j++)
             {
                 var item = new UIItem(p.Key, j);
                 if (slots == null)
@@ -108,7 +111,7 @@ public class InventoryUI : MonoBehaviour
                     slots[i].OnSelect();
                 i++;
             }
-            
+
         }
     }
 
@@ -123,10 +126,10 @@ public class InventoryUI : MonoBehaviour
 
     private void SetStateButton()
     {
-        for(int i = 0; i < stateButtons.Length; i++) 
+        for (int i = 0; i < stateButtons.Length; i++)
         {
             int temp = i;
-            stateButtons[temp].onClick.AddListener(() => 
+            stateButtons[temp].onClick.AddListener(() =>
             {
                 state = (InvenState)temp;
                 selectedSlot = -1;
@@ -139,7 +142,7 @@ public class InventoryUI : MonoBehaviour
 
     public void ChangeSelectedSlot(int index)
     {
-        if(selectedSlot != -1)
+        if (selectedSlot != -1)
         {
             slots[selectedSlot].OffSelect();
         }
@@ -148,7 +151,7 @@ public class InventoryUI : MonoBehaviour
 
     public void OnClickSelect(int index)
     {
-        if(slots[index].CheckOn())
+        if (slots[index].CheckOn())
         {
             selectedItems.Add(slots[index].GetItem());
             if (selectedItems.Count > maxSelected)
@@ -173,13 +176,13 @@ public class InventoryUI : MonoBehaviour
 
     public Item[] GetToMerge(int cnt = 2)
     {
-        if(selectedItems.Count < cnt)
+        if (selectedItems.Count < cnt)
         {
             Debug.LogWarning("선택된 아이템 부족");
             return null;
         }
         Item[] items = new Item[selectedItems.Count];
-        for(int i = 0; i<selectedItems.Count; i++) 
+        for (int i = 0; i < selectedItems.Count; i++)
         {
             items[i] = selectedItems[i].item;
         }
@@ -189,12 +192,12 @@ public class InventoryUI : MonoBehaviour
 
     public Item GetToDecom()
     {
-        if(selectedItems.Count == 0)
+        if (selectedItems.Count == 0)
         {
             Debug.LogWarning("분해&거래를 하려면 아이템 선택을 해주세요");
             return null;
         }
-        else if(selectedItems.Count > 1) 
+        else if (selectedItems.Count > 1)
         {
             Debug.LogWarning("분해&거래를 하려면 아이템을 하나만 선택 해주세요");
             return null;
@@ -210,7 +213,7 @@ public class InventoryUI : MonoBehaviour
             Debug.LogWarning("선택된 아이템 부족");
             return null;
         }
-        else if(selectedItems.Count > 2)
+        else if (selectedItems.Count > 2)
         {
             Debug.LogWarning("2개이상 선택 불가");
             return null;
@@ -223,5 +226,6 @@ public class InventoryUI : MonoBehaviour
 
         return items;
     }
+
 }
- 
+

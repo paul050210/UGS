@@ -11,7 +11,9 @@ public class CameraMove : MonoBehaviour
     private bool isMoving = false;
     private float moveDelay = 1.0f;
     [SerializeField] private GameObject[] canvases;
+
     private int temp;
+
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
     private EventTrigger leftTrigger;
@@ -50,7 +52,7 @@ public class CameraMove : MonoBehaviour
         {
             Turn(0);
         }
-        if(Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             Turn(1);
         }
@@ -84,11 +86,11 @@ public class CameraMove : MonoBehaviour
         });
     }
 
-    private void OnPointerEnter(PointerEventData data) 
+    private void OnPointerEnter(PointerEventData data)
     {
         if (tabletUI.IsTabletOn() || !Mathf.Approximately(cam.fieldOfView, 60f)) return;
         var img = data.pointerEnter.GetComponent<Image>();
-        img.color = new Color(img.color.r, img.color.g, img.color.b, 150f/255f);
+        img.color = new Color(img.color.r, img.color.g, img.color.b, 150f / 255f);
     }
 
     public void OnPointerExit(PointerEventData data)
