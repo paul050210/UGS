@@ -9,6 +9,8 @@ public class EastUI : MonoBehaviour
     [SerializeField] private Button mergeButton;
     [SerializeField] private Button decomButton;
     [SerializeField] private ItemMerge itemMerge;
+    [SerializeField] private Button backButton;
+
 
     private Camera cam;
     private TabletUI tabletUI;
@@ -20,6 +22,18 @@ public class EastUI : MonoBehaviour
     {
         cam = Camera.main;
         tabletUI = FindObjectOfType<TabletUI>();
+        backButton.onClick.AddListener(() =>
+        {
+            if (fov == 60f) return;
+            tabletUI.TurnOnTablet(State.Inventory);
+            fov = 60f;
+            itemMerge.SetMergeState(ItemMergeState.None);
+            camvec = new Vector3(0f, 1f, 0f);
+            cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
+            cam.gameObject.transform.DOMove(camvec, camCloseDuration).SetEase(Ease.Linear);
+            ItemManager.Instance.canSelect = false;
+            backButton.gameObject.SetActive(false);
+        });
         tabletUI.onDisable.AddListener(() => 
         {
             if (fov == 60f) return;
@@ -29,6 +43,7 @@ public class EastUI : MonoBehaviour
             cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
             cam.gameObject.transform.DOMove(camvec, camCloseDuration).SetEase(Ease.Linear);
             ItemManager.Instance.canSelect = false;
+            backButton.gameObject.SetActive(false);
         });
         mergeButton.onClick.AddListener(() => OnClickButton(0));
         decomButton.onClick.AddListener(() => OnClickButton(1));
@@ -64,7 +79,10 @@ public class EastUI : MonoBehaviour
         cam.gameObject.transform.DOMove(camvec, camCloseDuration).SetEase(Ease.Linear).OnComplete(() => 
         {
             if (fov == 30f)
+            {
                 tabletUI.TurnOnTablet(State.Inventory);
+                backButton.gameObject.SetActive(true);
+            }
         });
     }
 }

@@ -7043,7 +7043,6 @@ RectTransform:
   - {fileID: 2043246782}
   - {fileID: 1330033343}
   - {fileID: 166161254}
-  - {fileID: 1355737008}
   m_Father: {fileID: 818719359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -14768,6 +14767,7 @@ RectTransform:
   - {fileID: 1950770120}
   - {fileID: 249917432}
   - {fileID: 382683926}
+  - {fileID: 1355737008}
   - {fileID: 555418637}
   - {fileID: 2003256928}
   - {fileID: 1993784615}
@@ -29770,11 +29770,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 382683926}
+  m_Father: {fileID: 818719359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.0004272489, y: 30}
+  m_AnchoredPosition: {x: 0.00061035436, y: 130}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1355737009
@@ -30461,6 +30461,7 @@ MonoBehaviour:
   mergeButton: {fileID: 930198028}
   decomButton: {fileID: 593625507}
   itemMerge: {fileID: 382683927}
+  backButton: {fileID: 1355737009}
 --- !u!1 &1388213155
 GameObject:
   m_ObjectHideFlags: 0
