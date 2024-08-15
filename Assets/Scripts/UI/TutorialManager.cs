@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public UnityEvent onDisableButtons;
+
+    public void DisableButton()
+    {
+        GetComponent<Button>().interactable = false;
+    }
+
+
     void Start()
     {
         
@@ -15,4 +24,6 @@ public class TutorialManager : MonoBehaviour
     {
         
     }
+
+
 }
