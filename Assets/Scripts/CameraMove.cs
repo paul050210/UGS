@@ -9,6 +9,7 @@ public class CameraMove : MonoBehaviour
 {
     private Vector3 dir = Vector3.zero;
     private bool isMoving = false;
+    public bool lockActivate = false;
     private float moveDelay = 1.0f;
     [SerializeField] private GameObject[] canvases;
 
@@ -58,7 +59,7 @@ public class CameraMove : MonoBehaviour
         }
     }
 
-    private void Turn(int lr = 0)
+    public void Turn(int lr = 0)
     {
         if (tabletUI.IsTabletOn() || !Mathf.Approximately(cam.fieldOfView, 60f)) return;
         if (isMoving) return;
@@ -85,7 +86,20 @@ public class CameraMove : MonoBehaviour
             newCanvas.transform.GetChild(newCanvas.transform.childCount - 1).gameObject.SetActive(false);
         });
     }
+    public void LockCamera(bool lockActivate)
+    {
+        // 태블릿 왼쪽 및 오른쪽 버튼을 비활성화
+        SetButtonInteractable(leftButton, lockActivate);
+        SetButtonInteractable(rightButton, lockActivate);
+    }
 
+    private void SetButtonInteractable(Button button, bool lockActivate)
+    {
+        if (button != null)
+        {
+            button.interactable = !lockActivate;
+        }
+    }
     private void OnPointerEnter(PointerEventData data)
     {
         if (tabletUI.IsTabletOn() || !Mathf.Approximately(cam.fieldOfView, 60f)) return;
