@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - npc
   - Water
   - UI
   - 
@@ -40,4 +40,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: textbox
+    uniqueID: 231497723
+    locked: 0
+  - name: tab
+    uniqueID: 2636703915
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 356949411
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 2509928897
+    locked: 0
+  - name: New Layer 5
+    uniqueID: 1864866223
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 821268543
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 3277901491
     locked: 0

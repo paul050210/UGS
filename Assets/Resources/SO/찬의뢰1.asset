@@ -26,8 +26,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c57c2d7e836dabd479c1f72d8ccf0007, type: 2}
   - {fileID: 11400000, guid: 9a7bbdd25b7180f43b4dd81fbaef97dd, type: 2}
   - {fileID: 11400000, guid: 45d900c67e643cc45afaa7100370532d, type: 2}
-  charSprite: {fileID: 21300000, guid: 7d008f516ebcd0244b6912fe7ad3a31f, type: 3}
+  charSprite: {fileID: 21300000, guid: 685e6904ce61bbd4aa9a18de44d21911, type: 3}
   simpleCharSprite: {fileID: 21300000, guid: 3a5b1e553207a9f44b8373b34c90758c, type: 3}
   durationTime: 1
-  isAceepted: 0
-  questState: 0
+  isAceepted: 1
+  questState: 1

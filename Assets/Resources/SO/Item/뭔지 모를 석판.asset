@@ -18,4 +18,4 @@ MonoBehaviour:
     itemDesc: "\uC54C\uC218 \uC5C6\uB294 \uAE00\uC790\uAC19\uC740 \uAC83\uB4E4\uC774
       \uBE7C\uACE1\uD788 \uC801\uD600\uC788\uB294 \uC11D\uD310."
     itemPrice: 3
-  sprite: {fileID: 21300000, guid: 25d847bd1696f5746bcf92aa59c31942, type: 3}
+  sprite: {fileID: 21300000, guid: ca02323d1599c2141ad8708512f1a21e, type: 3}
