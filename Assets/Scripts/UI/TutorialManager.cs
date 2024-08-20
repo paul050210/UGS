@@ -84,6 +84,8 @@ public class TutorialManager : MonoBehaviour
     public bool isDialogActive;
     public int lockCameraInt;
 
+    public Vector3 nameTextEndPos = new Vector3(0, 400, 0); // 이동할 최종 위치
+    public Vector3 mainTextEndPos = new Vector3(0, 300, 0); // 이동할 최종 위치
 
 
 
@@ -132,48 +134,26 @@ public class TutorialManager : MonoBehaviour
         blackScreen.color = endColor;
         blackScreen.gameObject.SetActive(false);
 
-        yield return StartCoroutine(MoveTextBoxes());
+        nameTextBoxTransform.anchoredPosition = new Vector3(0, -300, 0); // 화면 아래에서 시작
+        mainTextBoxTransform.anchoredPosition = new Vector3(0, -300, 0); // 화면 아래에서 시작
+
+        MoveTextBoxes();
     }
 
-    private IEnumerator MoveTextBoxes()
+
+
+
+    public void MoveTextBoxes()
     {
-        nameTxt.gameObject.SetActive(true);
-        mainTxt.gameObject.SetActive(true);
-
-        nameTextBoxTransform.gameObject.SetActive(true);
-        mainTextBoxTransform.gameObject.SetActive(true);
-
-
-        Vector3 nameTextBoxStartPos = new Vector3(0, -500, 0);
-        Vector3 nameTextBoxEndPos = nameTextBoxTransform.anchoredPosition;
-
-        Vector3 mainTextBoxStartPos = new Vector3(0, -500, 0);
-        Vector3 mainTextBoxEndPos = mainTextBoxTransform.anchoredPosition;
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < moveDuration)
-        {
-            // 비율을 계산
-            float t = Mathf.Clamp01(elapsedTime / moveDuration);
-
-            // Lerp를 사용하여 중간 위치로 이동
-            nameTextBoxTransform.anchoredPosition = Vector3.Lerp(nameTextBoxStartPos, nameTextBoxEndPos, t);
-            mainTextBoxTransform.anchoredPosition = Vector3.Lerp(mainTextBoxStartPos, mainTextBoxEndPos, t);
-
-            // 시간 갱신
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        // 마지막 위치를 정확히 설정
-        nameTextBoxTransform.anchoredPosition = nameTextBoxEndPos;
-        mainTextBoxTransform.anchoredPosition = mainTextBoxEndPos;
-
-        Debug.Log("텍스트 박스 움직임");
-        yield return StartCoroutine(FadeInCoroutine(HawonImg, fadeDuration));
+        // 텍스트를 현재 위치에서 endPos로 moveDuration 동안 이동시킵니다.
+        nameTextBoxTransform.DOAnchorPos(nameTextEndPos, moveDuration).SetEase(Ease.OutCubic);
+        mainTextBoxTransform.DOAnchorPos(mainTextEndPos, moveDuration).SetEase(Ease.OutCubic);
+        Debug.Log("텍스트박스 움직임");
 
     }
+
+
+
 
     private IEnumerator FadeInCoroutine(Image image, float duration)
     {
