@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7bb080a646efff4e93dc43a9bc3472c, type: 3}
+  m_Name: "\uC640\uC0CC\uC988"
+  m_EditorClassIdentifier: 
+  reject: 0
+  simpleTxt: 
+  startIndex: 132
+  endIndex: 132
+  acceptStart: 132
+  acceptEnd: 132
+  refuseStart: 132
+  refuseEnd: 132
+  needItems: []
+  halfItem: {fileID: 11400000, guid: eaee66af578bec6409231cd716250a2e, type: 2}
+  rewardItems: []
+  charSprite: {fileID: 21300000, guid: 771aef691c436b647a2d5d5d889674d5, type: 3}
+  simpleCharSprite: {fileID: 21300000, guid: fb1e48043961d8f44948225f539a83bb, type: 3}
+  durationTime: 2
+  isAceepted: 1
+  questState: 1

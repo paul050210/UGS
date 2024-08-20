@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: day1
   m_EditorClassIdentifier: 
   quests:
+  - {fileID: 11400000, guid: 4b0ca1a734e929d44a6b169a3b8b1e06, type: 2}
   - {fileID: 11400000, guid: f150f00374a846243b3b46d1d607c218, type: 2}
   dayIndex: 1

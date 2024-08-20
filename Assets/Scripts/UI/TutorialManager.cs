@@ -85,7 +85,7 @@ public class TutorialManager : MonoBehaviour
         lockActivate = true; 
         //lockcamera()??
 
-        startButton.onClick.AddListener(() => StartCoroutine(TutorialBeginning()));
+        //startButton.onClick.AddListener(() => StartCoroutine(TutorialBeginning()));
 
         // 예시: 구글 시트에서 읽어온 텍스트
         List<string> textLines = new List<string>

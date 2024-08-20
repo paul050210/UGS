@@ -3682,7 +3682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &202150893
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3731,7 +3731,11 @@ MonoBehaviour:
   mainTxt: {fileID: 0}
   blackScreen: {fileID: 918503622}
   streetImg: {fileID: 1795737037}
-  friendACharImg: {fileID: 0}
+  HawonImg: {fileID: 0}
+  HayoungImg: {fileID: 0}
+  ChanaImg: {fileID: 0}
+  JackImg: {fileID: 0}
+  TradeManImg: {fileID: 0}
   nameTextBoxTransform: {fileID: 1629538431}
   mainTextBoxTransform: {fileID: 46163860}
   lockActivate: 0
@@ -9292,7 +9296,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 478911762}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -11416,6 +11420,7 @@ GameObject:
   - component: {fileID: 594171892}
   - component: {fileID: 594171891}
   - component: {fileID: 594171890}
+  - component: {fileID: 594171893}
   m_Layer: 0
   m_Name: SAVEBUTTEN
   m_TagString: Untagged
@@ -11524,6 +11529,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594171888}
   m_CullTransparentMesh: 1
+--- !u!114 &594171893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594171888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6f72500a9e18ca4b86d79df7642d49a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &594878868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24807,7 +24824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1126478314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30898,7 +30915,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1320601657
 RectTransform:
   m_ObjectHideFlags: 0
@@ -31411,6 +31428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1834855ac24144982b5ef0dcdc3ad5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questList: []
 --- !u!4 &1346103252
 Transform:
   m_ObjectHideFlags: 0

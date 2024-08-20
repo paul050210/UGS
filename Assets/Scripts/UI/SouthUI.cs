@@ -11,7 +11,7 @@ public class SouthUI : MonoBehaviour
 
     private void Start()
     {
-        doorButton.onClick.AddListener(OnClickDoor);
+        doorButton.onClick.AddListener(OnClickDoor); 
     }
 
     private void OnClickDoor()

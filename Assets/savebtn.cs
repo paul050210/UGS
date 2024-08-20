@@ -21,6 +21,7 @@ public class savebtn : MonoBehaviour
         SaveManager.Instance.SaveGameSettingData();
         SaveManager.Instance.SaveItemDicData();
         SaveManager.Instance.SaveDay(day);
+        SaveManager.Instance.SaveQuestInfo();
     }
 
 }
