@@ -11,6 +11,7 @@ public class CameraMove : MonoBehaviour
     private bool isMoving = false;
     public bool lockActivate = false;
     private float moveDelay = 1.0f;
+    private int currentScreen = 0; 
     [SerializeField] private GameObject[] canvases;
 
     private int temp;
@@ -99,6 +100,21 @@ public class CameraMove : MonoBehaviour
         {
             button.interactable = !lockActivate;
         }
+    }
+
+    public void SetScreen(int screenNumber)
+    {
+        if (isMoving || screenNumber < 0 || screenNumber > 3) return;
+        if (currentScreen == screenNumber) return;
+
+        int turnsNeeded = (screenNumber - currentScreen + 4) % 4; 
+
+        for (int i = 0; i < turnsNeeded; i++)
+        {
+            Turn(1); 
+        }
+
+        currentScreen = screenNumber; 
     }
     private void OnPointerEnter(PointerEventData data)
     {
