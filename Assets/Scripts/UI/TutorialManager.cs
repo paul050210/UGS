@@ -6,9 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
-using System.Reflection;
-using UnityEngine.Device;
-using DG.Tweening;
 
 
 public enum Buttons
@@ -22,15 +19,6 @@ public enum Buttons
     DictionaryButton,
 
 }
-
-public enum ButtonState
-{
-    NotActivated,
-    Activated,
-    Clicked
-}
-
-
 public class TutorialManager : MonoBehaviour
 {
     private Dictionary<Buttons, Button> buttonDictionary = new Dictionary<Buttons, Button>();
@@ -48,16 +36,13 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Button DictionaryButton;
 
     [SerializeField] private Text nameTxt;
-    [SerializeField] private Text mainTxt;
+    [SerializeField] private Text descriptTxt;
 
     [SerializeField] public Image blackScreen;
     [SerializeField] public Image streetImg;
-    [SerializeField] public Image HawonImg;
-    [SerializeField] public Image HayoungImg;
-    [SerializeField] public Image ChanaImg;
-    [SerializeField] public Image JackImg;
-    [SerializeField] public Image TradeManImg;
+    [SerializeField] public Image friendACharImg;
 
+<<<<<<< HEAD
 
     [SerializeField] private RectTransform nameTextBoxTransform;
     [SerializeField] public RectTransform mainTextBoxTransform;
@@ -70,12 +55,28 @@ public class TutorialManager : MonoBehaviour
     public bool startButtonClicked = true;
     private bool isTypingDone = false;
     private bool starNextClicked = false; // 텍스트 쪼갬 단위
+=======
+    [SerializeField] private TextMeshProUGUI nameTextBox; // 텍스트 내용과 스타일 조정용
+    [SerializeField] private RectTransform nameTextBoxTransform; // UI 위치와 크기 조정용
+    [SerializeField] private TextMeshProUGUI mainTextBox; // 텍스트 내용과 스타일 조정용
+    [SerializeField] public RectTransform mainTextBoxTransform; 
+
+    private TabletUI tabletUI;
+    private NorthUI north;
+    private InventoryUI inventoryUI;
+    private CameraMove cameraMove;
+
+
+    private bool isTypingDone = false;
+    private bool starnextClicked = false; // 텍스트 쪼갬 단위
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
     public bool lockActivate = false;
     public bool allClicked { get; private set; } // 모든 버튼이 클릭되었는지 여부
 
     public float fadeDuration = 1.0f; // 페이드 아웃 시간
     public float moveDuration = 60.0f; // 이동 시간
     public int currentIndex = 0; // @(골뱅이) 카운트 인덱스
+<<<<<<< HEAD
     private int index = 0;
     private int totalItems = 7; // 기물의 총 개수, 필요에 맞게 수정하세요.
     private int screenNumber = 0;
@@ -97,6 +98,33 @@ public class TutorialManager : MonoBehaviour
         lockActivate = true;
 
         allClicked = false;
+=======
+    private int moveCamera = 1; // 카메라 이동 인덱스
+
+
+
+
+    void Start()
+    {
+        lockActivate = true; 
+
+        startButton.onClick.AddListener(() => StartCoroutine(StartTutorialSequence()));
+
+        // 예시: 구글 시트에서 읽어온 텍스트
+        List<string> textLines = new List<string>
+        {
+            "Hello",
+            "@FirstSpecialCase",
+            "World",
+            "@SecondSpecialCase",
+            "This is Unity",
+            "@ThirdSpecialCase",
+            "Done"
+        };
+
+        ProcessTextLines(textLines);
+
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
         
 
     }
@@ -104,17 +132,18 @@ public class TutorialManager : MonoBehaviour
     void Update()
     {
 
+<<<<<<< HEAD
         if (3 < index && index <= lockCameraInt)
         {
             lockActivate = false;
         }
 
+=======
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
     }
 
-
-    private IEnumerator TutorialBeginning()
+    private IEnumerator StartTutorialSequence()
     {
-        cameraMove.SetScreen(1);
         blackScreen.gameObject.SetActive(true);
         streetImg.gameObject.SetActive(true);
         blackScreen.color = new Color(0, 0, 0, 1);
@@ -135,7 +164,12 @@ public class TutorialManager : MonoBehaviour
         blackScreen.color = endColor;
         blackScreen.gameObject.SetActive(false);
 
+<<<<<<< HEAD
         yield return StartCoroutine(FadeInCoroutine(HawonImg, fadeDuration));
+=======
+
+        yield return StartCoroutine(FadeInCoroutine(friendACharImg, fadeDuration));
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
     }
 
     private IEnumerator MoveTextBoxes()
@@ -169,7 +203,13 @@ public class TutorialManager : MonoBehaviour
         nameTextBoxTransform.anchoredPosition = nameTextBoxEndPos;
         mainTextBoxTransform.anchoredPosition = mainTextBoxEndPos;
 
+<<<<<<< HEAD
         Debug.Log("텍스트 박스 움직임 완료");
+=======
+    public void FadeIn(Image imageObject, float duration)
+    {
+        StartCoroutine(FadeInCoroutine(imageObject.GetComponent<Image>(), duration));
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
     }
 
     private IEnumerator FadeInCoroutine(Image image, float duration)
@@ -192,6 +232,16 @@ public class TutorialManager : MonoBehaviour
         image.color = color;
     }
 
+
+
+    public void MoveCameraToCanvas(int moveCamera)
+    {
+        if (cameraMove != null)
+        {
+            cameraMove.Turn(moveCamera);
+        }
+    }
+
     private Dictionary<int, Action> indexActions = new Dictionary<int, Action>
     {
         /*
@@ -202,8 +252,10 @@ public class TutorialManager : MonoBehaviour
         */
     };
 
-    private Dictionary<Buttons, ButtonState> buttonStates = new Dictionary<Buttons, ButtonState>()
+
+    void ProcessTextLines(List<string> lines)
     {
+<<<<<<< HEAD
         { Buttons.WindowButton, ButtonState.NotActivated },
         { Buttons.CounterButton, ButtonState.NotActivated },
         { Buttons.MergeButton, ButtonState.NotActivated },
@@ -212,22 +264,41 @@ public class TutorialManager : MonoBehaviour
         { Buttons.MapButton, ButtonState.NotActivated },
         { Buttons.DictionaryButton, ButtonState.NotActivated }
     };
+=======
+        foreach (string line in lines)
+        {
+            if (line.Contains("@"))
+            {
+                currentIndex++;
+                Debug.Log($"Index incremented to {currentIndex}");
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
 
+                if (indexActions.TryGetValue(currentIndex, out Action action))
+                {
+                    action?.Invoke();
+                }
+            }
+        }
+    }
 
+<<<<<<< HEAD
     private void FunctionA()
+=======
+    void FunctionA()
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
     {
         Debug.Log("Function A executed!");
         // allClicked가 true일 때 함수 호출
 
     }
 
-    private void FunctionB()
+    void FunctionB()
     {
         Debug.Log("Function B executed!");
         //bool allClicked==1 되면 화면 = 1 설정, 대화 진행
     }
 
-    private void FunctionC()
+    void FunctionC()
     {
         Debug.Log("Function C executed!");
         //화면=0이고 bool allClicked==1이면 계산대 버튼 클릭하지 않아도 npc 대화 진행
@@ -245,6 +316,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     public void OnButtonClick(Buttons button)
     {
         // 해당 버튼에 대한 데이터를 찾음
@@ -289,6 +361,17 @@ public class TutorialManager : MonoBehaviour
         for (int i = 0; i < screenNumber; i++)
         {
             cameraMove.Turn(0);
+=======
+    public void SetButtonState(Buttons buttonEnum, bool isActive)
+    {
+        if (buttonDictionary.TryGetValue(buttonEnum, out Button button))
+        {
+            button.interactable = isActive;
+        }
+        else
+        {
+            Debug.LogError($"Button with enum {buttonEnum} not found.");
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
         }
     }
 
@@ -301,12 +384,12 @@ public class TutorialManager : MonoBehaviour
     }
     private IEnumerator TypeTextEffect(string text)
     {
-        mainTxt.text = string.Empty;
+        descriptTxt.text = string.Empty;
         StringBuilder stringBuilder = new StringBuilder();
         float delay = Mathf.Clamp(0.25f - (SaveManager.Instance.gameSettingData.textSpeed * 0.2f), 0.01f, 0.25f);
 
         isTypingDone = false;
-        starNextClicked = false;
+        starnextClicked = false;
         lockActivate = true;
         cameraMove.LockCamera(lockActivate);
 
@@ -315,9 +398,9 @@ public class TutorialManager : MonoBehaviour
             if (text[i] == '*')
             {
                 i++;
-                yield return new WaitUntil(() => starNextClicked);
+                yield return new WaitUntil(() => starnextClicked);
 
-                starNextClicked = false;
+                starnextClicked = false;
                 isTypingDone = false;
 
                 if (i < text.Length)
@@ -353,26 +436,16 @@ public class TutorialManager : MonoBehaviour
                 }
                 continue;
             }
-            else if (text[i] == '@')
-            {
-                currentIndex++;
-                Debug.Log($"Index incremented to {currentIndex}");
-
-                if (indexActions.TryGetValue(currentIndex, out Action action))
-                {
-                    action?.Invoke();
-                }
-            }
             else
             {
                 stringBuilder.Append(text[i]);
             }
 
-            mainTxt.text = stringBuilder.ToString();
+            descriptTxt.text = stringBuilder.ToString();
 
             if (isTypingDone)
             {
-                mainTxt.text = text;
+                descriptTxt.text = text;
                 break;
             }
 
@@ -386,4 +459,7 @@ public class TutorialManager : MonoBehaviour
 
 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)

@@ -11,7 +11,10 @@ public class CameraMove : MonoBehaviour
     private bool isMoving = false;
     public bool lockActivate = false;
     private float moveDelay = 1.0f;
+<<<<<<< HEAD
     private int currentScreen = 0;
+=======
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
     [SerializeField] private GameObject[] canvases;
 
     private int temp;
@@ -105,6 +108,7 @@ public class CameraMove : MonoBehaviour
             button.interactable = !lockActivate;
         }
     }
+<<<<<<< HEAD
 
     public void SetScreen(int screenNumber)
     {
@@ -120,6 +124,8 @@ public class CameraMove : MonoBehaviour
 
         currentScreen = screenNumber;
     }
+=======
+>>>>>>> parent of cd0c5e3 (Merge branch 'main' of https://github.com/paul050210/UGS)
     private void OnPointerEnter(PointerEventData data)
     {
         if (tabletUI.IsTabletOn() || !Mathf.Approximately(cam.fieldOfView, 60f)) return;
