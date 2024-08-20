@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         SaveManager.Instance.LoadItemData();
         //SaveManager.Instance.SaveItemData();
         SaveManager.Instance.LoadItemDicData();
+        QuestManager.Instance.SetDay();
+        SaveManager.Instance.LoadQuestInfo();
     }
 
     public void MoveToNextDay()

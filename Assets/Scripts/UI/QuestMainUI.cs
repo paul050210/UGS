@@ -191,6 +191,7 @@ public class QuestMainUI : MonoBehaviour
         {
             curDatas = goingQuest.GetText(1);
             QuestManager.Instance.AddAcceptQuest(goingQuest);
+            QuestManager.Instance.AddQuestInfo(true);
             OnClickChoose();
         });
         noButton.onClick.AddListener(() =>
@@ -200,6 +201,7 @@ public class QuestMainUI : MonoBehaviour
             goingQuest.isAceepted = false;
             goingQuest.questState = QuestState.Refuse;
             QuestManager.Instance.AddEnableQuest(goingQuest);
+            QuestManager.Instance.AddQuestInfo(false);
             OnClickChoose();
         });
     }
