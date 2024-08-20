@@ -17,6 +17,8 @@ public enum QuestState
 [CreateAssetMenu(menuName = "QuestSO")]
 public class Quest : ScriptableObject
 {
+    public int reject;
+
     //TODO: 퀘스트 등장 조건
 
     //대화 내용
