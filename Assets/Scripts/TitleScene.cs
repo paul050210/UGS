@@ -9,6 +9,8 @@ public class TitleScene : MonoBehaviour
     [SerializeField] private Button startButton;
     [SerializeField] private Button endButton;
 
+    public bool startButtonClicked = false;
+
     private void Start()
     {
         startButton.onClick.AddListener(GameStart);
@@ -17,6 +19,7 @@ public class TitleScene : MonoBehaviour
 
     private void GameStart()
     {
+        startButtonClicked = true;
         SceneManager.LoadScene(1);
     }
 

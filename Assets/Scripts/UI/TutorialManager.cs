@@ -13,7 +13,6 @@ using DG.Tweening;
 
 public enum Buttons
 {
-    StartButton,
     WindowButton,
     CounterButton,
     MergeButton,
@@ -35,8 +34,11 @@ public enum ButtonState
 public class TutorialManager : MonoBehaviour
 {
     private Dictionary<Buttons, Button> buttonDictionary = new Dictionary<Buttons, Button>();
+    private List<ButtonDescTable.Data> curDatas;
+    private List<ButtonData> buttonDataList;
 
-    [SerializeField] private Button startButton;
+
+
     [SerializeField] private Button WindowButton;
     [SerializeField] private Button CounterButton;
     [SerializeField] private Button MergeButton;
@@ -60,56 +62,51 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private RectTransform nameTextBoxTransform; 
     [SerializeField] public RectTransform mainTextBoxTransform; 
 
-    private TabletUI tabletUI;
-    private TabletUI titleScene;
-    private NorthUI north;
-    private InventoryUI inventoryUI;
-    private CameraMove cameraMove;
+    [SerializeField] private TabletUI tabletUI;
+    [SerializeField] private NorthUI north;
+    [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private CameraMove cameraMove;
 
-
+    public bool startButtonClicked = true;
     private bool isTypingDone = false; 
     private bool starNextClicked = false; // 텍스트 쪼갬 단위
     public bool lockActivate = false;
+    public bool allClicked { get; private set; } // 모든 버튼이 클릭되었는지 여부
 
     public float fadeDuration = 1.0f; // 페이드 아웃 시간
     public float moveDuration = 0.3f; // 이동 시간
     public int currentIndex = 0; // @(골뱅이) 카운트 인덱스
     private int index = 0;
-    private bool allClicked = false;
-    private int totalItems = 8; // 기물의 총 개수, 필요에 맞게 수정하세요.
+    private int totalItems = 7; // 기물의 총 개수, 필요에 맞게 수정하세요.
     private int screenNumber = 0;
-    
+    private int curIndex;
+    private int maxIndex;
+    public bool isDialogActive;
+    public int lockCameraInt;
+
+
+
+
+    void Awake()
+    {
+        StartCoroutine(TutorialBeginning());
+    }
 
     void Start()
     {
-        lockActivate = true; 
-        //lockcamera()??
+        lockActivate = true;
 
-        startButton.onClick.AddListener(() => StartCoroutine(TutorialBeginning()));
-
-        // 예시: 구글 시트에서 읽어온 텍스트
-        List<string> textLines = new List<string>
-        {
-            "Hello",
-            "@FirstSpecialCase",
-            "World",
-            "@SecondSpecialCase",
-            "This is Unity",
-            "@ThirdSpecialCase",
-            "Done"
-        };
-        
-        // 예시: StartButton을 비활성화
-        SetButtonState(Buttons.StartButton, false);
-
-        // 예시: StartButton을 활성화
-        SetButtonState(Buttons.StartButton, true);
+        allClicked = false;
     }
 
     void Update()
     {
-        // 설정: 다이얼로그 진행중일때 태블릿 left right 비활성화,
-        // 3<= index <= n이고 다이얼로그 진행 안하고 있으면 활성화
+
+        if(3<index&& index<= lockCameraInt)
+        {
+            lockActivate = false;
+        }
+       
     }
 
 
@@ -136,12 +133,15 @@ public class TutorialManager : MonoBehaviour
         blackScreen.color = endColor;
         blackScreen.gameObject.SetActive(false);
 
-
         yield return StartCoroutine(FadeInCoroutine(HawonImg, fadeDuration));
     }
 
     private IEnumerator MoveTextBoxes()
     {
+        nameTxt.gameObject.SetActive(true);
+        mainTxt.gameObject.SetActive(true);
+
+
         Vector3 nameTextBoxStartPos = new Vector3(0, -300, 0);
         Vector3 nameTextBoxEndPos = nameTextBoxTransform.anchoredPosition;
 
@@ -161,15 +161,6 @@ public class TutorialManager : MonoBehaviour
 
         nameTextBoxTransform.anchoredPosition = nameTextBoxEndPos;
         mainTextBoxTransform.anchoredPosition = mainTextBoxEndPos;
-    }
-
-
-
-
-
-    public void FadeIn(Image imageObject, float duration)
-    {
-        StartCoroutine(FadeInCoroutine(imageObject.GetComponent<Image>(), duration));
     }
 
     private IEnumerator FadeInCoroutine(Image image, float duration)
@@ -195,7 +186,7 @@ public class TutorialManager : MonoBehaviour
     private Dictionary<int, Action> indexActions = new Dictionary<int, Action>
     {
         /*
-         * { 0, () => FunctionA() },
+        { 0, () => FunctionA() },
         { 1, () => FunctionB() },
         { 2, () => FunctionC() },
         // 필요한 만큼 추가
@@ -204,7 +195,6 @@ public class TutorialManager : MonoBehaviour
 
     private Dictionary<Buttons, ButtonState> buttonStates = new Dictionary<Buttons, ButtonState>()
     {
-        { Buttons.StartButton, ButtonState.NotActivated },
         { Buttons.WindowButton, ButtonState.NotActivated },
         { Buttons.CounterButton, ButtonState.NotActivated },
         { Buttons.MergeButton, ButtonState.NotActivated },
@@ -215,65 +205,55 @@ public class TutorialManager : MonoBehaviour
     };
 
 
-//bool allclicked==1 되면 화면 = 1 설정, 대화 진행
-//화면=0이고 bool allclicked==1이면 계산대 버튼 클릭하지 않아도 npc 대화 진행
-
-
-
     private void FunctionA()
     {
         Debug.Log("Function A executed!");
-        // 여기에 기능 구현
+        // allClicked가 true일 때 함수 호출
+
     }
 
     private void FunctionB()
     {
         Debug.Log("Function B executed!");
-        // 여기에 기능 구현
+        //bool allClicked==1 되면 화면 = 1 설정, 대화 진행
     }
 
     private void FunctionC()
     {
         Debug.Log("Function C executed!");
-        // 여기에 기능 구현
+        //화면=0이고 bool allClicked==1이면 계산대 버튼 클릭하지 않아도 npc 대화 진행
     }
 
+    public class ButtonData
+    {
+        public Buttons Button { get; private set; }
+        public bool IsClicked { get; set; }
 
+        public ButtonData(Buttons button)
+        {
+            Button = button;
+            IsClicked = false;
+        }
+    }
 
+    public void OnButtonClick(Buttons button)
+    {
+        // 해당 버튼에 대한 데이터를 찾음
+        ButtonData buttonData = buttonDataList.Find(b => b.Button == button);
 
-    //버튼의 단계: clicked, notactivated, activated
-    //Clicked bool 부울곱 이용해서 allclicked 만들기
-    //Notactivated->activated 위해서 index 활용
+        if (buttonData != null && !buttonData.IsClicked)
+        {
+            buttonData.IsClicked = true;
+            return;
+        }
+    }
 
+   
 
     private void SetButtonState(Buttons buttonEnum, bool isActive)
     {
-        if (buttonStates.TryGetValue(buttonEnum, out ButtonState state))
-        {
-            if (isActive && state == ButtonState.NotActivated)
-            {
-                buttonStates[buttonEnum] = ButtonState.Activated;
-                Console.WriteLine($"{buttonEnum} is now activated.");
-            }
-        }
-
-    // 모든 버튼이 Clicked 상태인지 확인하여 allClicked 설정
-        allClicked = true;
-        foreach (var buttonState in buttonStates.Values)
-        {
-            if (buttonState != ButtonState.Clicked)
-            {
-                allClicked = false;
-                break;
-            }
-        }
-
-        if (allClicked)
-        {
-            Console.WriteLine("allClicked is now true.");
-        }
     }
-    private void HandleButtonClick(Buttons buttonEnum)
+    private void ButtonStateManager(Buttons buttonEnum)
     {
         if (buttonStates.TryGetValue(buttonEnum, out ButtonState state))
         {
@@ -303,7 +283,13 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-
+    public void StartDialog(string text, int dialogIndex)
+    {
+        index = dialogIndex;
+        isDialogActive = true; // 다이얼로그 진행 중으로 설정
+        StartCoroutine(TypeTextEffect(text));
+        isDialogActive = false; // 다이얼로그가 끝나면 진행 중이 아니라고 설정
+    }
     private IEnumerator TypeTextEffect(string text)
     {
         mainTxt.text = string.Empty;
@@ -389,7 +375,12 @@ public class TutorialManager : MonoBehaviour
 
 
 
+
 }
+
+
+
+
 
 
 

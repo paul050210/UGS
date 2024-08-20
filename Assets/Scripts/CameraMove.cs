@@ -11,7 +11,7 @@ public class CameraMove : MonoBehaviour
     private bool isMoving = false;
     public bool lockActivate = false;
     private float moveDelay = 1.0f;
-    private int currentScreen = 0; 
+    private int currentScreen = 0;
     [SerializeField] private GameObject[] canvases;
 
     private int temp;
@@ -60,9 +60,13 @@ public class CameraMove : MonoBehaviour
         }
     }
 
-    public void Turn(int lr = 0)
+    public void Turn(int lr)
     {
-        if (tabletUI.IsTabletOn() || !Mathf.Approximately(cam.fieldOfView, 60f)) return;
+        if (tabletUI != null)
+        {
+            if (tabletUI.IsTabletOn() || !Mathf.Approximately(cam.fieldOfView, 60f)) return;
+        }
+
         if (isMoving) return;
         isMoving = true;
         temp = Mathf.FloorToInt(dir.y / 90f);
@@ -107,14 +111,14 @@ public class CameraMove : MonoBehaviour
         if (isMoving || screenNumber < 0 || screenNumber > 3) return;
         if (currentScreen == screenNumber) return;
 
-        int turnsNeeded = (screenNumber - currentScreen + 4) % 4; 
+        int turnsNeeded = (screenNumber - currentScreen + 4) % 4;
 
         for (int i = 0; i < turnsNeeded; i++)
         {
-            Turn(1); 
+            Turn(1);
         }
 
-        currentScreen = screenNumber; 
+        currentScreen = screenNumber;
     }
     private void OnPointerEnter(PointerEventData data)
     {
