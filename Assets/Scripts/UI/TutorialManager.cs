@@ -50,7 +50,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Text nameTxt;
     [SerializeField] private Text mainTxt;
 
-    [SerializeField] public Image blackScreen; 
+    [SerializeField] public Image blackScreen;
     [SerializeField] public Image streetImg;
     [SerializeField] public Image HawonImg;
     [SerializeField] public Image HayoungImg;
@@ -59,8 +59,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] public Image TradeManImg;
 
 
-    [SerializeField] private RectTransform nameTextBoxTransform; 
-    [SerializeField] public RectTransform mainTextBoxTransform; 
+    [SerializeField] private RectTransform nameTextBoxTransform;
+    [SerializeField] public RectTransform mainTextBoxTransform;
 
     [SerializeField] private TabletUI tabletUI;
     [SerializeField] private NorthUI north;
@@ -68,13 +68,13 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private CameraMove cameraMove;
 
     public bool startButtonClicked = true;
-    private bool isTypingDone = false; 
+    private bool isTypingDone = false;
     private bool starNextClicked = false; // 텍스트 쪼갬 단위
     public bool lockActivate = false;
     public bool allClicked { get; private set; } // 모든 버튼이 클릭되었는지 여부
 
     public float fadeDuration = 1.0f; // 페이드 아웃 시간
-    public float moveDuration = 0.3f; // 이동 시간
+    public float moveDuration = 60.0f; // 이동 시간
     public int currentIndex = 0; // @(골뱅이) 카운트 인덱스
     private int index = 0;
     private int totalItems = 7; // 기물의 총 개수, 필요에 맞게 수정하세요.
@@ -97,16 +97,18 @@ public class TutorialManager : MonoBehaviour
         lockActivate = true;
 
         allClicked = false;
+        
+
     }
 
     void Update()
     {
 
-        if(3<index&& index<= lockCameraInt)
+        if (3 < index && index <= lockCameraInt)
         {
             lockActivate = false;
         }
-       
+
     }
 
 
@@ -116,8 +118,6 @@ public class TutorialManager : MonoBehaviour
         blackScreen.gameObject.SetActive(true);
         streetImg.gameObject.SetActive(true);
         blackScreen.color = new Color(0, 0, 0, 1);
-
-        yield return StartCoroutine(MoveTextBoxes());
 
         float elapsedTime = 0f;
         Color startColor = blackScreen.color;
@@ -130,6 +130,8 @@ public class TutorialManager : MonoBehaviour
             yield return null;
         }
 
+        yield return StartCoroutine(MoveTextBoxes());
+
         blackScreen.color = endColor;
         blackScreen.gameObject.SetActive(false);
 
@@ -141,7 +143,6 @@ public class TutorialManager : MonoBehaviour
         nameTxt.gameObject.SetActive(true);
         mainTxt.gameObject.SetActive(true);
 
-
         Vector3 nameTextBoxStartPos = new Vector3(0, -300, 0);
         Vector3 nameTextBoxEndPos = nameTextBoxTransform.anchoredPosition;
 
@@ -152,15 +153,23 @@ public class TutorialManager : MonoBehaviour
 
         while (elapsedTime < moveDuration)
         {
-            nameTextBoxTransform.anchoredPosition = Vector3.Lerp(nameTextBoxStartPos, nameTextBoxEndPos, elapsedTime / moveDuration);
-            mainTextBoxTransform.anchoredPosition = Vector3.Lerp(mainTextBoxStartPos, mainTextBoxEndPos, elapsedTime / moveDuration);
+            // 비율을 계산
+            float t = Mathf.Clamp01(elapsedTime / moveDuration);
 
+            // Lerp를 사용하여 중간 위치로 이동
+            nameTextBoxTransform.anchoredPosition = Vector3.Lerp(nameTextBoxStartPos, nameTextBoxEndPos, t);
+            mainTextBoxTransform.anchoredPosition = Vector3.Lerp(mainTextBoxStartPos, mainTextBoxEndPos, t);
+
+            // 시간 갱신
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
+        // 마지막 위치를 정확히 설정
         nameTextBoxTransform.anchoredPosition = nameTextBoxEndPos;
         mainTextBoxTransform.anchoredPosition = mainTextBoxEndPos;
+
+        Debug.Log("텍스트 박스 움직임 완료");
     }
 
     private IEnumerator FadeInCoroutine(Image image, float duration)
@@ -248,7 +257,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-   
+
 
     private void SetButtonState(Buttons buttonEnum, bool isActive)
     {
@@ -299,7 +308,7 @@ public class TutorialManager : MonoBehaviour
         isTypingDone = false;
         starNextClicked = false;
         lockActivate = true;
-        cameraMove.LockCamera(lockActivate); 
+        cameraMove.LockCamera(lockActivate);
 
         for (int i = 0; i < text.Length; i++)
         {
@@ -322,13 +331,13 @@ public class TutorialManager : MonoBehaviour
                 if (isStart)
                 {
                     stringBuilder.Append("<size=200%>");
-                    i += 2; 
+                    i += 2;
                 }
                 else
                 {
                     stringBuilder.Append("</size>");
                 }
-                continue; 
+                continue;
             }
             else if (text[i] == 'b' && i + 1 < text.Length && text[i + 1] == 'b')
             {
@@ -336,13 +345,13 @@ public class TutorialManager : MonoBehaviour
                 if (isStart)
                 {
                     stringBuilder.Append("<size=200%>");
-                    i += 2; 
+                    i += 2;
                 }
                 else
                 {
                     stringBuilder.Append("</size>");
                 }
-                continue; 
+                continue;
             }
             else if (text[i] == '@')
             {
@@ -377,20 +386,4 @@ public class TutorialManager : MonoBehaviour
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

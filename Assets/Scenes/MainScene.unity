@@ -1420,7 +1420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &46163860
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3751,7 +3751,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &202150893
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3796,16 +3796,16 @@ MonoBehaviour:
   MapButton: {fileID: 881797121}
   DictionaryButton: {fileID: 1025193728}
   nameTxt: {fileID: 1122234659}
-  mainTxt: {fileID: 0}
+  mainTxt: {fileID: 954060097}
   blackScreen: {fileID: 918503622}
   streetImg: {fileID: 1795737037}
   HawonImg: {fileID: 1615046205}
-  HayoungImg: {fileID: 0}
+  HayoungImg: {fileID: 1615046205}
   ChanaImg: {fileID: 870087470}
   JackImg: {fileID: 26714766}
   TradeManImg: {fileID: 795714988}
-  nameTextBoxTransform: {fileID: 1629538431}
-  mainTextBoxTransform: {fileID: 46163860}
+  nameTextBoxTransform: {fileID: 1122234658}
+  mainTextBoxTransform: {fileID: 954060096}
   tabletUI: {fileID: 818719355}
   north: {fileID: 953591136}
   inventoryUI: {fileID: 382683923}
@@ -11314,7 +11314,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &583077741
 RectTransform:
   m_ObjectHideFlags: 0
@@ -36798,7 +36798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1629538431
 RectTransform:
   m_ObjectHideFlags: 0
