@@ -177,7 +177,7 @@ public class SaveManager : MonoBehaviourSingleton<SaveManager>
 
             if(GameManager.Instance.CurrentDay == questList[questList.Count-1].day)
             {
-                QuestManager.Instance.SetQuestIndex(questList[questList.Count].index);
+                QuestManager.Instance.SetQuestIndex(questList[questList.Count-1].index);
             }
             else
             {

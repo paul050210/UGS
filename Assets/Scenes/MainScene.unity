@@ -3719,7 +3719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2580be51a63d4b04c944948a1d058af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startButton: {fileID: 0}
   WindowButton: {fileID: 685259699}
   CounterButton: {fileID: 1279399252}
   MergeButton: {fileID: 930198028}
@@ -3738,10 +3737,19 @@ MonoBehaviour:
   TradeManImg: {fileID: 0}
   nameTextBoxTransform: {fileID: 1629538431}
   mainTextBoxTransform: {fileID: 46163860}
+  tabletUI: {fileID: 0}
+  north: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  cameraMove: {fileID: 0}
+  startButtonClicked: 1
   lockActivate: 0
   fadeDuration: 1
   moveDuration: 0.3
   currentIndex: 0
+  isDialogActive: 0
+  lockCameraInt: 0
+  nameTextEndPos: {x: 0, y: 400, z: 0}
+  mainTextEndPos: {x: 0, y: 300, z: 0}
 --- !u!1001 &214375580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11538,7 +11546,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 594171888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6f72500a9e18ca4b86d79df7642d49a, type: 3}
+  m_Script: {fileID: 11500000, guid: aa7bb5746126c8647825eac0c6f770f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &594878868
