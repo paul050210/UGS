@@ -24,6 +24,21 @@ public class NorthUI : MonoBehaviour
     [HideInInspector]
     public UnityEvent OnDisable;
 
+    private void Awake()
+    {
+        cam = Camera.main;
+        fov = 40f;
+        camY = 2.5f;
+        cam.DOFieldOfView(fov, camCloseDuration).SetEase(Ease.Linear);
+        cam.gameObject.transform.DOMoveY(camY, camCloseDuration).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            zoomOutBtn.gameObject.SetActive(true);
+            openBtn.gameObject.SetActive(true);
+            leftBtn.raycastTarget = false;
+            rightBtn.raycastTarget = false;
+        });
+
+    }
     private void Start()
     {
         cam = Camera.main;
