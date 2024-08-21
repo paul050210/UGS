@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7bb080a646efff4e93dc43a9bc3472c, type: 3}
   m_Name: "\uCC2C\uC758\uB8B01"
   m_EditorClassIdentifier: 
+  reject: 0
   simpleTxt: "\uC218\uC815\uAD6C\uAC00\uC628\uB098"
   startIndex: 43
   endIndex: 110
@@ -26,8 +27,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c57c2d7e836dabd479c1f72d8ccf0007, type: 2}
   - {fileID: 11400000, guid: 9a7bbdd25b7180f43b4dd81fbaef97dd, type: 2}
   - {fileID: 11400000, guid: 45d900c67e643cc45afaa7100370532d, type: 2}
-  charSprite: {fileID: 21300000, guid: 685e6904ce61bbd4aa9a18de44d21911, type: 3}
+  charSprite: {fileID: 21300000, guid: 97eae2b2ea389be488099dc48cd204a3, type: 3}
   simpleCharSprite: {fileID: 21300000, guid: 3a5b1e553207a9f44b8373b34c90758c, type: 3}
   durationTime: 1
   isAceepted: 1
-  questState: 1
+  questState: 0

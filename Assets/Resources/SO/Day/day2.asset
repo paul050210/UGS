@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55a0a7190080e44695fd076838f5157, type: 3}
   m_Name: day2
   m_EditorClassIdentifier: 
-  quests:
-  - {fileID: 11400000, guid: 1578f1e4ee479754f844770a29e97810, type: 2}
-  - {fileID: 11400000, guid: af6ac5eb5a4341340b61fc036ccbdeae, type: 2}
+  quests: []
   dayIndex: 2
