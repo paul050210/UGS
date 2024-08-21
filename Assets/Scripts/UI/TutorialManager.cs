@@ -19,8 +19,7 @@ public enum Buttons
     DecomButton,
     DoorButton,
     MapButton,
-    DictionaryButton,
-
+    DictionaryButton
 }
 
 public enum ButtonState
@@ -34,7 +33,7 @@ public enum ButtonState
 public class TutorialManager : MonoBehaviour
 {
     private Dictionary<Buttons, Button> buttonDictionary = new Dictionary<Buttons, Button>();
-    private List<ButtonDescTable.Data> curDatas;
+    private List<TutorialTable.Data> curDatas;
     private List<ButtonData> buttonDataList;
 
 
@@ -66,6 +65,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private NorthUI north;
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private CameraMove cameraMove;
+    [SerializeField] private TutorialTextManager tutorialTextManager;
 
     public bool startButtonClicked = true;
     private bool isTypingDone = false;
@@ -75,17 +75,18 @@ public class TutorialManager : MonoBehaviour
 
     public float fadeDuration = 1.0f; // 페이드 아웃 시간
     public float moveDuration = 60.0f; // 이동 시간
-    public int currentIndex = 0; // @(골뱅이) 카운트 인덱스
-    private int index = 0;
-    private int totalItems = 7; // 기물의 총 개수, 필요에 맞게 수정하세요.
     private int screenNumber = 0;
     private int curIndex;
     private int maxIndex;
+    private int dialogStartIndex;
+    private int dialogEndIndex;
     public bool isDialogActive;
     public int lockCameraInt;
 
-    public Vector3 nameTextEndPos = new Vector3(0, 400, 0); // 이동할 최종 위치
-    public Vector3 mainTextEndPos = new Vector3(0, 300, 0); // 이동할 최종 위치
+    private Button[] buttonsArray;
+
+    private Vector3 nameTextEndPos = new Vector3(-325, -250, 0); 
+    private Vector3 mainTextEndPos = new Vector3(0, -500, 0); 
 
 
 
@@ -97,21 +98,26 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         lockActivate = true;
-
         allClicked = false;
 
+        buttonsArray = new Button[]
+        {
+        WindowButton,    // Buttons.WindowButton
+        CounterButton,   // Buttons.CounterButton
+        MergeButton,     // Buttons.MergeButton
+        DecomButton,     // Buttons.DecomButton
+        DoorButton,      // Buttons.DoorButton
+        MapButton,       // Buttons.MapButton
+        DictionaryButton // Buttons.DictionaryButton
+        };
 
     }
 
     void Update()
     {
 
-        if (3 < index && index <= lockCameraInt)
-        {
-            lockActivate = false;
-        }
-
     }
+
 
 
     private IEnumerator TutorialBeginning()
@@ -134,25 +140,16 @@ public class TutorialManager : MonoBehaviour
         blackScreen.color = endColor;
         blackScreen.gameObject.SetActive(false);
 
-        nameTextBoxTransform.anchoredPosition = new Vector3(0, -300, 0); // 화면 아래에서 시작
-        mainTextBoxTransform.anchoredPosition = new Vector3(0, -300, 0); // 화면 아래에서 시작
-
         MoveTextBoxes();
     }
 
-
-
-
+              
     public void MoveTextBoxes()
     {
-        // 텍스트를 현재 위치에서 endPos로 moveDuration 동안 이동시킵니다.
         nameTextBoxTransform.DOAnchorPos(nameTextEndPos, moveDuration).SetEase(Ease.OutCubic);
         mainTextBoxTransform.DOAnchorPos(mainTextEndPos, moveDuration).SetEase(Ease.OutCubic);
-        Debug.Log("텍스트박스 움직임");
-
+        StartDialog(1,15);
     }
-
-
 
 
     private IEnumerator FadeInCoroutine(Image image, float duration)
@@ -173,8 +170,7 @@ public class TutorialManager : MonoBehaviour
 
         color.a = 1f;
         image.color = color;
-        Debug.Log("하원 이미지 보이기");
-        StartCoroutine(TypeTextEffect(curDatas[curIndex].strValue));
+        StartDialog();
     }
 
     private Dictionary<int, Action> indexActions = new Dictionary<int, Action>
@@ -187,17 +183,7 @@ public class TutorialManager : MonoBehaviour
         */
     };
 
-    private Dictionary<Buttons, ButtonState> buttonStates = new Dictionary<Buttons, ButtonState>()
-    {
-        { Buttons.WindowButton, ButtonState.NotActivated },
-        { Buttons.CounterButton, ButtonState.NotActivated },
-        { Buttons.MergeButton, ButtonState.NotActivated },
-        { Buttons.DecomButton, ButtonState.NotActivated },
-        { Buttons.DoorButton, ButtonState.NotActivated },
-        { Buttons.MapButton, ButtonState.NotActivated },
-        { Buttons.DictionaryButton, ButtonState.NotActivated }
-    };
-
+    
 
     private void FunctionA()
     {
@@ -218,6 +204,18 @@ public class TutorialManager : MonoBehaviour
         //화면=0이고 bool allClicked==1이면 계산대 버튼 클릭하지 않아도 npc 대화 진행
     }
 
+
+    private Dictionary<Buttons, ButtonState> buttonStates = new Dictionary<Buttons, ButtonState>()
+    {
+        { Buttons.WindowButton, ButtonState.NotActivated },
+        { Buttons.CounterButton, ButtonState.NotActivated },
+        { Buttons.MergeButton, ButtonState.NotActivated },
+        { Buttons.DecomButton, ButtonState.NotActivated },
+        { Buttons.DoorButton, ButtonState.NotActivated },
+        { Buttons.MapButton, ButtonState.NotActivated },
+        { Buttons.DictionaryButton, ButtonState.NotActivated }
+    };
+
     public class ButtonData
     {
         public Buttons Button { get; private set; }
@@ -232,20 +230,21 @@ public class TutorialManager : MonoBehaviour
 
     public void OnButtonClick(Buttons button)
     {
-        // 해당 버튼에 대한 데이터를 찾음
         ButtonData buttonData = buttonDataList.Find(b => b.Button == button);
 
         if (buttonData != null && !buttonData.IsClicked)
         {
             buttonData.IsClicked = true;
+            int buttonNumber = (int)button;
+            GetButtonText(buttonNumber);
             return;
         }
     }
 
-
-
     private void SetButtonState(Buttons buttonEnum, bool isActive)
     {
+        // 배열의 인덱스에 해당하는 버튼의 상태를 설정합니다.
+        buttonsArray[(int)buttonEnum].Enabled = isActive;
     }
     private void ButtonStateManager(Buttons buttonEnum)
     {
@@ -254,9 +253,6 @@ public class TutorialManager : MonoBehaviour
             if (state == ButtonState.Activated)
             {
                 buttonStates[buttonEnum] = ButtonState.Clicked;
-
-
-                // 상태가 변경되었으니, 다시 allClicked 확인
                 SetButtonState(buttonEnum, true);
             }
             else if (state == ButtonState.Clicked)
@@ -277,13 +273,19 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void StartDialog(string text, int dialogIndex)
+    private void StartDialog(int dialogStartIndex, int dialogEndIndex)
     {
-        index = dialogIndex;
-        isDialogActive = true; // 다이얼로그 진행 중으로 설정
-        StartCoroutine(TypeTextEffect(text));
-        isDialogActive = false; // 다이얼로그가 끝나면 진행 중이 아니라고 설정
+        var data = tutorialTextManager.GetTextData(1, 3);
+
+        curIndex = dialogEndIndex;
+        isDialogActive = true; 
+        foreach (var item in data)
+        {
+            yield return StartCoroutine(TypeTextEffect(item.Text));
+        }
+        isDialogActive = false; 
     }
+
     private IEnumerator TypeTextEffect(string text)
     {
         mainTxt.text = string.Empty;
@@ -341,8 +343,6 @@ public class TutorialManager : MonoBehaviour
             else if (text[i] == '@')
             {
                 currentIndex++;
-                Debug.Log($"Index incremented to {currentIndex}");
-
                 if (indexActions.TryGetValue(currentIndex, out Action action))
                 {
                     action?.Invoke();
@@ -368,7 +368,51 @@ public class TutorialManager : MonoBehaviour
     }
 
 
-
+    private List<TutorialTable.Data> GetButtonText(int buttonNumber)
+    {
+        int start=0;
+        int end=0;
+        switch (buttonNumber)
+        {
+            case 0:
+                start = buttonDescStartIndex+13;
+                end = start+5;
+                break;
+            case 1:
+                break;
+            case 2:
+                start = buttonDescStartIndex;
+                end = start + 4;
+                break;
+            case 3:
+                start = buttonDescStartIndex + 6;
+                end = start + 5;
+                break;
+            case 4:
+                start = buttonDescStartIndex + 30;
+                end = start + 6;
+                break;
+            case 5:
+                start = buttonDescStartIndex + 20;
+                end = start + 4;
+                break;
+            case 6:
+                start = buttonDescStartIndex + 26;
+                end = start + 3;
+                break;
+            default:
+                start = buttonDescStartIndex;
+                end = buttonDescEndIndex;
+                break;
+        }
+        var datas = TutorialTable.Data.GetList();
+        List<TutorialTable.Data> returnList = new List<TutorialTable.Data>();
+        for (int i = start; i <= end; i++)
+        {
+            returnList.Add(datas[i]);
+        }
+        return returnList;
+    }
 
 }
 
