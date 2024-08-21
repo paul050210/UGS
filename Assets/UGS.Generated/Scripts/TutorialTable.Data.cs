@@ -14,7 +14,7 @@ using System.Reflection;
 using UnityEngine;
 
 
-namespace ButtonDescTable
+namespace TutorialTable
 {
     [GoogleSheet.Attribute.TableStruct]
     public partial class Data : ITable
@@ -23,7 +23,7 @@ namespace ButtonDescTable
         public delegate void OnLoadedFromGoogleSheets(List<Data> loadedList, Dictionary<int, Data> loadedDictionary);
 
         static bool isLoaded = false;
-        static string spreadSheetID = "1GIRfBwMRnOgcO6VQAxkFUTWi3gKS6MyZxrdJcF0ekuw"; // it is file id
+        static string spreadSheetID = "1imJywwG92gI1tr6t1WxFF5UM5nTTxO70EwXWxxorQ94"; // it is file id
         static string sheetID = "0"; // it is sheet id
         static UnityFileReader reader = new UnityFileReader();
 
@@ -74,7 +74,7 @@ namespace ButtonDescTable
                  return;
             }
 
-            string text = reader.ReadData("ButtonDescTable"); 
+            string text = reader.ReadData("TutorialTable"); 
             if (text != null)
             {
                 var result = Newtonsoft.Json.JsonConvert.DeserializeObject<ReadSpreadSheetResult>(text);
@@ -125,14 +125,25 @@ namespace ButtonDescTable
             foreach (var column in sheet.Keys)
             {
                 string[] split = column.Replace(" ", null).Split(':');
-                         string column_field = split[0];
-                string   column_type = split[1];
+                if (split.Length >= 2)
+                {
+                    string column_field = split[0];
+                    string column_type = split[1];
+                    Debug.Log(column_field);
+                    Debug.Log(column_type);
 
-                typeInfos.Add((column, column_field, column_type));
+                    typeInfos.Add((column, column_field, column_type));
+                }
+                else
+                {
+                    Debug.LogWarning("Unexpected format: " + column);
+                }
+
                           List<string> typeValues = sheet[column];
                 rows.Add(typeValues);
             }
 
+            
           // 실제 데이터 로드
                     if (rows.Count != 0)
                     {
