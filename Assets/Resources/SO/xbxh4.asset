@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7bb080a646efff4e93dc43a9bc3472c, type: 3}
+  m_Name: xbxh4
+  m_EditorClassIdentifier: 
+  reject: 0
+  simpleTxt: 
+  startIndex: 0
+  endIndex: 0
+  acceptStart: 0
+  acceptEnd: 0
+  refuseStart: 0
+  refuseEnd: 0
+  needItems: []
+  halfItem: {fileID: 0}
+  rewardItems: []
+  charSprite: {fileID: 0}
+  simpleCharSprite: {fileID: 0}
+  durationTime: 0
+  isAceepted: 0
+  questState: 0
